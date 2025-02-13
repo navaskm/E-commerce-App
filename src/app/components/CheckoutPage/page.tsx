@@ -4,7 +4,7 @@ import { lazy,Suspense } from "react";
 import { useEffect,useState } from "react";
 import { Rings } from 'react-loading-icons';
 
-const NavbarSkeleton = lazy(()=> import("../HomePage/Navbar/Skeleton/NavbarSkeleton"));
+const NavbarSkeleton = lazy(()=> import("../homepage/navbar/skeleton/navbarskeleton"));
 const CartItems = lazy(()=> import('./CartItems/page'));
 const PaymentPage = lazy(()=> import('./PaymentSection/page'));
 const TopBarOfCartPage = lazy(()=> import('./TopBar/topbar'));
