@@ -162,7 +162,7 @@ function TwoProducts({product}:ItemOne) {
             <Link  key={item.id}
               style={{textDecoration:"none"}}
               href={{
-                pathname: "/components/eslectedPage",
+                pathname: "/components/SelectedPage",
                 query: {
                   name: encodeURIComponent(item.name),
                   priceCents: item.priceCents,
