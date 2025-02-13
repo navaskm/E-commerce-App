@@ -1,6 +1,6 @@
 import { Suspense,lazy } from "react";
 
-import { fetchProduct,fetchScrollingProduct } from "@/app/datafetching/productdata";
+import { fetchProduct,fetchScrollingProduct } from "@/app/DataFetching/productdata";
 
 // loading imports
 import AppLogSkeleton from "./AppLogo/AppLogSkeleton";
