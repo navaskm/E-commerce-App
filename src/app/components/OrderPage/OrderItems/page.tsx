@@ -8,8 +8,8 @@ import { hydrateOrder } from "@/app/lib/store/feature/deliverydate/deliverydate"
 
 import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 import { addItem } from "@/app/lib/store/feature/items/itemsslice";
-import TopBarOfCartPage from "../../checkoutpage/topbar/topbar";
-import EmptyCart from "../../checkoutpage/cartitems/emptycart/page";
+import TopBarOfCartPage from "../../CheckoutPage/TopBar/TopBar";
+import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/page";
 
 type OrderItems = {
   image: string;
