@@ -1,13 +1,13 @@
 import { lazy,Suspense } from "react";
 
-import NavbarSkeleton from "../homepage/navbar/skeleton/navbarskeleton";
-import ImageDisplaySkeleton from "./imagedisplay/skeleton/imagedisplayskeleton";
-import SimilarProductsSkeleton from "./similardisplay/skeleton/similardisplayskeleton";
+import NavbarSkeleton from "../HomePage/navbar/Skeleton/NavbarSkeleton";
+import ImageDisplaySkeleton from "./ImageDisplay/Skeleton/ImageDisplaySkeleton";
+import SimilarProductsSkeleton from "./SimilarDisplay/Skeleton/SimilarDisplaySkeleton";
 
-const NavBar = lazy(() => import("../homepage/navbar/navbar"));
-const ImageDisplay = lazy(() => import("./imagedisplay/imagedisplay"));
-const ImageFeature = lazy(() => import("./imagefeature/imagefeature"));
-const SimilarProducts = lazy(() => import("./similardisplay/page"));
+const NavBar = lazy(() => import("../HomePage/navbar/NavBar"));
+const ImageDisplay = lazy(() => import("./ImageDisplay/ImageDisplay"));
+const ImageFeature = lazy(() => import("./ImageFeature/ImageFeature"));
+const SimilarProducts = lazy(() => import("./SimilarDisplay/page"));
 
 import '@/app/styles/selectdpage/selectpage.scss';
 
