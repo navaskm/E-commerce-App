@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import '@/app/components/HomePage/HomePageScrolling/Skeleton/skeleton.scss'
+import '@/app/components/HomePage/HomePageScrolling/Skeleton/Skeleton.scss'
 
 const ScrollingSkeleton = () => {
   return (
