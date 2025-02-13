@@ -2,13 +2,13 @@ import { Suspense, lazy } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 //Loading imports
-import NavbarSkeleton from "./components/HomePage/navbar/Skeleton/navbarskeleton";
+import NavbarSkeleton from "./components/HomePage/Navbar/Skeleton/NavbarSkeleton";
 import MainOfferSkeleton from "./components/HomePage/MainOffers/Skeleton/mainofferskeleton";
 import SmallProductsSkeleton from "./components/HomePage/SmallProducts/Skeleton/smallproductsskeleton";
 import ScrollingSkeleton from "./components/HomePage/HomePageScrolling/Skeleton/scrollingskeleton";
 import LargeProductSkeleton from "./components/HomePage/LargeProducts/Skeleton/largeproductskeleton";
 
-const NavBar = lazy(() => import("./components/HomePage/navbar/navbar"));
+const NavBar = lazy(() => import("./components/HomePage/Navbar/navbar"));
 const MainOffers = lazy(() => import ("./components/HomePage/MainOffers/mainoffers"));
 const SmallProducts = lazy(() => import("./components/HomePage/SmallProducts/smallproducts"));
 const HomePageScrolling = lazy(() => import("./components/HomePage/HomePageScrolling/homepagescrolling"));
