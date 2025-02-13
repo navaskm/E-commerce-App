@@ -69,7 +69,7 @@ function SmallProducts() {
 
                         {/* image click time pass value to selected page */}
                         <Link href={{
-                          pathname: "/components/selectedpage",
+                          pathname: "/components/SelectedPage",
                           query: {
                             name: encodeURIComponent(item.name),
                             priceCents: item.priceCents,
@@ -89,7 +89,7 @@ function SmallProducts() {
 
                           {/* this div click time pass value to selected page */}
                         <Link style={{ textDecoration: 'none' }} href={{
-                          pathname: "/components/selectedpage",
+                          pathname: "/components/SelectedPage",
                           query: {
                             name: encodeURIComponent(item.name),
                             priceCents: item.priceCents,
