@@ -182,7 +182,7 @@ const OrderItems = () => {
 
                   <Link 
                     href={{
-                      pathname :'/components/trackingpage',
+                      pathname :'/components/TrackingPage',
                       query:{
                         name: item.name,
                         image: item.image,
