@@ -1,7 +1,7 @@
 
 import { lazy,Suspense } from "react";
 import { Rings } from 'react-loading-icons';
-const OrderItems = lazy(()=>import("./orderitems/page"));
+const OrderItems = lazy(()=>import("./OrderItems/page"));
 import '@/app/styles/orderpage/orderpage.scss';
 
 const OrderPage = () => {
