@@ -110,7 +110,7 @@ const SimilarProducts = async ({selectedImage}:{selectedImage:Products}) => {
               style={{textDecoration:"none"}}
               className='col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product'
               href={{
-                pathname: "/components/selectedpage",
+                pathname: "/components/SelectedPage",
                 query: {
                   name: encodeURIComponent(product.name),
                   priceCents: product.priceCents,
@@ -141,7 +141,7 @@ const SimilarProducts = async ({selectedImage}:{selectedImage:Products}) => {
               key={product.id}
               style={{textDecoration:"none"}}
               href={{
-                pathname: "/components/selectedpage",
+                pathname: "/components/SelectedPage",
                 query: {
                   name: encodeURIComponent(product.name),
                   priceCents: product.priceCents,
