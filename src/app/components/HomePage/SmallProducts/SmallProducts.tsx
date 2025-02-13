@@ -1,6 +1,6 @@
-import '@/app/Style/HomePage/SmallProducts/smallproducts.scss';
+import '@/app/homepagesmall/smallproducts.scss'
 
-import { fetchProduct } from "@/app/DataFetching/productdata";
+import { fetchProduct } from "@/app/datafetching/productdata";
 import Link from "next/link";
 
 type Products = {
@@ -69,7 +69,7 @@ function SmallProducts() {
 
                         {/* image click time pass value to selected page */}
                         <Link href={{
-                          pathname: "/components/SelectedPage",
+                          pathname: "/components/selectedpage",
                           query: {
                             name: encodeURIComponent(item.name),
                             priceCents: item.priceCents,
@@ -89,7 +89,7 @@ function SmallProducts() {
 
                           {/* this div click time pass value to selected page */}
                         <Link style={{ textDecoration: 'none' }} href={{
-                          pathname: "/components/SelectedPage",
+                          pathname: "/components/selectedpage",
                           query: {
                             name: encodeURIComponent(item.name),
                             priceCents: item.priceCents,

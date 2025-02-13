@@ -3,19 +3,19 @@ import { SkeletonTheme } from "react-loading-skeleton";
 
 //Loading imports
 import NavbarSkeleton from "./components/homepage/navbar/skeleton/navbarskeleton";
-import MainOfferSkeleton from "./components/homepage/MainOffers/Skeleton/mainofferskeleton";
-import SmallProductsSkeleton from "./components/homepage/SmallProducts/Skeleton/smallproductsskeleton";
-import ScrollingSkeleton from "./components/homepage/HomePageScrolling/Skeleton/scrollingskeleton";
-import LargeProductSkeleton from "./components/homepage/LargeProducts/Skeleton/largeproductskeleton";
+import MainOfferSkeleton from "./components/homepage/mainofferce/skeleton/mainofferskeleton";
+import SmallProductsSkeleton from "./components/homepage/smallproducts/smallproductsskeleton";
+import ScrollingSkeleton from "./components/homepage/homepagescrolling/skeleton/scrollingskeleton";
+import LargeProductSkeleton from "./components/homepage/largeproducts/skeleton/largeproductskeleton";
 
 const NavBar = lazy(() => import("./components/homepage/navbar/navbar"));
-const MainOffers = lazy(() => import ("./components/homepage/MainOffers/mainoffers"));
-const SmallProducts = lazy(() => import("./components/homepage/SmallProducts/smallproducts"));
+const MainOffers = lazy(() => import ("./components/homepage/mainofferce/mainoffers"));
+const SmallProducts = lazy(() => import("./components/homepage/smallproducts/smallproducts"));
 const HomePageScrolling = lazy(() => import("./components/homepage/HomePageScrolling/homepagescrolling"));
-const LargeProduct = lazy(() => import("./components/homepage/LargeProducts/largeproduct"));
-const TwoProducts = lazy(() => import("./components/homepage/TwoProducts/twoproducts"));
-const SmallScrolling = lazy(() => import("./components/homepage/SmallScrolling/smallscrolling"));
-const LastOneProducts = lazy (() => import("./components/homepage/LastOneProducts/lastoneproducts"));
+const LargeProduct = lazy(() => import("./components/homepage/largeproducts/largeproduct"));
+const TwoProducts = lazy(() => import("./components/homepage/twoproducts/twoproducts"));
+const SmallScrolling = lazy(() => import("./components/homepage/smallscrolling/smallscrolling"));
+const LastOneProducts = lazy (() => import("./components/homepage/lastoneproducts/lastoneproducts"));
 
 export default function Home() {
   return (

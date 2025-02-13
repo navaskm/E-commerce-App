@@ -30,7 +30,7 @@ const MainOffers = () => {
             <div className="offer-image">
               {/* shoes images */}
               <Link href={{
-                pathname:"/components/SelectedPage",
+                pathname:"/components/selectedpage",
                 query:{
                   id: 1000,
                   type: 'shoes',
@@ -43,7 +43,7 @@ const MainOffers = () => {
               </Link>
               
               <Link href={{
-                pathname:"/components/SelectedPage",
+                pathname:"/components/selectedpage",
                 query:{
                   id: 999,
                   type: 'shoes',
@@ -55,7 +55,7 @@ const MainOffers = () => {
               </Link>
               
               <Link href={{
-                pathname:"/components/SelectedPage",
+                pathname:"/components/selectedpage",
                 query:{
                   id: 998,
                   type:'shoes',
@@ -77,7 +77,7 @@ const MainOffers = () => {
             <div className="offer-image">
                 {/* phone images */}
                 <Link href={{
-                  pathname:"/components/SelectedPage",
+                  pathname:"/components/selectedpage",
                   query:{
                     id: 997,
                     type:'phone',
@@ -89,7 +89,7 @@ const MainOffers = () => {
                 </Link>
                
                <Link href={{
-                pathname:"/components/SelectedPage",
+                pathname:"/components/selectedpage",
                   query:{
                     id: 996,
                     type:'phone',
@@ -101,7 +101,7 @@ const MainOffers = () => {
                 </Link>
                 
                 <Link href={{
-                  pathname:"/components/SelectedPage",
+                  pathname:"/components/selectedpage",
                   query:{
                     id: 995,
                     type:'phone',
@@ -122,7 +122,7 @@ const MainOffers = () => {
             <div className="offer-image">
                 {/* bag images */}
                 <Link href={{
-                  pathname:"/components/SelectedPage",
+                  pathname:"/components/selectedpage",
                   query:{
                     id: 994,
                     type:'bag',
@@ -134,7 +134,7 @@ const MainOffers = () => {
                 </Link>
               
                 <Link href={{
-                  pathname:"/components/SelectedPage",
+                  pathname:"/components/selectedpage",
                   query:{
                     id: 993,
                     type:'bag',
@@ -146,7 +146,7 @@ const MainOffers = () => {
                 </Link>
               
                <Link href={{
-                pathname:"/components/SelectedPage",
+                pathname:"/components/selectedpage",
                   query:{
                     id: 992,
                     type:'bag',

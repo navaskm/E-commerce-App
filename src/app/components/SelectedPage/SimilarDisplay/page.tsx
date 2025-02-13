@@ -1,8 +1,8 @@
-import { fetchProduct } from "@/app/DataFetching/productdata";
-import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
+import { fetchProduct } from "@/app/datafetching/productdata";
+import { fetchScrollingProduct } from "@/app/datafetching/productdata";
 import Link from "next/link";
 import similarProducts from '@/app/API/similar-product.json';
-import BackToTop from "./BackToTop/page";
+import BackToTop from "./backtotop/page";
 
 // api similar product lines
 
@@ -110,7 +110,7 @@ const SimilarProducts = async ({selectedImage}:{selectedImage:Products}) => {
               style={{textDecoration:"none"}}
               className='col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product'
               href={{
-                pathname: "/components/SelectedPage",
+                pathname: "/components/selectedpage",
                 query: {
                   name: encodeURIComponent(product.name),
                   priceCents: product.priceCents,
@@ -141,7 +141,7 @@ const SimilarProducts = async ({selectedImage}:{selectedImage:Products}) => {
               key={product.id}
               style={{textDecoration:"none"}}
               href={{
-                pathname: "/components/SelectedPage",
+                pathname: "/components/selectedpage",
                 query: {
                   name: encodeURIComponent(product.name),
                   priceCents: product.priceCents,

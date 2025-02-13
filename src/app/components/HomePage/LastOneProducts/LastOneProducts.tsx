@@ -1,6 +1,6 @@
 import { lazy,Suspense } from "react";
-const TwoProducts = lazy(()=> import("../TwoProducts/twoproducts"));
-const LargeProduct = lazy(()=> import("../LargeProducts/largeproduct"));
+const TwoProducts = lazy(()=> import("../twoproducts/twoproducts"));
+const LargeProduct = lazy(()=> import("../largeproducts/largeproduct"));
 import '@/app/styles/homepage/lastoneproducts/lastoneproducts.scss';
 
 function LastOneProducts() {

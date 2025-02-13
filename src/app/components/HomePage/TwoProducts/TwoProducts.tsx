@@ -1,5 +1,5 @@
 import '@/app/styles/homepage/twoproduct/twoproduct.scss';
-import { fetchProduct } from "@/app/DataFetching/productdata";
+import { fetchProduct } from "@/app/datafetching/productdata";
 
 import  Link  from 'next/link';
 
@@ -109,7 +109,7 @@ function TwoProducts({product}:ItemOne) {
                         }
                       } 
                       href={{
-                        pathname: "/components/SelectedPage",
+                        pathname: "/components/selectedpage",
                         query: {
                           name: encodeURIComponent(Product.name),
                           priceCents: Product.priceCents,
@@ -162,7 +162,7 @@ function TwoProducts({product}:ItemOne) {
             <Link  key={item.id}
               style={{textDecoration:"none"}}
               href={{
-                pathname: "/components/SelectedPage",
+                pathname: "/components/selectedpage",
                 query: {
                   name: encodeURIComponent(item.name),
                   priceCents: item.priceCents,

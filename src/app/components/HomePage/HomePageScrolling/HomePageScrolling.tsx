@@ -1,7 +1,7 @@
 import { lazy,Suspense } from "react";
-import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
+import { fetchScrollingProduct } from "@/app/datafetching/productdata";
 import "@/app/styles/homepage/homepagescrolling/homepagescrolling.scss";
-const BagsSports = lazy(() => import("./BagSports/bagsports"));
+const BagsSports = lazy(() => import("./bagsports/bagsports"));
 
 type Products = {
   id:string;

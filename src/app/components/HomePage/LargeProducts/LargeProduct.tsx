@@ -1,5 +1,5 @@
 import '@/app/styles/homepage/largeproduct/largeproduct.scss';
-import { fetchProduct } from "@/app/DataFetching/productdata";
+import { fetchProduct } from "@/app/datafetching/productdata";
 import Link from 'next/link';
 
 type Products = {
@@ -78,7 +78,7 @@ function LargeProduct({product}:ItemOne) {
                   return (
                     <div key={item.id} className="product-card">
                       <Link href={{
-                        pathname: "/components/SelectedPage",
+                        pathname: "/components/selectedpage",
                         query: {
                           name: encodeURIComponent(item.name),
                           priceCents: item.priceCents,
@@ -122,7 +122,7 @@ function LargeProduct({product}:ItemOne) {
           return (
             <Link  key={item.id}
               href={{
-                pathname: "/components/SelectedPage",
+                pathname: "/components/selectedpage",
                 query: {
                   name: encodeURIComponent(item.name),
                   priceCents: item.priceCents,

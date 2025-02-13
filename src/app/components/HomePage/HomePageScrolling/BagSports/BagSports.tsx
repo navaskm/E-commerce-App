@@ -67,7 +67,7 @@ function BagsSports({product,order}:BagsSports) {
                     } 
 
                     href={{
-                      pathname: "/components/SelectedPage",
+                      pathname: "/components/selectedpage",
                       query: {
                         name: encodeURIComponent(item.name),
                         priceCents: item.priceCents,

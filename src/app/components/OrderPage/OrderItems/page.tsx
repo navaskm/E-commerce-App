@@ -8,8 +8,8 @@ import { hydrateOrder } from "@/app/lib/store/feature/deliverydate/deliverydate"
 
 import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 import { addItem } from "@/app/lib/store/feature/items/itemsslice";
-import TopBarOfCartPage from "../../checkoutpage/TopBar/topbar";
-import EmptyCart from "../../checkoutpage/CartItems/EmptyCart/page";
+import TopBarOfCartPage from "../../checkoutpage/topbar/topbar";
+import EmptyCart from "../../checkoutpage/cartitems/emptycart/page";
 
 type OrderItems = {
   image: string;
@@ -182,7 +182,7 @@ const OrderItems = () => {
 
                   <Link 
                     href={{
-                      pathname :'/components/TrackingPage',
+                      pathname :'/components/trackingpage',
                       query:{
                         name: item.name,
                         image: item.image,

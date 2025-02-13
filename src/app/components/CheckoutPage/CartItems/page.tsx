@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
 import { cartItemHydrate,addItem,removeItemQuantity,removeItem } from "@/app/lib/store/feature/items/itemsslice";
 import { addDeliveryDate,removeDeliveryDate } from "@/app/lib/store/feature/deliverydate/deliverydate";
 import { addToCart,removeFromCart,removeFromCartOfQuantityBase } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
-import EmptyCart from "./EmptyCart/page";
+import EmptyCart from "./emptycart/page";
 
 type Products = {
   id: string;
