@@ -16,7 +16,6 @@ type Products = {
   size:string,
 }
 
-
 type BagsSports = {
   product : Products[],
   order: string,

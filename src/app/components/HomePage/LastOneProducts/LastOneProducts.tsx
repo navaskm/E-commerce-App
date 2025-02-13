@@ -14,7 +14,6 @@ function LastOneProducts() {
         <LargeProduct product='waterHouse' />
       </Suspense>
 
-
       <Suspense fallback={<p>Loading two products</p>}>
         <TwoProducts product='slipper'/>
       </Suspense>

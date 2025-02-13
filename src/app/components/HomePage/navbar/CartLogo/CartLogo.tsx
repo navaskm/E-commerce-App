@@ -1,22 +1,14 @@
-import { useSelector } from "react-redux";
+"use client";
+
 import Link from "next/link";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-import { hydrate } from "./cartlogoslice";
-
-type Quantity = {
-  cart:{
-    cartBase:number;
-  }
-}
+import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
+import { hydrate } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 
 const CartLogo = () => {
 
-  const dispatch = useDispatch();
-  const numberOfItemsQuantity = useSelector((state:Quantity) => state.cart.
-    cartBase
-  )
+  const dispatch = useAppDispatch();
+  const numberOfItemsQuantity = useAppSelector((state) => state.cart.cartBase)
 
   // add local storage in to the store
   useEffect(() => {

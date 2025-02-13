@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link"
-import { useSelector } from "react-redux"
+import { useAppSelector } from "@/app/lib/store/hooks/hooks";
 
 type TopBarProps = {
   order?: string,
@@ -32,8 +32,8 @@ type CartItemType = {
 
 export default function TopBar ({order}:TopBarProps)  {
 
-  const checkoutItems = useSelector((state:QuantityType)=> state.cart.cartBase);
-  const carItems = useSelector((state: CartItemType) => state.cartItems.items);
+  const checkoutItems = useAppSelector((state:QuantityType)=> state.cart.cartBase);
+  const carItems = useAppSelector((state: CartItemType) => state.cartItems.items);
 
   return (
     <div className="top-bar">

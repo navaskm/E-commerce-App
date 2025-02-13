@@ -1,10 +1,8 @@
-"use client"
+"use client";
 
 import { useSearchParams } from "next/navigation";
 import { lazy,Suspense } from "react";
 import { useState } from "react";
-import { Provider } from "react-redux";
-import store from '../../Redux/store';
 
 const AddToCartBtn = lazy(()=> import('./AddToCartBtn/addtocartbtn'));
 
@@ -74,9 +72,7 @@ const ImageDisplay = () => {
 
           {/* create add to cart button of product */}
           <Suspense fallback={<p>loading....</p>}>
-            <Provider store={store}>
               <AddToCartBtn name={name} image={image} price={priceCents} size={size} id={id} selectedSize={selectedSize}/>
-            </Provider> 
           </Suspense>
 
         </div>

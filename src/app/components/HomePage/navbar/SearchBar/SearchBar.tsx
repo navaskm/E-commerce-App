@@ -1,10 +1,9 @@
 'use client';
 
 import { CiSearch } from "react-icons/ci";
-import { useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import Link from "next/link";
 
-import { fetchProduct,fetchScrollingProduct } from "@/app/DataFetching/productdata";
 import similarProducts from '@/app/API/similar-product.json';
 import "@/app/styles/homepage/navbar/navbar.scss";
 
@@ -22,35 +21,23 @@ type Search = {
   keyWords: string,
 }
 
+interface SearchBarProps {
+  homeProducts: Search[];
+  scrollingProducts: Search[];
+}
 
-const SearchBar =  () => {
+const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) => {
 
   const [scrolling, setScrolling] = useState<Search[]>([]);
-  const [searchData, setSearchData] = useState('');
+  const [searchData, setSearchData] = useState<string>('');
 
   useEffect(()=> {
-
-    // fetch scrolling product
-    const getProducts = async ()=>{
-      try {
-
-        const homeProducts = await fetchProduct();
-        const scrollingProducts  = await fetchScrollingProduct();
-        setScrolling([
-          ...(homeProducts  as Search[]),
-          ...(scrollingProducts  as Search[]),
-          ...(similarProducts as unknown as Search[])
-        ]);
-        
-
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-
-    }
-    getProducts();
-
-  },[])
+    setScrolling([
+      ...(homeProducts),
+      ...(scrollingProducts),
+      ...(similarProducts as unknown as Search[])
+    ]);
+   },[homeProducts, scrollingProducts])
 
   const productName = scrolling.filter((product:Search)=>
     product.name.toLocaleLowerCase().includes(searchData.toLocaleLowerCase())

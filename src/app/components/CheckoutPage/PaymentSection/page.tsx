@@ -1,14 +1,14 @@
 "use client";
 
-import { useSelector,useDispatch } from "react-redux";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import { userOrder } from "../CartItems/cartitems";
-import { removeAllItem } from "../../SelectedPage/ImageDisplay/AddToCartBtn/cartslice";
-import { removeAllQuantity } from "../../HomePage/navbar/CartLogo/cartlogoslice";
-import { hydrate } from "../../HomePage/navbar/CartLogo/cartlogoslice";
+import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
+import { userOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
+import { removeAllItem } from "@/app/lib/store/feature/items/itemsslice";
+import { removeAllQuantity } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { hydrate } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 
 type Products = {
   id: string;
@@ -41,12 +41,12 @@ type ShippingType = {
 
 const PaymentPage = () => {
 
-  const dispatch = useDispatch();
-  const checkoutItems = useSelector((state:QuantityType)=> state.cart.cartBase || 0);
-  const conformItems = useSelector((state:CartItemType)=> state.cartItems.items || {});
+  const dispatch = useAppDispatch();
+  const checkoutItems = useAppSelector((state:QuantityType)=> state.cart.cartBase || 0);
+  const conformItems = useAppSelector((state:CartItemType)=> state.cartItems.items || {});
 
   // get shipping cost
-  const shippingCost = useSelector((state:ShippingType) => state.deliveryDate.shippingCost);
+  const shippingCost = useAppSelector((state:ShippingType) => state.deliveryDate.shippingCost);
 
   // get total product price
   const productPriceCents = React.useMemo(() => {

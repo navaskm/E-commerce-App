@@ -1,12 +1,13 @@
 "use client"
 
-import { useSelector,useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { addToCart } from "../../HomePage/navbar/CartLogo/cartlogoslice";
-import { addItem } from "../../SelectedPage/ImageDisplay/AddToCartBtn/cartslice";
-import { hydrateOrder } from "../../CheckoutPage/CartItems/cartitems";
+import { useAppDispatch,useAppSelector } from "@/app/lib/store/hooks/hooks";
+import { hydrateOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
+
+import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { addItem } from "@/app/lib/store/feature/items/itemsslice";
 import TopBarOfCartPage from "../../CheckoutPage/TopBar/topbar";
 import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/page";
 
@@ -20,11 +21,6 @@ type OrderItems = {
   size: string;
 }
 
-type GroupedItems = {
-  [date: string]: OrderItems[];
-};
-
-
 type Products = {
   id: string;
   name: string;
@@ -35,31 +31,17 @@ type Products = {
   selectedSize: string;
 };
 
-type CartItemType = {
-  selectedSize?: string;
-  cartItems: {
-    items: Products[];
-  }
+interface GroupedItems {
+  [key: string]: OrderItems[];
 }
-
-type UserOrderType = {
-  deliveryDate: {
-    userOrder: OrderItems[];
-  }
-}
-
-type ConformType = {
-  conformDate: string
-}
-
 
 const OrderItems = () => {
 
   const [isClient, setIsClient] = useState(false);
   const [buttonState, setButtonState] = useState<{ [key: string]: string }>({});
 
-  const checkoutItems = useSelector((state:CartItemType) => state.cartItems.items);
-  const dispatch = useDispatch();
+  const checkoutItems = useAppSelector((state) => state.cartItems.items);
+  const dispatch = useAppDispatch();
 
   // add local storage in to the store
   useEffect(() => {
@@ -75,7 +57,7 @@ const OrderItems = () => {
     setIsClient(true);
   }, []);
 
-  const conformDeliveryDate = useSelector((state: UserOrderType) => state.deliveryDate.userOrder);
+  const conformDeliveryDate = useAppSelector((state) => state.deliveryDate.userOrder)as OrderItems[];
 
   // Render a loading or placeholder state until the client hydrates
   if (!isClient) {
@@ -83,8 +65,8 @@ const OrderItems = () => {
   }
 
   // Group items by `conformDate`
-  const groupedItems:GroupedItems = conformDeliveryDate.reduce(
-    (acc: Record<string, OrderItems[]>, item: OrderItems) => {
+    const groupedItems = conformDeliveryDate.reduce<GroupedItems>(
+      (acc, item) => {
 
       const date = item.conformDate;
       if (!acc[date]) {
@@ -128,11 +110,11 @@ const OrderItems = () => {
   }
 
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string):Date => {
     return new Date(dateString);
   };
 
-  const isPastDate = (date: string) => {
+  const isPastDate = (date: string):boolean => {
     const today = new Date();
     const conformDate = formatDate(date);
     return conformDate > today;
@@ -146,12 +128,12 @@ const OrderItems = () => {
       {Object.entries(groupedItems).map(([date, items], groupIndex) => {
 
         // Check if any item in the group has a past delivery date
-        const isReceived = items.some((item:ConformType) => isPastDate(item.conformDate));
+        const isReceived = items.some((item:OrderItems) => isPastDate(item.conformDate));
 
         return (
 
         <div
-          className={`same-date-item-container ${isReceived? 'item-received':null}`}
+          className={`same-date-item-container ${isReceived? 'item-received':''}`}
           key={groupIndex}
         >
 
@@ -163,13 +145,13 @@ const OrderItems = () => {
           )}
 
 
-          {items.map((item:OrderItems, index:number) => {
+          {items.map((item, index) => {
 
             const SelectedSize = item.size?.replace(".size-", "");
 
             return(
 
-              <div className={`each-item-container ${index == 0?'item-first':null}`} key={index}>
+              <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
 
                 <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
 

@@ -19,7 +19,6 @@ const LastOneProducts = lazy (() => import("./components/HomePage/LastOneProduct
 
 export default function Home() {
   return (
-    <>
     <SkeletonTheme baseColor="#aed4fa" highlightColor="#525252">
       <Suspense fallback={<NavbarSkeleton/>}>
         <NavBar />
@@ -60,7 +59,6 @@ export default function Home() {
        <Suspense fallback={<LargeProductSkeleton/>}>
         <LastOneProducts />
       </Suspense> 
-      </SkeletonTheme>
-    </>
+    </SkeletonTheme>
   );
 }

@@ -3,8 +3,6 @@
 import { lazy,Suspense } from "react";
 import { useEffect,useState } from "react";
 import { Rings } from 'react-loading-icons';
-import { Provider } from "react-redux";
-import store from "../Redux/store";
 
 import NavbarSkeleton from "../HomePage/navbar/Skeleton/navbarskeleton";
 
@@ -30,8 +28,7 @@ const CartPage = () => {
   }, []);
 
   return (
-    <Provider store={store}>
-
+    <>
       <title>Check Your Items</title>
 
       <Suspense fallback={<NavbarSkeleton/>}>
@@ -55,7 +52,7 @@ const CartPage = () => {
         </Suspense>
       </div>
     )}
-    </Provider>
+    </>
   )
 }
 

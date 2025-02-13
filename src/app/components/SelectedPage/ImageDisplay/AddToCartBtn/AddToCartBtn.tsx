@@ -1,10 +1,11 @@
 "use client";
 
 import { TiShoppingCart } from "react-icons/ti";
-import { useDispatch,useSelector } from "react-redux";
 import { useState } from "react";
-import { addToCart } from "@/app/components/HomePage/navbar/CartLogo/cartlogoslice";
-import { addItem } from "./cartslice";
+
+import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
+import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { addItem } from "@/app/lib/store/feature/items/itemsslice";
 
 type Product = {
   name:string|null,
@@ -25,19 +26,12 @@ type Products = {
   selectedSize: string;
 };
 
-type CartItemType = {
-  selectedSize?: string;
-  cartItems: {
-    items: Products[];
-  }
-}
-
 const AddToCartBtn = ({name,image,price,id,size,selectedSize}:Product) => {
 
   const [isAdded, setIsAdded] = useState(false);
 
-  const dispatch = useDispatch();
-  const checkoutItems = useSelector((state:CartItemType) => state.cartItems.items);
+  const dispatch = useAppDispatch();
+  const checkoutItems = useAppSelector(state => state.cartItems.items);
 
   const AddToCart = ()=>{
 

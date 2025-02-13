@@ -1,12 +1,12 @@
 'use client'
-import { useSelector, useDispatch } from "react-redux";
+
 import { useState, useEffect } from "react";
 import { MdRemoveShoppingCart } from "react-icons/md";
 
-import { cartItemHydrate,addItem,removeItemQuantity,removeItem } from "../../SelectedPage/ImageDisplay/AddToCartBtn/cartslice";
-
-import { addDeliveryDate, removeDeliveryDate } from "./cartitems";
-import { addToCart, removeFromCart, removeFromCartOfQuantityBase } from "../../HomePage/navbar/CartLogo/cartlogoslice";
+import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
+import { cartItemHydrate,addItem,removeItemQuantity,removeItem } from "@/app/lib/store/feature/items/itemsslice";
+import { addDeliveryDate,removeDeliveryDate } from "@/app/lib/store/feature/deliverydate/deliverydate";
+import { addToCart,removeFromCart,removeFromCartOfQuantityBase } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "./EmptyCart/page";
 
 type Products = {
@@ -19,17 +19,10 @@ type Products = {
   selectedSize: string;
 };
 
-type CartItemType = {
-  selectedSize?: string;
-  cartItems: {
-    items: Products[];
-  }
-}
-
 const CartItems = () => {
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string }>({});
-  const checkoutItems = useSelector((state: CartItemType) => state.cartItems.items || {});
-  const dispatch = useDispatch();
+  const checkoutItems = useAppSelector((state) => state.cartItems.items);
+  const dispatch = useAppDispatch();
 
   // add local storage in to the store
     useEffect(() => {
@@ -58,7 +51,7 @@ const CartItems = () => {
   useEffect(() => {
     Object.entries(selectedOptions).forEach(([key, selectedOption]) => {
       const existingItem = checkoutItems.find(
-        (item:Products) => `${item.id}-${item.selectedSize.replace(".size-", "")}` === key
+        (item) => `${item.id}-${item.selectedSize.replace(".size-", "")}` === key
       );
   
       if (existingItem) {
@@ -84,8 +77,6 @@ const CartItems = () => {
       }
     });
   }, [selectedOptions, checkoutItems, dispatch]);
-  
-  
 
   const findDeliveryDate = (deliveryDate: number) => {
     const date = new Date();
