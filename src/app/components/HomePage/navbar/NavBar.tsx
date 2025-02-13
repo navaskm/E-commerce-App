@@ -3,17 +3,17 @@ import { Suspense,lazy } from "react";
 import { fetchProduct,fetchScrollingProduct } from "@/app/datafetching/productdata";
 
 // loading imports
-import AppLogSkeleton from "./applogo/applogskeleton";
-import SearchBarSkeleton from "./searchbar/skeleton/searchbarskeleton";
-import LinksSkeleton from "./links/skeleton/linksskeleton";
-import CartLogoSkelton from "./cartlogo/cartlogoskelton";
+import AppLogSkeleton from "./AppLogo/AppLogSkeleton";
+import SearchBarSkeleton from "./SearchBar/Skeleton/SearchBarSkeleton";
+import LinksSkeleton from "./Links/skeleton/LinksSkeleton";
+import CartLogoSkelton from "./CartLogo/cartlogoskelton";
 
-const AppLogs = lazy(() => import('./applogo/applogs'));
-const SearchBar = lazy(() => import("./searchbar/searchbar"));
-const Links = lazy(() => import("./links/links"));
-const Login = lazy(() => import("./login/login"));
-const CartLogo = lazy(() => import("./cartlogo/cartlogo"));
-const MobilHamburger = lazy(() => import("./mobilhamburger/mobilhamburger"));
+const AppLogs = lazy(() => import('./AppLogo/AppLogs'));
+const SearchBar = lazy(() => import("./SearchBar/SearchBar"));
+const Links = lazy(() => import("./Links/Links"));
+const Login = lazy(() => import("./Login/Login"));
+const CartLogo = lazy(() => import("./CartLogo/CartLogo"));
+const MobilHamburger = lazy(() => import("./MobilHamburger/MobilHamburger"));
 
 import "@/app/styles/homepage/navbar/navbar.scss";
 
