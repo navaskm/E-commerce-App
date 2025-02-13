@@ -1,5 +1,5 @@
-import { fetchScrollingProduct } from '@/app/datafetching/productdata';
-import '@/app/styles/homepage/smallScrolling/smallscrolling.scss';
+import { fetchScrollingProduct } from '@/app/DataFetching/productdata';
+import '@/app/styles/homepage/smallScrolling/smallScrolling.scss';
 
 import Link from 'next/link';
 
