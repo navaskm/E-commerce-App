@@ -92,7 +92,7 @@ switch (diffInDays) {
 
       <div className="order-content">
 
-        <Link href='/components/orderpage'>View All Orders</Link>
+        <Link href='/components/OrderPage'>View All Orders</Link>
         <h2>Arriving on : <span>{decodeURIComponent(searchParams.date)}</span></h2>
         <div className="product-content">
           <img src={decodeURIComponent(searchParams.image)} alt=""/>
