@@ -1,6 +1,6 @@
 import Link from "next/link"
 import '@/app/styles/trackingpage/tracking.scss';
-import TrackId from "./trackid";
+import TrackId from "./TrackId";
 
 type Products = {
   name: string,
