@@ -1,8 +1,8 @@
-import { fetchProduct } from "@/app/datafetching/productdata";
-import { fetchScrollingProduct } from "@/app/datafetching/productdata";
+import { fetchProduct } from "@/app/DataFetching/productdata";
+import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
 import Link from "next/link";
 import similarProducts from '@/app/API/similar-product.json';
-import BackToTop from "./backtotop/page";
+import BackToTop from "./BackToTop/page";
 
 // api similar product lines
 
