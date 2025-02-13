@@ -82,7 +82,7 @@ const PaymentPage = () => {
     dispatch(userOrder());
     dispatch(removeAllItem());
     dispatch(removeAllQuantity());
-    route.push("/components/orderpage");
+    route.push("/components/OrderPage");
   }
 
   return conformItems.length !== 0 ? (
