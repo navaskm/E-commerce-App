@@ -1,6 +1,6 @@
 import '@/app/homepagesmall/smallproducts.scss'
 
-import { fetchProduct } from "@/app/datafetching/productdata";
+import { fetchProduct } from "@/app/DataFetching/productdata";
 import Link from "next/link";
 
 type Products = {
