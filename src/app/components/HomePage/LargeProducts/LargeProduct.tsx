@@ -78,7 +78,7 @@ function LargeProduct({product}:ItemOne) {
                   return (
                     <div key={item.id} className="product-card">
                       <Link href={{
-                        pathname: "/components/selectedpage",
+                        pathname: "/components/SelectedPage",
                         query: {
                           name: encodeURIComponent(item.name),
                           priceCents: item.priceCents,
@@ -122,7 +122,7 @@ function LargeProduct({product}:ItemOne) {
           return (
             <Link  key={item.id}
               href={{
-                pathname: "/components/selectedpage",
+                pathname: "/components/SelectedPage",
                 query: {
                   name: encodeURIComponent(item.name),
                   priceCents: item.priceCents,
