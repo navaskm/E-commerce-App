@@ -49,7 +49,7 @@ function SmallScrolling({item}: Item) {
                 <Link key={faceWash.id}
                 style={{textDecoration:"none"}}
                 href={{
-                  pathname: "/components/selectedpage",
+                  pathname: "/components/SelectedPage",
                   query: {
                     name: encodeURIComponent(faceWash.name),
                     priceCents: faceWash.priceCents,
@@ -87,7 +87,7 @@ function SmallScrolling({item}: Item) {
                 <Link key={phone.id}
                 style={{textDecoration:"none"}}
                 href={{
-                  pathname: "/components/selectedpage",
+                  pathname: "/components/SelectedPage",
                   query: {
                     name: encodeURIComponent(phone.name),
                     priceCents: phone.priceCents,
