@@ -1,4 +1,3 @@
-
 import { lazy,Suspense } from "react";
 import { Rings } from 'react-loading-icons';
 const OrderItems = lazy(()=>import("./OrderItems/page"));

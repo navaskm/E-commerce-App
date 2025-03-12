@@ -3,10 +3,6 @@
 import Link from "next/link"
 import { useAppSelector } from "@/app/lib/store/hooks/hooks";
 
-type TopBarProps = {
-  order?: string,
-}
-
 type QuantityType = {
   cart: {
     cartBase: number;
@@ -30,7 +26,7 @@ type CartItemType = {
   }
 }
 
-export default function TopBar ({order}:TopBarProps)  {
+export default function TopBar ()  {
 
   const checkoutItems = useAppSelector((state:QuantityType)=> state.cart.cartBase);
   const carItems = useAppSelector((state: CartItemType) => state.cartItems.items);
@@ -42,11 +38,7 @@ export default function TopBar ({order}:TopBarProps)  {
       </Link>
 
       {
-        order?(
-          <h2>
-            Your Orders
-          </h2>
-        ): carItems.length !== 0 ? (
+        carItems.length !== 0 ? (
           <h2>
             Check Out <span>{checkoutItems}</span> Items
           </h2>

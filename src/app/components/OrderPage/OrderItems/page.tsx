@@ -8,14 +8,13 @@ import { hydrateOrder } from "@/app/lib/store/feature/deliverydate/deliverydate"
 
 import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 import { addItem } from "@/app/lib/store/feature/items/itemsslice";
-import TopBarOfCartPage from "../../CheckoutPage/TopBar/TopBar";
 import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/page";
 
 type OrderItems = {
   image: string;
   name: string;
   price: string;
-  id: string;
+  id: string; 
   quantity: number;
   conformDate: string;
   size: string;
@@ -33,6 +32,13 @@ type Products = {
 
 interface GroupedItems {
   [key: string]: OrderItems[];
+}
+
+type CartItemType = {
+  selectedSize?: string;
+  cartItems: {
+    items: Products[];
+  }
 }
 
 const OrderItems = () => {
@@ -123,7 +129,20 @@ const OrderItems = () => {
   return conformDeliveryDate.length !== 0 ? (
     <div className="order-item-container">
 
-      <TopBarOfCartPage order='useOrder'/>
+      <div className="top-bar">
+        <Link href='/'>
+            <img src="/Logo/app-logo.png" alt="back"/>
+        </Link>
+
+        <h2>
+          Your Orders
+        </h2>
+      </div>
+
+
+
+
+
 
       {Object.entries(groupedItems).map(([date, items], groupIndex) => {
 
