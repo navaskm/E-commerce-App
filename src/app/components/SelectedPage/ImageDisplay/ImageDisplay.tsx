@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
 import { useSearchParams } from "next/navigation";
 import { lazy,Suspense } from "react";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 
 const AddToCartBtn = lazy(()=> import('./AddToCartBtn/AddToCartBtn'));
 
@@ -16,11 +16,6 @@ const ImageDisplay = () => {
   const name:string|null = searchParams.get("name");
   const priceCents:string|null = searchParams.get("priceCents");
   const id:string|null = searchParams.get("id");
-
-  useEffect(() => {
-    // Scroll to top when page loads
-    window.scrollTo(0, 0);
-  }, []);
 
   // image size select code
   const selectSize = (isWhite: string) => {

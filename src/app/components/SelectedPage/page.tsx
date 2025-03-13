@@ -1,4 +1,7 @@
-import { lazy,Suspense } from "react";
+"use client";
+
+import { lazy,Suspense,useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 import NavbarSkeleton from "../HomePage/navbar/Skeleton/NavbarSkeleton";
 import ImageDisplaySkeleton from "./ImageDisplay/Skeleton/ImageDisplaySkeleton";
@@ -11,44 +14,37 @@ const SimilarProducts = lazy(() => import("./SimilarDisplay/page"));
 
 import '@/app/styles/selectdpage/selectpage.scss';
 
-type Products = {
-  name: string,
-  title:string,
-  image: string,
-  rating: string,
-  priceCents:string,
-  type: string,
-  keywords: string,
-  id: number,
-  company: string,
-  madein: string,
-  Feature: string,
-  size:string,
-  offer?: string,
+const SelectItemPage = () => {
 
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+  const searchParams = useSearchParams();
+  const offerProductDisplay = searchParams.get("offer");
+  
+  // scroll in to the top
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[]);
 
-// Generate metadata dynamically based on searchParams
-export async function generateMetadata({ searchParams }: {searchParams: Promise<{name:string}>}) {
-  const {name} = await searchParams
-  return {
-    title: `About ${decodeURIComponent(name || 'Good Product')}`,
-    description: `Explore details about ${decodeURIComponent(name||'Good Product')} including features, price, and more.`,
-  };
-}
-
-const SelectItemPage = async ( {searchParams}:{searchParams:Products}) => {
-
-  const offerProductDisplay = searchParams.offer? true : false;
+  // create title of this page
+  useEffect(() => {
+    const name = searchParams.get("name");
+    if (name) {
+      document.title = `About ${decodeURIComponent(name)}`;
+    } else {
+      document.title = "Product Details";
+    }
+  
+    // Optional: Reset the title when unmounting
+    return () => {
+      document.title = "E-commerce site";
+    };
+  }, [searchParams]);
 
   if (offerProductDisplay){
     return (
       <>
           {/* offer products display */}
         <Suspense fallback={<SimilarProductsSkeleton/>}>
-          <SimilarProducts selectedImage={searchParams} />
+          <SimilarProducts/>
         </Suspense>
       </>
     )
@@ -65,17 +61,16 @@ const SelectItemPage = async ( {searchParams}:{searchParams:Products}) => {
           <Suspense fallback={<ImageDisplaySkeleton/>}>
             <ImageDisplay/>
           </Suspense>
-          
 
             {/* features display */}
           <Suspense fallback={<ImageDisplaySkeleton/>}>
-            <ImageFeature selectedImage={searchParams} />
+            <ImageFeature/>
           </Suspense>
         </div>
 
         {/* similar products display */}
         <Suspense fallback={<SimilarProductsSkeleton/>}>
-          <SimilarProducts selectedImage={searchParams} />
+          <SimilarProducts/>
         </Suspense>
 
       </>

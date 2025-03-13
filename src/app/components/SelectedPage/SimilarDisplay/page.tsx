@@ -1,6 +1,10 @@
-import { fetchProduct } from "@/app/DataFetching/productdata";
-import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
+'use client';
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+
+import { fetchProduct, fetchScrollingProduct } from "@/app/DataFetching/productdata";
 import similarProducts from '@/app/API/similar-product.json';
 import BackToTop from "./BackToTop/page";
 
@@ -46,128 +50,154 @@ import BackToTop from "./BackToTop/page";
 // all total id is = 345
 
 type Products = {
-  name: string,
-  title:string,
-  image: string,
-  rating: string,
-  priceCents:string,
-  type: string,
-  keywords: string,
-  id: number,
-  company: string,
-  madein: string,
-  Feature: string,
-  size?:string,
-  offer?: string,
-}
+  name: string;
+  title: string;
+  image: string;
+  rating: string;
+  priceCents: string;
+  type: string;
+  keywords: string;
+  id: number;
+  company: string;
+  madein: string;
+  Feature: string;
+  size?: string;
+  offer?: string;
+};
 
-const SimilarProducts = async ({selectedImage}:{selectedImage:Products}) => {
+const SimilarProducts = () => {
 
-  let products : Products[] =  []
+  const [finalProduct, setFinalProduct] = useState<Products[]>([]);
+  const [similarFinalProduct, setSimilarFinalProduct] = useState<Products[]>([]);
 
-  console.log(selectedImage);
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+  const id:number|string|null = searchParams.get("id");
+  const offer = searchParams.get('offer');
 
-  //fetch product
-  const similarProductOne = await fetchProduct();
-  const productOne = similarProductOne.filter((product:Products)=> product.type===selectedImage.type);
+  // fetch data
+  useEffect(() => {
+    const fetchData = async () => {
 
-  //fetch scrolling product
-  const similarProductTwo = await fetchScrollingProduct();
-  const productTwo = similarProductTwo.filter((product:Products)=> product.type===selectedImage.type);
+      let products: Products[] = [];
 
-  // find which the product (scrolling api of dynamic api)
-  const product = productTwo.length === 0 ? productOne : productTwo;
+      try {
+        // Fetch product
+        const similarProductOne = await fetchProduct();
+        const productOne = similarProductOne.filter((product: Products) => product.type === type);
 
-  // push product in to the products
-  products = products.concat(product);
+        // Fetch scrolling product
+        const similarProductTwo = await fetchScrollingProduct();
+        const productTwo = similarProductTwo.filter((product: Products) => product.type === type);
 
-  // remove selectedImage in display
-  const finalProduct = products.filter((product:Products) => product.id !== selectedImage.id);
+        // Find product source
+        const product = productTwo.length === 0 ? productOne : productTwo;
 
-  // fetch similar products
-  const similarProduct = similarProducts.filter(product => product.type == selectedImage.type);
+        // Push products into array
+        products = products.concat(product);
 
-  // remove selectedImage in display in similar products
-  const similarFinalProduct = similarProduct.filter(product => Number(product.id) !== selectedImage.id);
+        // Remove selected product from display
+        const filteredProducts = products.filter((product:Products) => product.id !== id);
+        setFinalProduct(filteredProducts);
+
+        // Fetch similar products
+        const similarProduct = similarProducts.filter(
+          (product) => product.type === type
+        );
+
+        // Remove selected product from similar products
+        const filteredSimilarProducts = similarProduct.filter(
+          (product) => product.id !== id
+        );
+        setSimilarFinalProduct(filteredSimilarProducts);
+
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    fetchData();
+  }, [searchParams]);
 
   return (
     <div className="container-of-similar-product">
-      {
-        selectedImage.offer? <h3 className="offer-title">Best offer for you</h3>:<h3>Similar Products</h3>
-      }
+      {offer ? (
+        <h3 className="offer-title">Best offer for you</h3>
+      ) : (
+        <h3>Similar Products</h3>
+      )}
 
-      {
-        selectedImage.offer ? null : <BackToTop/>
-      }
+      {offer ? null : <BackToTop />}
 
       <div className="container-of-each-similar-product">
-        {
-          finalProduct?.map((product:Products) => {
+        {/* Render final products */}
+        {finalProduct?.map((product) => (
+          <Link
+            key={product.id}
+            style={{ textDecoration: "none" }}
+            className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
+            href={{
+              pathname: "/components/SelectedPage",
+              query: {
+                name: encodeURIComponent(product.name),
+                priceCents: product.priceCents,
+                image: encodeURIComponent(product.image),
+                rating: product.rating,
+                type: product.type,
+                id: product.id,
+                keywords: product.keywords,
+                company: encodeURIComponent(product.company),
+                madein: encodeURIComponent(product.madein),
+                Feature: encodeURIComponent(product.Feature),
+                size: product.size,
+              },
+            }}
+          >
+            <img src={product.image} alt={product.name} />
+            <h5>{product.name}</h5>
+            <b>
+              <span>₹</span>
+              {product.priceCents}
+            </b>
+            <p>{product.rating}&#9733;</p>
+          </Link>
+        ))}
 
-            return (
-              <Link 
-              key={product.id} 
-              style={{textDecoration:"none"}}
-              className='col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product'
-              href={{
-                pathname: "/components/SelectedPage",
-                query: {
-                  name: encodeURIComponent(product.name),
-                  priceCents: product.priceCents,
-                  image: encodeURIComponent(product.image),
-                  rating: product.rating,
-                  type: product.type,
-                  id: product.id,
-                  keywords: product.keywords,
-                  company: encodeURIComponent(product.company),
-                  madein: encodeURIComponent(product.madein),
-                  Feature: encodeURIComponent(product.Feature),
-                  size: product.size,
-                }
-              }}>
-                  <img src={product.image} alt={product.name}/>
-                  <h5>{product.name}</h5>
-                  <b><span>₹</span>{product.priceCents}</b>
-                  <p>{product.rating}&#9733;</p>
-              </Link>
-            )
-          })
-        }
-        {
-          similarFinalProduct?.map(product => {
-            return (
-              <Link 
-              className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
-              key={product.id}
-              style={{textDecoration:"none"}}
-              href={{
-                pathname: "/components/SelectedPage",
-                query: {
-                  name: encodeURIComponent(product.name),
-                  priceCents: product.priceCents,
-                  image: encodeURIComponent(product.image),
-                  rating: product.rating,
-                  type: product.type,
-                  id: product.id,
-                  keywords: product.keywords,
-                  company: encodeURIComponent(product.company),
-                  madein: encodeURIComponent(product.madein),
-                  Feature: encodeURIComponent(product.Feature),
-                  size: product.size,
-                }
-              }}>
-                <img src={product.image} alt={product.name}/>
-                <h5>{product.name}</h5>
-                <b><span>₹</span>{product.priceCents}</b>
-                <p>{product.rating}&#9733;</p>
-              </Link>
-            )
-          })
-        }
+        {/* Render similar products */}
+        {similarFinalProduct?.map((product) => (
+          <Link
+            key={product.id}
+            style={{ textDecoration: "none" }}
+            className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
+            href={{
+              pathname: "/components/SelectedPage",
+              query: {
+                name: encodeURIComponent(product.name),
+                priceCents: product.priceCents,
+                image: encodeURIComponent(product.image),
+                rating: product.rating,
+                type: product.type,
+                id: product.id,
+                keywords: product.keywords,
+                company: encodeURIComponent(product.company),
+                madein: encodeURIComponent(product.madein),
+                Feature: encodeURIComponent(product.Feature),
+                size: product.size,
+              },
+            }}
+          >
+            <img src={product.image} alt={product.name} />
+            <h5>{product.name}</h5>
+            <b>
+              <span>₹</span>
+              {product.priceCents}
+            </b>
+            <p>{product.rating}&#9733;</p>
+          </Link>
+        ))}
       </div>
-      
     </div>
-  )
-}
+  );
+};
 
-export default SimilarProducts
+export default SimilarProducts;

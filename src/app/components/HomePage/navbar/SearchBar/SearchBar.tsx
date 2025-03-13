@@ -28,26 +28,32 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) => {
 
-  const [scrolling, setScrolling] = useState<Search[]>([]);
+  const [products, setProducts] = useState<Search[]>([]);
   const [searchData, setSearchData] = useState<string>('');
 
   useEffect(()=> {
-    setScrolling([
+    setProducts([
       ...(homeProducts),
       ...(scrollingProducts),
       ...(similarProducts as unknown as Search[])
     ]);
    },[homeProducts, scrollingProducts])
 
-  const productName = scrolling.filter((product:Search)=>
+  const productName = products.filter((product:Search)=>
     product.name.toLocaleLowerCase().includes(searchData.toLocaleLowerCase())
-  )
+  );
+
+  const handleProductClick = () => {
+    // Clear search input after user clicks on a product
+    setSearchData('');
+  };
 
   return (
     <div className="searchbar-container">
       <input
         type="text" 
         placeholder="Search product"
+        value={searchData}
         onChange={(e)=> setSearchData(e.target.value)}
       />
       <button>
@@ -77,6 +83,7 @@ const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) 
                       size: product.size,
                     }
                   }}
+                  onClick={handleProductClick}
                 >
                   <li>{product.name}</li>
                 </Link>

@@ -1,30 +1,31 @@
 import { AiOutlineExclamationCircle } from "react-icons/ai";
+import { useSearchParams } from "next/navigation";
 
-type Products = {
-  name: string,
-  rating: string,
-  priceCents:string,
-  company: string,
-  madein: string,
-  Feature: string,
-}
+const ImageFeature = () => {
 
-const ImageFeature = ({selectedImage}:{selectedImage:Products}) => {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name');
+  const priceCents = searchParams.get('priceCents');
+  const rating = searchParams.get('rating');
+  const madein = searchParams.get('madein');
+  const company = searchParams.get('company');
+  const Feature = searchParams.get('Feature');
+
   return (
     <div className="feature-display  col-12 col-md-6">
 
       <div className="product-basic">
-        <h2>{decodeURIComponent(selectedImage.name)}</h2>
-        <h3><span>₹</span>{selectedImage.priceCents} <b><AiOutlineExclamationCircle /></b></h3>
-        <h5>{selectedImage.rating}&#9733;</h5> <h6></h6>
+        <h2>{decodeURIComponent(name)}</h2>
+        <h3><span>₹</span>{priceCents} <b><AiOutlineExclamationCircle /></b></h3>
+        <h5>{rating}&#9733;</h5> <h6></h6>
         <p>free delivery</p>
       </div>
 
       <div className="product-details">
         <h2>Product details</h2>
-        <p>Made in : <span>{decodeURIComponent(selectedImage.madein)}</span></p>
-        <p>Company: <span>{decodeURIComponent(selectedImage.company)}</span></p>
-        <p>Special Feature : <span>{decodeURIComponent(selectedImage.Feature)}</span></p>
+        <p>Made in : <span>{decodeURIComponent(madein)}</span></p>
+        <p>Company: <span>{decodeURIComponent(company)}</span></p>
+        <p>Special Feature : <span>{decodeURIComponent(Feature)}</span></p>
       </div>
 
       <div className="product-delivery-date">

@@ -1,5 +1,6 @@
-import { Suspense,lazy } from "react";
+"use client";
 
+import { Suspense,lazy,useEffect,useState } from "react";
 import { fetchProduct,fetchScrollingProduct } from "@/app/DataFetching/productdata";
 
 // loading imports
@@ -17,11 +18,26 @@ const MobilHamburger = lazy(() => import("./MobilHamburger/MobilHamburger"));
 
 import "@/app/styles/homepage/navbar/navbar.scss";
 
-const NavBar = async () => {
+const NavBar =  () => {
 
-  // fetch products and pass in to the search bar. (user search products name);
-  const homeProducts = await fetchProduct();
-  const scrollingProducts  = await fetchScrollingProduct();
+  const [homeProducts,setHomeProducts] = useState([]);
+  const [scrollingProducts,setScrollingProducts] = useState([]);
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        const homeProducts = await fetchProduct();
+        const scrollingProducts  = await fetchScrollingProduct();
+
+        setHomeProducts(homeProducts);
+        setScrollingProducts(scrollingProducts);
+
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    }
+    fetchData();
+  },[]);
    
   return (
     <>
