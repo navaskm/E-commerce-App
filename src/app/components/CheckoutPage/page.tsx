@@ -1,7 +1,4 @@
-"use client";
-
 import { lazy,Suspense } from "react";
-import { useEffect,useState } from "react";
 import { Rings } from 'react-loading-icons';
 
 const NavbarSkeleton = lazy(()=> import("../HomePage/navbar/Skeleton/NavbarSkeleton"));
@@ -12,20 +9,6 @@ import "@/app/styles/checkoutpage/checkout.scss";
 
 const CartPage = () => {
 
-  const [screenWidth, setScreenWidth] = useState<number | null>(null);
-
-  useEffect(() => {
-    // Update screenWidth only after the component is mounted on the client
-    const handleResize = () => setScreenWidth(window.innerWidth);
-
-    handleResize(); // Set initial value
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <>
       <title>Check Your Items</title>
@@ -34,23 +17,13 @@ const CartPage = () => {
         <TopBarOfCartPage/>
       </Suspense>
 
-      {screenWidth !== null && (
       <div className="cart-items-payment-section-container" style={{ display: 'flex' }}>
-        <Suspense fallback={<Rings />}>
-          {screenWidth < 991 ? (
-            <>
-              <PaymentPage />
-              <CartItems />
-            </>
-          ) : (
-            <>
-              <CartItems />
-              <PaymentPage />
-            </>
-          )}
+        <Suspense fallback={<Rings/>}>
+          <PaymentPage />
+          <CartItems />
         </Suspense>
       </div>
-    )}
+
     </>
   )
 }

@@ -129,4 +129,4 @@ const PaymentPage = () => {
   ):null
 }
 
-export default PaymentPage
+export default PaymentPage;
