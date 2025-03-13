@@ -113,12 +113,6 @@ const OrderItems = () => {
     return new Date(dateString);
   };
 
-  // const isPastDate = (date: string):boolean => {
-  //   const today = new Date();
-  //   const conformDate = formatDate(date);
-  //   return conformDate > today;
-  // };
-
   const isPastDate = (date: string): boolean => {
     const today = new Date();
     const conformDate = formatDate(date);
@@ -126,7 +120,7 @@ const OrderItems = () => {
     today.setHours(0, 0, 0, 0);
     conformDate.setHours(0, 0, 0, 0);
   
-    return conformDate <= today;
+    return conformDate >= today;
   };
   
 
@@ -178,7 +172,8 @@ const OrderItems = () => {
                   
                   <div className="item-details">
                     <h5>{decodeURIComponent(item.name)}</h5>
-                    <p>Quantity : <span>{item.quantity}</span></p>
+                    {!isReceived && <p>Quantity : <span>{item.quantity}</span></p>}
+                    
                     {
                       item.size && <p>Size : <span>{SelectedSize}</span></p>
                     }
@@ -199,22 +194,24 @@ const OrderItems = () => {
 
                   </div>
 
-                  <Link 
-                    href={{
-                      pathname :'/components/TrackingPage',
-                      query:{
-                        name: item.name,
-                        image: item.image,
-                        date: item.conformDate,
-                        size: item.size,
-                        quantity: item.quantity,
-                      }
-                    }}
-                  >
-                    <button className="track-button">
-                      Track Package
-                    </button>
-                  </Link>
+                  {!isReceived && (
+                    <Link 
+                      href={{
+                        pathname :'/components/TrackingPage',
+                        query:{
+                          name: item.name,
+                          image: item.image,
+                          date: item.conformDate,
+                          size: item.size,
+                          quantity: item.quantity,
+                        }
+                      }}
+                    >
+                      <button className="track-button">
+                        Track Package
+                      </button>
+                    </Link>
+                  )}
                   
                 </div>
 
