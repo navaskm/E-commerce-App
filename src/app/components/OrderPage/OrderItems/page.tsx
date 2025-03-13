@@ -34,13 +34,6 @@ interface GroupedItems {
   [key: string]: OrderItems[];
 }
 
-type CartItemType = {
-  selectedSize?: string;
-  cartItems: {
-    items: Products[];
-  }
-}
-
 const OrderItems = () => {
 
   const [isClient, setIsClient] = useState(false);
@@ -138,11 +131,6 @@ const OrderItems = () => {
           Your Orders
         </h2>
       </div>
-
-
-
-
-
 
       {Object.entries(groupedItems).map(([date, items], groupIndex) => {
 
