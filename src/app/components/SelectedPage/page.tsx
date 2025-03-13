@@ -17,12 +17,11 @@ import '@/app/styles/selectdpage/selectpage.scss';
 const SelectItemPage = () => {
 
   const searchParams = useSearchParams();
+
   const offerProductDisplay = searchParams.get("offer");
   
   // scroll in to the top
-  useEffect(()=>{
-    window.scrollTo(0, 0);
-  },[]);
+  window.scrollTo(0, 0);
 
   // create title of this page
   useEffect(() => {
