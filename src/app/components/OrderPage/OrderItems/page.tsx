@@ -113,15 +113,27 @@ const OrderItems = () => {
     return new Date(dateString);
   };
 
-  const isPastDate = (date: string):boolean => {
+  // const isPastDate = (date: string):boolean => {
+  //   const today = new Date();
+  //   const conformDate = formatDate(date);
+  //   return conformDate > today;
+  // };
+
+  const isPastDate = (date: string): boolean => {
     const today = new Date();
     const conformDate = formatDate(date);
-    return conformDate > today;
+  
+    today.setHours(0, 0, 0, 0);
+    conformDate.setHours(0, 0, 0, 0);
+  
+    return conformDate <= today;
   };
+  
 
   return conformDeliveryDate.length !== 0 ? (
     <div className="order-item-container">
 
+      {/* navbar of this order page */}
       <div className="top-bar">
         <Link href='/'>
             <img src="/Logo/app-logo.png" alt="back"/>
