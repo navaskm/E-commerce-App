@@ -34,11 +34,11 @@
 }
 
 .cart-items-payment-section-container{
-  display: flex;
+  // display: flex;
 
-  @media (max-width:991px) {
-    flex-direction: column;
-  }
+  // @media (max-width:991px) {
+  //   flex-direction: column;
+  // }
   
   // cart items section
   .cart-items-container{
@@ -224,7 +224,7 @@
     @media (min-width:992px) {
       position: fixed;
       top: 0;
-      right: -10;
+      right: 0;
     }
 
     h4{

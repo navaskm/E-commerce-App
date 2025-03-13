@@ -17,13 +17,12 @@ const CartPage = () => {
         <TopBarOfCartPage/>
       </Suspense>
 
-      <div className="cart-items-payment-section-container" style={{ display: 'flex' }}>
+      <div className="cart-items-payment-section-container">
         <Suspense fallback={<Rings/>}>
           <PaymentPage />
           <CartItems />
         </Suspense>
       </div>
-
     </>
   )
 }
