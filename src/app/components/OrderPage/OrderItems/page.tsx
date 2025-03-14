@@ -145,24 +145,16 @@ const OrderItems = () => {
         // Check if any item in the group has a past delivery date
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
-
-        ///////////////////////////////////////////
         // Separate pending and received items
-    const pendingItems = items.filter(
-      (item: OrderItems) => !productReceivedOrNot(item.conformDate)
-    );
-    const receivedItems = items.filter(
-      (item: OrderItems) => productReceivedOrNot(item.conformDate)
-    );
+        const pendingItems = items.filter(
+          (item: OrderItems) => !productReceivedOrNot(item.conformDate)
+        );
+        const receivedItems = items.filter(
+          (item: OrderItems) => productReceivedOrNot(item.conformDate)
+        );
 
-    // Combine pending items first, then received items
-    const sortedItems = [...pendingItems, ...receivedItems];
-
-    console.log(sortedItems);
-
-
-
-
+        // Combine pending items first, then received items
+        const sortedItems = [...pendingItems, ...receivedItems];
 
         return (
         <div
