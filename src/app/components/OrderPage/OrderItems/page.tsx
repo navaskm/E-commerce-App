@@ -154,7 +154,7 @@ const OrderItems = () => {
         );
 
         // Combine pending items first, then received items
-        const sortedItems = [...pendingItems, ...receivedItems];
+        const sortedItems = [...receivedItems,...pendingItems];
 
         return (
         <div
