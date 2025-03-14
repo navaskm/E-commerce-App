@@ -108,21 +108,20 @@ const OrderItems = () => {
 
   }
 
+  
+  /////////////////////////////////////////////////////////////////
 
-  const formatDate = (dateString: string):Date => {
-    return new Date(dateString);
-  };
+    // Check if delivery date is in the past
+  const productReceivedOrNot = (date: string) => {
 
-  const isPastDate = (date: string): boolean => {
     const today = new Date();
-    const conformDate = formatDate(date);
-  
-    today.setHours(0, 0, 0, 0);
-    conformDate.setHours(0, 0, 0, 0);
-  
-    return conformDate >= today;
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+
+    const to = mm  + dd  +  yyyy;
+    return to>date
   };
-  
 
   return conformDeliveryDate.length !== 0 ? (
     <div className="order-item-container">
@@ -141,22 +140,20 @@ const OrderItems = () => {
       {Object.entries(groupedItems).map(([date, items], groupIndex) => {
 
         // Check if any item in the group has a past delivery date
-        const isReceived = items.some((item:OrderItems) => isPastDate(item.conformDate));
+        const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
         return (
-
         <div
           className={`same-date-item-container ${isReceived? 'item-received':''}`}
           key={groupIndex}
         >
 
           {/* Conditional rendering for delivery date or received message */}
-          {isReceived ? (
+            {isReceived ? (
             <h2>Congratulations! Your item has been successfully delivered.</h2>
           ) : (
             <h3>Arriving on: {date}</h3>
           )}
-
 
           {items.map((item, index) => {
 
