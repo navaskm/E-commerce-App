@@ -108,20 +108,23 @@ const OrderItems = () => {
 
   }
 
-  
-  /////////////////////////////////////////////////////////////////
-
-    // Check if delivery date is in the past
+  // check product received or not
   const productReceivedOrNot = (date: string) => {
-
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear();
-
-    const to = mm  + dd  +  yyyy;
-    return to>date
+  
+    // Append the current year to the date string
+    const dateWithYear = `${date}, ${today.getFullYear()}`;
+  
+    // Create Date objects for comparison
+    const comparedDate = new Date(dateWithYear);
+  
+    today.setHours(0, 0, 0, 0);
+    comparedDate.setHours(0, 0, 0, 0);
+  
+    return comparedDate < today;
   };
+  
+  
 
   return conformDeliveryDate.length !== 0 ? (
     <div className="order-item-container">
