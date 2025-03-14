@@ -145,6 +145,25 @@ const OrderItems = () => {
         // Check if any item in the group has a past delivery date
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
+
+        ///////////////////////////////////////////
+        // Separate pending and received items
+    const pendingItems = items.filter(
+      (item: OrderItems) => !productReceivedOrNot(item.conformDate)
+    );
+    const receivedItems = items.filter(
+      (item: OrderItems) => productReceivedOrNot(item.conformDate)
+    );
+
+    // Combine pending items first, then received items
+    const sortedItems = [...pendingItems, ...receivedItems];
+
+    console.log(sortedItems);
+
+
+
+
+
         return (
         <div
           className={`same-date-item-container ${isReceived? 'item-received':''}`}
@@ -158,7 +177,7 @@ const OrderItems = () => {
             <h3>Arriving on: {date}</h3>
           )}
 
-          {items.map((item, index) => {
+          {sortedItems.map((item, index) => {
 
             const SelectedSize = item.size?.replace(".size-", "");
 
@@ -183,7 +202,7 @@ const OrderItems = () => {
                       onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
                     >
                       {buttonState[item.id] === "added" ? (
-                        <strong>&#x2713; Added</strong>
+                        <strong style={{color:'green'}}>&#x2713; Added</strong>
                       ) : (
                         <>
                           <img src="/ByItAgain/by-it-again.png" alt=""/>
