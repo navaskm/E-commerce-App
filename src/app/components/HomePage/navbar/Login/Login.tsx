@@ -13,7 +13,7 @@ const Login = () => {
       </SignedOut>
 
       <SignedIn>
-        <UserButton  className='login-button'/>
+        <UserButton  className='user-button'/>
       </SignedIn>
     </>
   )
