@@ -190,8 +190,7 @@
   }
 
   // loginButton styles
-  .login-button,
-  .user-button{
+  .login-button{
     width: 70px;
     background-color: black;
     color: #fff;
@@ -213,6 +212,15 @@
       right: 100px;
     }
   
+  }
+
+  // user button style
+  .user-button{
+    @media (max-width:768px) {
+      position: absolute;
+      transform: translateY(-50px);
+      right: 100px;
+    }
   }
 
   // cart logo styles
