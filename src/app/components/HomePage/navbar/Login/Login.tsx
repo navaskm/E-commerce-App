@@ -13,7 +13,9 @@ const Login = () => {
       </SignedOut>
 
       <SignedIn>
-        <UserButton  className='user-button'/>
+        <div className="user-button">
+          <UserButton />
+        </div>
       </SignedIn>
     </>
   )
