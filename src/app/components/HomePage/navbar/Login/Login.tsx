@@ -9,13 +9,14 @@ const Login = () => {
   return(
     <>
       <SignedOut>
-        <SignInButton mode="modal" />
+        <SignInButton mode="modal"  className='login-button'/>
       </SignedOut>
+
       <SignedIn>
-        <UserButton />
+        <UserButton  className='login-button'/>
       </SignedIn>
     </>
   )
 }
 
-export default Login
+export default Login;
