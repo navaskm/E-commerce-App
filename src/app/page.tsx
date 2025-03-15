@@ -16,6 +16,7 @@ const LargeProduct = lazy(() => import("./components/HomePage/LargeProducts/Larg
 const TwoProducts = lazy(() => import("./components/HomePage/TwoProducts/TwoProducts"));
 const SmallScrolling = lazy(() => import("./components/HomePage/SmallScrolling/SmallScrolling"));
 const LastOneProducts = lazy (() => import("./components/HomePage/LastOneProducts/LastOneProducts"));
+const Footer = lazy(()=>import("./components/HomePage/Footer/page"));
 
 export default function Home() {
   return (
@@ -58,6 +59,10 @@ export default function Home() {
 
        <Suspense fallback={<LargeProductSkeleton/>}>
         <LastOneProducts />
+      </Suspense> 
+
+      <Suspense fallback={<NavbarSkeleton/>}>
+        <Footer />
       </Suspense> 
     </SkeletonTheme>
   );

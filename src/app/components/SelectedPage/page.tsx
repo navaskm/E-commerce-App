@@ -11,6 +11,7 @@ const NavBar = lazy(() => import("../HomePage/navbar/NavBar"));
 const ImageDisplay = lazy(() => import("./ImageDisplay/ImageDisplay"));
 const ImageFeature = lazy(() => import("./ImageFeature/ImageFeature"));
 const SimilarProducts = lazy(() => import("./SimilarDisplay/page"));
+const Footer = lazy(()=>import("../HomePage/Footer/page"));
 
 import '@/app/styles/selectdpage/selectpage.scss';
 
@@ -70,6 +71,10 @@ const SelectItemPage = () => {
         {/* similar products display */}
         <Suspense fallback={<SimilarProductsSkeleton/>}>
           <SimilarProducts/>
+        </Suspense>
+
+        <Suspense fallback={<NavbarSkeleton/>}>
+          <Footer/>
         </Suspense>
 
       </>
