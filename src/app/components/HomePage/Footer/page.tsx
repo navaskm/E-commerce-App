@@ -58,6 +58,10 @@ const Footer = () => {
                 <i className="bi bi-telephone text-secondary me-2"></i>
                 <span className="text-secondary">+91 889 123 6670</span>
               </div>
+              <div className="d-flex align-items-center">
+                <i className="bi bi-telephone text-secondary me-2"></i>
+                <a href='https://portfolio-rho-orcin-64.vercel.app/' target='_blank' className="text-secondary">My portfolio</a>
+              </div>
             </div>
           </div>
         </div>
