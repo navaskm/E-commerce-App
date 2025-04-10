@@ -17,8 +17,8 @@
 
     @media (max-width: 768px) {
       img{
-        width: 150px;
-        transform: translate(0px,-20px);
+        width: 100px;
+        transform: translate(0px,-1px);
       }
     }
 
@@ -155,6 +155,31 @@
                   background-color: white;
                   color: rgb(156, 151, 151);
                 }
+
+                @media (max-width:767px) {
+                  .minus-button,
+                  .plus-button{
+                    font-size: 14px;
+                    padding: 0px 4px;
+                    font-weight: 500;
+                    margin: 2;
+                  }
+                }
+
+                @media (max-width:767px) {
+                  span{
+                    margin: 5px;
+                    padding: 0px 20px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    
+                    margin: 3px;
+                    padding: 0px 15px;
+                    font-size: 14px;
+                    font-weight: 600;
+                  }
+                }
+
               }
             }
           }
