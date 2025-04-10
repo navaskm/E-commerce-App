@@ -52,17 +52,21 @@
 
         .is-black,
         p{
-            font-size: 18px;
-            margin-top: 10px;
-            background-color: rgb(206, 206, 206);
-            color: rgb(44, 42, 42);
-            width: 80%;
-            text-align: center;
-            border-radius: 5px;
-            background-color: rgb(44, 42, 42);
-            color: rgb(206, 206, 206);
-
+          background-color: rgb(44, 42, 42);
+          color: rgb(206, 206, 206);
         }
+
+        
+        @media (max-width: 768px) {
+          p,
+          .is-white,
+          .is-black{
+            font-size: 15px;
+            margin-top: 6px;
+            width: 70%;
+          }
+        }
+
       }
     }
 
@@ -412,6 +416,33 @@
           transition: all 0.3s ease;
           border-color: rgba(0, 97, 0, 0.5);
         }
+
+        @media (max-width: 768px) {
+
+          h5 {
+          margin-left: 6px;
+          width: 100px;
+          font-size: medium;
+          }
+
+          b{
+            margin-left: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 13px;
+            color: rgb(56, 56, 56);
+          }
+
+          p{
+            font-size: 13px;
+            font-weight: 400;
+            padding: 0px 7px;
+            margin-top: 8px;
+            margin-left: 6px;
+          }
+
+        }        
+
       }
   }
 }
