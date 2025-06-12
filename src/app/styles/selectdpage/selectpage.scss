@@ -337,7 +337,7 @@
     border-radius: 10px;
     width: fit-content;
     position: sticky;
-    top: 67;
+    top: 67px;
     left: 45%;
     z-index: 500;
     cursor: pointer;
@@ -345,7 +345,7 @@
     font-weight: 600;
 
     @media (max-width:768px) {
-      top: 161;
+      top: 161px;
     }
   }
 
