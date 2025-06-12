@@ -1,5 +1,4 @@
 import Link from "next/link";
-import "@/app/styles/homepage/navbar/navbar.scss";
 
 const AppLogs =   () => {
   return(

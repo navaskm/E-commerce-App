@@ -5,7 +5,6 @@ import React, { useState,useEffect } from "react";
 import Link from "next/link";
 
 import similarProducts from '@/app/API/similar-product.json';
-import "@/app/styles/homepage/navbar/navbar.scss";
 
 type Search = {
   id: number | string,

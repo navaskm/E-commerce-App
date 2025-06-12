@@ -40,43 +40,41 @@ const NavBar =  () => {
   },[]);
    
   return (
-    <>
-      <nav>
-        <div className="navbar">
+    <nav>
+      <div className="navbar">
 
-          {/* App logo section */}
-          <Suspense fallback={<AppLogSkeleton/>}>
-            <AppLogs />
-          </Suspense>
+        {/* App logo section */}
+        <Suspense fallback={<AppLogSkeleton/>}>
+          <AppLogs />
+        </Suspense>
 
-          {/* search bar */}
-          <Suspense fallback={<SearchBarSkeleton/>}>
-            <SearchBar homeProducts={homeProducts} scrollingProducts={scrollingProducts}/>
-          </Suspense>
+        {/* search bar */}
+        <Suspense fallback={<SearchBarSkeleton/>}>
+          <SearchBar homeProducts={homeProducts} scrollingProducts={scrollingProducts}/>
+        </Suspense>
 
-          {/* Links menu section*/}
-          <Suspense fallback={<LinksSkeleton/>}>
-            <Links />
-          </Suspense>
+        {/* Links menu section*/}
+        <Suspense fallback={<LinksSkeleton/>}>
+          <Links />
+        </Suspense>
 
-          {/* user Login section */}
-          <Suspense fallback={<div>Loading...</div>}>
-            <Login />
-          </Suspense>
+        {/* user Login section */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Login />
+        </Suspense>
 
-          {/* cart logo section view*/}
-          <Suspense fallback={<CartLogoSkelton/>}>
-            <CartLogo />
-          </Suspense>
+        {/* cart logo section view*/}
+        <Suspense fallback={<CartLogoSkelton/>}>
+          <CartLogo />
+        </Suspense>
 
-          {/* mobile hamburger menu sections*/}
-          <Suspense fallback={<div>Loading...</div>}>
-            <MobilHamburger/>
-          </Suspense>
+        {/* mobile hamburger menu sections*/}
+        <Suspense fallback={<div>Loading...</div>}>
+          <MobilHamburger/>
+        </Suspense>
 
-        </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };
 
