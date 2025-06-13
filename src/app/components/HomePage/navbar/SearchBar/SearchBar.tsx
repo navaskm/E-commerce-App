@@ -47,6 +47,15 @@ const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) 
     setSearchData('');
   };
 
+  const getHighlightedText = (text: string, highlight: string) => {
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return parts.map((part, i) => (
+      part.toLowerCase() === highlight.toLowerCase() ? 
+      <span key={i} style={{ fontWeight: 'bold', color: 'orange' }}>{part}</span> 
+      : part
+    ));
+  };
+
   return (
     <div className="searchbar-container">
       <input
@@ -59,17 +68,16 @@ const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) 
         <CiSearch/>
       </button>
 
-     {
-      searchData && productName.length > 0 && (
+      {searchData && (
         <div className="result-box">
-          {
-            productName.map((product:Search) => (
-              <ul key={product.id}>
-                <Link
-                  style={{textDecoration:"none"}}
-                  href={{
-                    pathname:"/components/SelectedPage",
-                    query:{
+          {productName.length > 0 ? (
+            <ul>
+              {productName.map((product) => (
+                <li key={product.id}>
+                  <Link
+                    href={{
+                      pathname: "/components/SelectedPage",
+                      query:{
                       name: encodeURIComponent(product.name),
                       priceCents: product.priceCents,
                       image: encodeURIComponent(product.image),
@@ -81,17 +89,20 @@ const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) 
                       Feature: encodeURIComponent(product.Feature),
                       size: product.size,
                     }
-                  }}
-                  onClick={handleProductClick}
-                >
-                  <li>{product.name}</li>
-                </Link>
-              </ul>
-            ))
-          }
+                    }}
+                    onClick={handleProductClick}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    {getHighlightedText(product.name, searchData)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No matching products found.</p>
+          )}
         </div>
-      )
-     }
+      )}
 
     </div>
   )
