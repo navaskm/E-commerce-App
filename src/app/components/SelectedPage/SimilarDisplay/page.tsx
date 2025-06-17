@@ -8,6 +8,115 @@ import { fetchProduct, fetchScrollingProduct } from "@/app/DataFetching/productd
 import similarProducts from '@/app/API/similar-product.json';
 import BackToTop from "./BackToTop/page";
 
+type Products = {
+  name: string;
+  title: string;
+  image: string;
+  rating: string;
+  priceCents: string;
+  type: string;
+  keywords: string;
+  id: number;
+  company: string;
+  madein: string;
+  Feature: string;
+  size?: string;
+  offer?: string;
+};
+
+const SimilarProducts = () => {
+
+  const [finalProduct, setFinalProduct] = useState<Products[]>([]);
+
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+  const id:number|string|null = searchParams.get("id");
+  const offer = searchParams.get('offer');
+
+  // fetch data
+  useEffect(() => {
+    const fetchData = async () => {
+
+      try {
+        // Fetch product
+        const similarProductOne = await fetchProduct();
+        const productOne = similarProductOne.filter((product: Products) => product.type === type && product.id !== id);
+
+        // Fetch scrolling product
+        const similarProductTwo = await fetchScrollingProduct();
+        const productTwo = similarProductTwo.filter((product: Products) => product.type === type && product.id !== id);
+
+        // Find product source
+        const products: Products[] = [] = productTwo.length === 0 ? productOne : productTwo;
+
+        // Fetch similar products
+        const similarProduct = similarProducts.filter(
+          (product) => product.type === type && product.id !== id
+        );
+
+        setFinalProduct([...products,...similarProduct]);
+
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+
+    fetchData();
+  }, [searchParams]);
+
+  return (
+    <div className="container-of-similar-product">
+      {offer ? (
+        <h3 className="offer-title">Best offer for you</h3>
+      ) : (
+        <h3>Similar Products</h3>
+      )}
+
+      { !offer && <p onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+          className="top-mooving"
+        >Back to top</p>
+      }
+
+      <div className="container-of-each-similar-product">
+        {/* Render final products */}
+        {finalProduct?.map((product) => (
+          <Link
+            key={product.id}
+            style={{ textDecoration: "none" }}
+            className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
+            href={{
+              pathname: "/components/SelectedPage",
+              query: {
+                name: encodeURIComponent(product.name),
+                priceCents: product.priceCents,
+                image: encodeURIComponent(product.image),
+                rating: product.rating,
+                type: product.type,
+                id: product.id,
+                keywords: product.keywords,
+                company: encodeURIComponent(product.company),
+                madein: encodeURIComponent(product.madein),
+                Feature: encodeURIComponent(product.Feature),
+                size: product.size,
+              },
+            }}
+          >
+            <img src={product.image} alt={product.name} />
+            <h5>{product.name}</h5>
+            <b>
+              <span>₹</span>
+              {product.priceCents}
+            </b>
+            <p>{product.rating}&#9733;</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default SimilarProducts;
+
 // api similar product lines
 
 // watch = 1 to 233        = 21
@@ -48,156 +157,3 @@ import BackToTop from "./BackToTop/page";
                     // total = 102
 
 // all total id is = 345
-
-type Products = {
-  name: string;
-  title: string;
-  image: string;
-  rating: string;
-  priceCents: string;
-  type: string;
-  keywords: string;
-  id: number;
-  company: string;
-  madein: string;
-  Feature: string;
-  size?: string;
-  offer?: string;
-};
-
-const SimilarProducts = () => {
-
-  const [finalProduct, setFinalProduct] = useState<Products[]>([]);
-  const [similarFinalProduct, setSimilarFinalProduct] = useState<Products[]>([]);
-
-  const searchParams = useSearchParams();
-  const type = searchParams.get("type");
-  const id:number|string|null = searchParams.get("id");
-  const offer = searchParams.get('offer');
-
-  // fetch data
-  useEffect(() => {
-    const fetchData = async () => {
-
-      let products: Products[] = [];
-
-      try {
-        // Fetch product
-        const similarProductOne = await fetchProduct();
-        const productOne = similarProductOne.filter((product: Products) => product.type === type);
-
-        // Fetch scrolling product
-        const similarProductTwo = await fetchScrollingProduct();
-        const productTwo = similarProductTwo.filter((product: Products) => product.type === type);
-
-        // Find product source
-        const product = productTwo.length === 0 ? productOne : productTwo;
-
-        // Push products into array
-        products = products.concat(product);
-
-        // Remove selected product from display
-        const filteredProducts = products.filter((product:Products) => product.id !== id);
-        setFinalProduct(filteredProducts);
-
-        // Fetch similar products
-        const similarProduct = similarProducts.filter(
-          (product) => product.type === type
-        );
-
-        // Remove selected product from similar products
-        const filteredSimilarProducts = similarProduct.filter(
-          (product) => product.id !== id
-        );
-        setSimilarFinalProduct(filteredSimilarProducts);
-
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      }
-    };
-
-    fetchData();
-  }, [searchParams]);
-
-  return (
-    <div className="container-of-similar-product">
-      {offer ? (
-        <h3 className="offer-title">Best offer for you</h3>
-      ) : (
-        <h3>Similar Products</h3>
-      )}
-
-      {offer ? null : <BackToTop />}
-
-      <div className="container-of-each-similar-product">
-        {/* Render final products */}
-        {finalProduct?.map((product) => (
-          <Link
-            key={product.id}
-            style={{ textDecoration: "none" }}
-            className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
-            href={{
-              pathname: "/components/SelectedPage",
-              query: {
-                name: encodeURIComponent(product.name),
-                priceCents: product.priceCents,
-                image: encodeURIComponent(product.image),
-                rating: product.rating,
-                type: product.type,
-                id: product.id,
-                keywords: product.keywords,
-                company: encodeURIComponent(product.company),
-                madein: encodeURIComponent(product.madein),
-                Feature: encodeURIComponent(product.Feature),
-                size: product.size,
-              },
-            }}
-          >
-            <img src={product.image} alt={product.name} />
-            <h5>{product.name}</h5>
-            <b>
-              <span>₹</span>
-              {product.priceCents}
-            </b>
-            <p>{product.rating}&#9733;</p>
-          </Link>
-        ))}
-
-        {/* Render similar products */}
-        {similarFinalProduct?.map((product) => (
-          <Link
-            key={product.id}
-            style={{ textDecoration: "none" }}
-            className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
-            href={{
-              pathname: "/components/SelectedPage",
-              query: {
-                name: encodeURIComponent(product.name),
-                priceCents: product.priceCents,
-                image: encodeURIComponent(product.image),
-                rating: product.rating,
-                type: product.type,
-                id: product.id,
-                keywords: product.keywords,
-                company: encodeURIComponent(product.company),
-                madein: encodeURIComponent(product.madein),
-                Feature: encodeURIComponent(product.Feature),
-                size: product.size,
-              },
-            }}
-          >
-            <img src={product.image} alt={product.name} />
-            <h5>{product.name}</h5>
-            <b>
-              <span>₹</span>
-              {product.priceCents}
-            </b>
-            <p>{product.rating}&#9733;</p>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default SimilarProducts;

@@ -41,43 +41,41 @@ const SelectItemPage = () => {
 
   if (offerProductDisplay){
     return (
-      <>
-          {/* offer products display */}
-        <Suspense fallback={<SimilarProductsSkeleton/>}>
-          <SimilarProducts/>
-        </Suspense>
-      </>
+      // offer products display 
+      <Suspense fallback={<SimilarProductsSkeleton/>}>
+        <SimilarProducts/>
+      </Suspense>
     )
   }
 
   return (
-      <>
-        <Suspense fallback={<NavbarSkeleton/>}>
-          <NavBar/>
+    <>
+      <Suspense fallback={<NavbarSkeleton/>}>
+        <NavBar/>
+      </Suspense>
+
+      <div className="image-features-container">
+          {/* image size,image, add to cart, quantity of product display*/}
+        <Suspense fallback={<ImageDisplaySkeleton/>}>
+          <ImageDisplay/>
         </Suspense>
 
-        <div className="image-features-container">
-            {/* image size,image, add to cart, quantity of product display*/}
-          <Suspense fallback={<ImageDisplaySkeleton/>}>
-            <ImageDisplay/>
-          </Suspense>
-
-            {/* features display */}
-          <Suspense fallback={<ImageDisplaySkeleton/>}>
-            <ImageFeature/>
-          </Suspense>
-        </div>
-
-        {/* similar products display */}
-        <Suspense fallback={<SimilarProductsSkeleton/>}>
-          <SimilarProducts/>
+          {/* features display */}
+        <Suspense fallback={<ImageDisplaySkeleton/>}>
+          <ImageFeature/>
         </Suspense>
+      </div>
 
-        <Suspense fallback={<NavbarSkeleton/>}>
-          <Footer/>
-        </Suspense>
+      {/* similar products display */}
+      <Suspense fallback={<SimilarProductsSkeleton/>}>
+        <SimilarProducts/>
+      </Suspense>
 
-      </>
+      <Suspense fallback={<NavbarSkeleton/>}>
+        <Footer/>
+      </Suspense>
+
+    </>
   )
 }
 
