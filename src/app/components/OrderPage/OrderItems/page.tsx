@@ -18,7 +18,6 @@ type OrderItems = {
   quantity: number;
   conformDate: string;
   size: string;
-  delivered: boolean;
 }
 
 type Products = {
@@ -34,6 +33,11 @@ type Products = {
 interface GroupedItems {
   [key: string]: OrderItems[];
 }
+
+type hello = {
+  received: { [date: string]: OrderItems[] };
+  pending: { [date: string]: OrderItems[] };
+};
 
 const OrderItems = () => {
 
@@ -105,27 +109,63 @@ const OrderItems = () => {
   };
 
   // Group items by `conformDate`
-  const groupedItems = conformDeliveryDate.reduce<GroupedItems>((acc, item) => {
+  // const groupedItems = conformDeliveryDate.reduce<GroupedItems>((acc, item) => {
 
-    // get item delivery date
+  //   // get item delivery date
+  //   const date = item.conformDate;
+
+  //   //create array with delivery date based
+  //   if (!acc[date]) {
+  //     acc[date] = [];
+  //   }
+
+  //   acc[date].push(item);
+
+  //   if(productReceivedOrNot(date)){
+  //     console.log('yes')
+  //   }else{
+  //     console.log('not')
+  //   }
+    
+  //   return acc;
+
+  // },{});
+
+
+
+
+  const groupedItems = conformDeliveryDate.reduce<hello>(
+  (acc, item) => {
     const date = item.conformDate;
 
-    // create array with delivery date based
-    if (!acc[date]) {
-      acc[date] = [];
+    const isReceived = productReceivedOrNot(date);
+
+    if (isReceived) {
+      if (!acc.received[date]) {
+        acc.received[date] = [];
+      }
+      acc.received[date].push(item);
+    } else {
+      if (!acc.pending[date]) {
+        acc.pending[date] = [];
+      }
+      acc.pending[date].push(item);
     }
 
-    // Create a new object with delivered property added
-    const newItem = {
-      ...item,
-      delivered: productReceivedOrNot(date),
-    };
-
-    acc[date].push(newItem);
-    
     return acc;
+  },
+  {
+    received: {},
+    pending: {},
+  }
+);
 
-  },{});
+console.log(groupedItems.received);
+console.log(groupedItems.pending);
+
+
+
+
   
   // Render a loading or placeholder state until the client hydrates
   if (!isClient) {
@@ -146,34 +186,25 @@ const OrderItems = () => {
         </h2>
       </div>
 
-      {Object.entries(groupedItems).map(([date, items], groupIndex) => {
+
+
+
+
+      {Object.entries(groupedItems.pending).map(([date, items], groupIndex) => {
 
         // Check if any item in the group has a past delivery date
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
-
-        // pending items
-        // const pendingItems = items.filter(
-        //   (item: OrderItems) => !productReceivedOrNot(item.conformDate)
-        // );
-
-        // // customer received items
-        // const receivedItems = items.filter(
-        //   (item: OrderItems) => productReceivedOrNot(item.conformDate)
-        // );
 
         const pending = [];
         const delivered = [];
 
         items.forEach((item:OrderItems)=>{
-          if(item.delivered){
-            pending.push(item)
-          }else{
+          if(productReceivedOrNot(item.conformDate)){
             delivered.push(item)
+          }else{
+            pending.push(item)
           }
-        })
-
-        console.log(pending);
-        console.log(delivered);
+        });
 
         // merge pending items and received items
         const sortedItems = [...pending,...delivered];
@@ -195,73 +226,7 @@ const OrderItems = () => {
 
 
 
-          {pending.map((item, index) => {
-
-            const SelectedSize = item.size?.replace(".size-", "");
-
-            return(
-
-              <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
-
-                <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
-
-                <div className="item-details-display">
-                  
-                  <div className="item-details">
-                    <h5>{decodeURIComponent(item.name)}</h5>
-                    {!isReceived && <p>Quantity : <span>{item.quantity}</span></p>}
-                    
-                    {
-                      item.size && <p>Size : <span>{SelectedSize}</span></p>
-                    }
-
-                    <button
-                      className={`again-clicked-${item.id}`}
-                      onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
-                    >
-                      {buttonState[item.id] === "added" ? (
-                        <strong style={{color:'green'}}>&#x2713; Added</strong>
-                      ) : (
-                        <>
-                          <img src="/ByItAgain/by-it-again.png" alt=""/>
-                          By it again
-                        </>
-                      )}
-                    </button>
-
-                  </div>
-
-                  {!isReceived && (
-                    <Link 
-                      href={{
-                        pathname :'/components/TrackingPage',
-                        query:{
-                          name: item.name,
-                          image: item.image,
-                          date: item.conformDate,
-                          size: item.size,
-                          quantity: item.quantity,
-                        }
-                      }}
-                    >
-                      <button className="track-button">
-                        Track Package
-                      </button>
-                    </Link>
-                  )}
-                  
-                </div>
-
-              </div>
-            )
-          })}
-
-
-
-
-
-
-          {delivered.map((item, index) => {
+          {sortedItems.map((item, index) => {
 
             const SelectedSize = item.size?.replace(".size-", "");
 
@@ -330,6 +295,121 @@ const OrderItems = () => {
 
         </div>
       )})}
+
+
+
+
+
+
+
+      {Object.entries(groupedItems.pending).map(([date, items], groupIndex) => {
+
+        // Check if any item in the group has a past delivery date
+        const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
+
+        const pending = [];
+        const delivered = [];
+
+        items.forEach((item:OrderItems)=>{
+          if(productReceivedOrNot(item.conformDate)){
+            delivered.push(item)
+          }else{
+            pending.push(item)
+          }
+        });
+
+        // merge pending items and received items
+        const sortedItems = [...pending,...delivered];
+
+        return (
+        <div
+          className={`same-date-item-container ${isReceived? 'item-received':''}`}
+          key={groupIndex}
+        >
+
+          {/* Conditional rendering for delivery date or received message */}
+            {isReceived ? (
+            <h2>Congratulations! Your item has been successfully delivered.</h2>
+          ) : (
+            <h3>Arriving on: {date}</h3>
+          )}
+
+
+
+
+
+          {sortedItems.map((item, index) => {
+
+            const SelectedSize = item.size?.replace(".size-", "");
+
+            return(
+
+              <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
+
+                <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
+
+                <div className="item-details-display">
+                  
+                  <div className="item-details">
+                    <h5>{decodeURIComponent(item.name)}</h5>
+                    {!isReceived && <p>Quantity : <span>{item.quantity}</span></p>}
+                    
+                    {
+                      item.size && <p>Size : <span>{SelectedSize}</span></p>
+                    }
+
+                    <button
+                      className={`again-clicked-${item.id}`}
+                      onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
+                    >
+                      {buttonState[item.id] === "added" ? (
+                        <strong style={{color:'green'}}>&#x2713; Added</strong>
+                      ) : (
+                        <>
+                          <img src="/ByItAgain/by-it-again.png" alt=""/>
+                          By it again
+                        </>
+                      )}
+                    </button>
+
+                  </div>
+
+                  {!isReceived && (
+                    <Link 
+                      href={{
+                        pathname :'/components/TrackingPage',
+                        query:{
+                          name: item.name,
+                          image: item.image,
+                          date: item.conformDate,
+                          size: item.size,
+                          quantity: item.quantity,
+                        }
+                      }}
+                    >
+                      <button className="track-button">
+                        Track Package
+                      </button>
+                    </Link>
+                  )}
+                  
+                </div>
+
+              </div>
+            )
+          })}
+
+
+
+
+
+
+
+        </div>
+      )})}
+
+
+
 
     </div>
   ):(
