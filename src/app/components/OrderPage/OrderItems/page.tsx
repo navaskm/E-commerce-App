@@ -177,7 +177,7 @@ const OrderItems = () => {
 
                       {/* name, quantity and size display */}
                       <h5>{decodeURIComponent(item.name)}</h5>
-                      <p><span>{item.quantity}</span></p>
+                      <p>Quantity<span>{item.quantity}</span></p>
                       {item.size && <p>Size : <span>{SelectedSize}</span></p>}
 
                       {/* again add to cart button */}
@@ -228,7 +228,11 @@ const OrderItems = () => {
         return (
         <div className='same-date-item-container item-received' key={groupIndex}>
 
-          <h2>Congratulations! Your item has been successfully delivered.</h2>
+          <h3>
+            Congratulations! Your item has been successfully delivered on{" "}
+            <strong>{new Date(date).toLocaleDateString()}</strong>
+          </h3>
+
 
           {items.map((item, index) => {
 
