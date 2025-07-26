@@ -193,7 +193,7 @@ console.log(groupedItems.pending);
       {Object.entries(groupedItems.pending).map(([date, items], groupIndex) => {
 
         console.log(date,items);
-        
+
         // Check if any item in the group has a past delivery date
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
@@ -304,8 +304,9 @@ console.log(groupedItems.pending);
 
 
 
-      {Object.entries(groupedItems.pending).map(([date, items], groupIndex) => {
+      {Object.entries(groupedItems.received).map(([date, items], groupIndex) => {
 
+        console.log('pending',date, items);
         // Check if any item in the group has a past delivery date
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
