@@ -36,11 +36,12 @@ interface GroupedItems {
 
 const OrderItems = () => {
 
+  const checkoutItems = useAppSelector((state) => state.cartItems.items);
+  const conformDeliveryDate = useAppSelector((state) => state.deliveryDate.userOrder)as OrderItems[];
+  const dispatch = useAppDispatch();
+
   const [isClient, setIsClient] = useState(false);
   const [buttonState, setButtonState] = useState<{ [key: string]: string }>({});
-
-  const checkoutItems = useAppSelector((state) => state.cartItems.items);
-  const dispatch = useAppDispatch();
 
   // add local storage in to the store
   useEffect(() => {
@@ -56,26 +57,19 @@ const OrderItems = () => {
     setIsClient(true);
   }, []);
 
-  const conformDeliveryDate = useAppSelector((state) => state.deliveryDate.userOrder)as OrderItems[];
-
-  // Render a loading or placeholder state until the client hydrates
-  if (!isClient) {
-    return null; // Or return a skeleton/loading indicator
-  }
-
   // Group items by `conformDate`
-    const groupedItems = conformDeliveryDate.reduce<GroupedItems>(
-      (acc, item) => {
+  const groupedItems = conformDeliveryDate.reduce<GroupedItems>((acc, item) => {
 
-      const date = item.conformDate;
-      if (!acc[date]) {
-        acc[date] = [];
-      }
-      acc[date].push(item);
-      return acc;
-    },
-    {}
-  );
+    // get item delivery date
+    const date = item.conformDate;
+
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(item);
+    return acc;
+
+  },{});
 
   const againClickHandle = (name:string,image:string,price:string,id:string,selectedSize:string,conformDate:string) =>{
 
@@ -106,12 +100,11 @@ const OrderItems = () => {
     dispatch(addToCart());
     dispatch(addItem({name,image,price,id,selectedSize,conformDate}))
 
-  }
+  };
 
   // check product received or not
   const productReceivedOrNot = (date: string) => {
     const today = new Date();
-  
     // Append the current year to the date string
     const dateWithYear = `${date}, ${today.getFullYear()}`;
   
@@ -124,7 +117,10 @@ const OrderItems = () => {
     return comparedDate < today;
   };
   
-  
+  // Render a loading or placeholder state until the client hydrates
+  if (!isClient) {
+    return null;
+  }
 
   return conformDeliveryDate.length !== 0 ? (
     <div className="order-item-container">
@@ -145,16 +141,18 @@ const OrderItems = () => {
         // Check if any item in the group has a past delivery date
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
-        // Separate pending and received items
+        // pending items
         const pendingItems = items.filter(
           (item: OrderItems) => !productReceivedOrNot(item.conformDate)
         );
+
+        // customer received items
         const receivedItems = items.filter(
           (item: OrderItems) => productReceivedOrNot(item.conformDate)
         );
 
-        // Combine pending items first, then received items
-        const sortedItems = [...receivedItems,...pendingItems];
+        // merge pending items and received items
+        const sortedItems = [...pendingItems,...receivedItems];
 
         return (
         <div
