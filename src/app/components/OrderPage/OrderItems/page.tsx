@@ -228,10 +228,7 @@ const OrderItems = () => {
         return (
         <div className='same-date-item-container item-received' key={groupIndex}>
 
-          <h3>
-            Congratulations! Your item has been successfully delivered on{" "}
-            <strong>{new Date(date).toLocaleDateString()}</strong>
-          </h3>
+          <h3>Congratulations! Your item has been successfully delivered.</h3> 
 
 
           {items.map((item, index) => {
