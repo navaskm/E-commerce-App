@@ -172,6 +172,9 @@ const OrderItems = () => {
           }
         })
 
+        console.log(pending);
+        console.log(delivered);
+
         // merge pending items and received items
         const sortedItems = [...pending,...delivered];
 
@@ -188,7 +191,11 @@ const OrderItems = () => {
             <h3>Arriving on: {date}</h3>
           )}
 
-          {sortedItems.map((item, index) => {
+
+
+
+
+          {pending.map((item, index) => {
 
             const SelectedSize = item.size?.replace(".size-", "");
 
@@ -248,6 +255,79 @@ const OrderItems = () => {
               </div>
             )
           })}
+
+
+
+
+
+
+          {delivered.map((item, index) => {
+
+            const SelectedSize = item.size?.replace(".size-", "");
+
+            return(
+
+              <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
+
+                <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
+
+                <div className="item-details-display">
+                  
+                  <div className="item-details">
+                    <h5>{decodeURIComponent(item.name)}</h5>
+                    {!isReceived && <p>Quantity : <span>{item.quantity}</span></p>}
+                    
+                    {
+                      item.size && <p>Size : <span>{SelectedSize}</span></p>
+                    }
+
+                    <button
+                      className={`again-clicked-${item.id}`}
+                      onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
+                    >
+                      {buttonState[item.id] === "added" ? (
+                        <strong style={{color:'green'}}>&#x2713; Added</strong>
+                      ) : (
+                        <>
+                          <img src="/ByItAgain/by-it-again.png" alt=""/>
+                          By it again
+                        </>
+                      )}
+                    </button>
+
+                  </div>
+
+                  {!isReceived && (
+                    <Link 
+                      href={{
+                        pathname :'/components/TrackingPage',
+                        query:{
+                          name: item.name,
+                          image: item.image,
+                          date: item.conformDate,
+                          size: item.size,
+                          quantity: item.quantity,
+                        }
+                      }}
+                    >
+                      <button className="track-button">
+                        Track Package
+                      </button>
+                    </Link>
+                  )}
+                  
+                </div>
+
+              </div>
+            )
+          })}
+
+
+
+
+
+
+
         </div>
       )})}
 
