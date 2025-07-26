@@ -30,10 +30,6 @@ type Products = {
   selectedSize: string;
 };
 
-interface GroupedItems {
-  [key: string]: OrderItems[];
-}
-
 type hello = {
   received: { [date: string]: OrderItems[] };
   pending: { [date: string]: OrderItems[] };
@@ -62,10 +58,15 @@ const OrderItems = () => {
     setIsClient(true);
   }, []);
 
+  // Render a loading or placeholder state until the client hydrates
+  if (!isClient) {
+    return <p>Loading...</p>;
+  }
+
   const againClickHandle = (name:string,image:string,price:string,id:string,selectedSize:string,conformDate:string) =>{
 
-     // Check if the product is already in the cart
-     const existingItem = checkoutItems.find(
+    // Check if the product is already in the cart
+    const existingItem = checkoutItems.find(
       (item:Products) => item.id === id && item.selectedSize === selectedSize
     );
 
@@ -90,7 +91,6 @@ const OrderItems = () => {
 
     dispatch(addToCart());
     dispatch(addItem({name,image,price,id,selectedSize,conformDate}))
-
   };
 
   // check product received or not
@@ -108,69 +108,36 @@ const OrderItems = () => {
     return comparedDate < today;
   };
 
-  // Group items by `conformDate`
-  // const groupedItems = conformDeliveryDate.reduce<GroupedItems>((acc, item) => {
+  // (set received and pending object). (and inside that 2 object date based object). (and inside date object array)
+  const groupedItems = conformDeliveryDate.reduce<hello>((acc, item) => {
 
-  //   // get item delivery date
-  //   const date = item.conformDate;
-
-  //   //create array with delivery date based
-  //   if (!acc[date]) {
-  //     acc[date] = [];
-  //   }
-
-  //   acc[date].push(item);
-
-  //   if(productReceivedOrNot(date)){
-  //     console.log('yes')
-  //   }else{
-  //     console.log('not')
-  //   }
-    
-  //   return acc;
-
-  // },{});
-
-
-
-
-  const groupedItems = conformDeliveryDate.reduce<hello>(
-  (acc, item) => {
+    // get item delivering date
     const date = item.conformDate;
 
+    // check item delivered or not (boolean value)
     const isReceived = productReceivedOrNot(date);
 
     if (isReceived) {
+
+      // set arrived item date
       if (!acc.received[date]) {
         acc.received[date] = [];
       }
       acc.received[date].push(item);
+
     } else {
+
+      // set pending item date
       if (!acc.pending[date]) {
         acc.pending[date] = [];
       }
       acc.pending[date].push(item);
-    }
+
+    };
 
     return acc;
-  },
-  {
-    received: {},
-    pending: {},
-  }
-);
 
-console.log(groupedItems.received);
-console.log(groupedItems.pending);
-
-
-
-
-  
-  // Render a loading or placeholder state until the client hydrates
-  if (!isClient) {
-    return null;
-  }
+  },{received: {},pending: {},});
 
   return conformDeliveryDate.length !== 0 ? (
     <div className="order-item-container">
@@ -180,91 +147,56 @@ console.log(groupedItems.pending);
         <Link href='/'>
             <img src="/Logo/app-logo.png" alt="back"/>
         </Link>
-
         <h2>
           Your Orders
         </h2>
       </div>
 
-
-
-
-
+      {/* pending items */}
       {Object.entries(groupedItems.pending).map(([date, items], groupIndex) => {
-
-        console.log(date,items);
-
-        // Check if any item in the group has a past delivery date
-        const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
-
-        const pending = [];
-        const delivered = [];
-
-        items.forEach((item:OrderItems)=>{
-          if(productReceivedOrNot(item.conformDate)){
-            delivered.push(item)
-          }else{
-            pending.push(item)
-          }
-        });
-
-        // merge pending items and received items
-        const sortedItems = [...pending,...delivered];
-
         return (
-        <div
-          className={`same-date-item-container ${isReceived? 'item-received':''}`}
-          key={groupIndex}
-        >
+          <div className='same-date-item-container' key={groupIndex} >
 
-          {/* Conditional rendering for delivery date or received message */}
-            {isReceived ? (
-            <h2>Congratulations! Your item has been successfully delivered.</h2>
-          ) : (
+            {/* arriving date display */}
             <h3>Arriving on: {date}</h3>
-          )}
 
+            {items.map((item, index) => {
 
+              // get size with remove this = ".size-"
+              const SelectedSize = item.size?.replace(".size-", "");
 
+              return(
+                <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
 
+                  {/* display image */}
+                  <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
 
-          {sortedItems.map((item, index) => {
-
-            const SelectedSize = item.size?.replace(".size-", "");
-
-            return(
-
-              <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
-
-                <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
-
-                <div className="item-details-display">
-                  
-                  <div className="item-details">
-                    <h5>{decodeURIComponent(item.name)}</h5>
-                    {!isReceived && <p>Quantity : <span>{item.quantity}</span></p>}
+                  <div className="item-details-display">
                     
-                    {
-                      item.size && <p>Size : <span>{SelectedSize}</span></p>
-                    }
+                    <div className="item-details">
 
-                    <button
-                      className={`again-clicked-${item.id}`}
-                      onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
-                    >
-                      {buttonState[item.id] === "added" ? (
-                        <strong style={{color:'green'}}>&#x2713; Added</strong>
-                      ) : (
-                        <>
-                          <img src="/ByItAgain/by-it-again.png" alt=""/>
-                          By it again
-                        </>
-                      )}
-                    </button>
+                      {/* name, quantity and size display */}
+                      <h5>{decodeURIComponent(item.name)}</h5>
+                      <p><span>{item.quantity}</span></p>
+                      {item.size && <p>Size : <span>{SelectedSize}</span></p>}
 
-                  </div>
+                      {/* again add to cart button */}
+                      <button
+                        className={`again-clicked-${item.id}`}
+                        onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
+                      >
+                        {buttonState[item.id] === "added" ? (
+                          <strong style={{color:'green'}}>&#x2713; Added</strong>
+                        ) : (
+                          <>
+                            <img src="/ByItAgain/by-it-again.png" alt=""/>
+                            By it again
+                          </>
+                        )}
+                      </button>
 
-                  {!isReceived && (
+                    </div>
+
                     <Link 
                       href={{
                         pathname :'/components/TrackingPage',
@@ -281,86 +213,42 @@ console.log(groupedItems.pending);
                         Track Package
                       </button>
                     </Link>
-                  )}
-                  
+                    
+                  </div>
+
                 </div>
+              )
+            })}
 
-              </div>
-            )
-          })}
-
-
-
-
-
-
-
-        </div>
+          </div>
       )})}
 
-
-
-
-
-
-
+      {/* received items */}
       {Object.entries(groupedItems.received).map(([date, items], groupIndex) => {
-
-        console.log('pending',date, items);
-        // Check if any item in the group has a past delivery date
-        const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
-
-        const pending = [];
-        const delivered = [];
-
-        items.forEach((item:OrderItems)=>{
-          if(productReceivedOrNot(item.conformDate)){
-            delivered.push(item)
-          }else{
-            pending.push(item)
-          }
-        });
-
-        // merge pending items and received items
-        const sortedItems = [...pending,...delivered];
-
         return (
-        <div
-          className={`same-date-item-container ${isReceived? 'item-received':''}`}
-          key={groupIndex}
-        >
+        <div className='same-date-item-container item-received' key={groupIndex}>
 
-          {/* Conditional rendering for delivery date or received message */}
-            {isReceived ? (
-            <h2>Congratulations! Your item has been successfully delivered.</h2>
-          ) : (
-            <h3>Arriving on: {date}</h3>
-          )}
+          <h2>Congratulations! Your item has been successfully delivered.</h2>
 
+          {items.map((item, index) => {
 
-
-
-
-          {sortedItems.map((item, index) => {
-
+            // get size with remove this = ".size-"
             const SelectedSize = item.size?.replace(".size-", "");
 
             return(
-
               <div className={`each-item-container ${index == 0?'item-first':''}`} key={index}>
 
+                {/* display image */}
                 <img src={item.image && decodeURIComponent(item.image)} alt={item.name}/>
 
                 <div className="item-details-display">
-                  
                   <div className="item-details">
-                    <h5>{decodeURIComponent(item.name)}</h5>
-                    {!isReceived && <p>Quantity : <span>{item.quantity}</span></p>}
-                    
-                    {
-                      item.size && <p>Size : <span>{SelectedSize}</span></p>
-                    }
 
+                    {/* name, quantity display */}
+                    <h5>{decodeURIComponent(item.name)}</h5>
+                    {item.size && <p>Size : <span>{SelectedSize}</span></p>}
+
+                    {/* again add to cart button */}
                     <button
                       className={`again-clicked-${item.id}`}
                       onClick={() => againClickHandle(item.name, item.image, item.price, item.id, item.size,item.conformDate)}
@@ -376,43 +264,14 @@ console.log(groupedItems.pending);
                     </button>
 
                   </div>
-
-                  {!isReceived && (
-                    <Link 
-                      href={{
-                        pathname :'/components/TrackingPage',
-                        query:{
-                          name: item.name,
-                          image: item.image,
-                          date: item.conformDate,
-                          size: item.size,
-                          quantity: item.quantity,
-                        }
-                      }}
-                    >
-                      <button className="track-button">
-                        Track Package
-                      </button>
-                    </Link>
-                  )}
-                  
                 </div>
 
               </div>
             )
           })}
 
-
-
-
-
-
-
         </div>
       )})}
-
-
-
 
     </div>
   ):(
