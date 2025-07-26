@@ -18,6 +18,7 @@ type OrderItems = {
   quantity: number;
   conformDate: string;
   size: string;
+  delivered: boolean;
 }
 
 type Products = {
@@ -56,20 +57,6 @@ const OrderItems = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-
-  // Group items by `conformDate`
-  const groupedItems = conformDeliveryDate.reduce<GroupedItems>((acc, item) => {
-
-    // get item delivery date
-    const date = item.conformDate;
-
-    if (!acc[date]) {
-      acc[date] = [];
-    }
-    acc[date].push(item);
-    return acc;
-
-  },{});
 
   const againClickHandle = (name:string,image:string,price:string,id:string,selectedSize:string,conformDate:string) =>{
 
@@ -116,6 +103,29 @@ const OrderItems = () => {
   
     return comparedDate < today;
   };
+
+  // Group items by `conformDate`
+  const groupedItems = conformDeliveryDate.reduce<GroupedItems>((acc, item) => {
+
+    // get item delivery date
+    const date = item.conformDate;
+
+    // create array with delivery date based
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+
+    // Create a new object with delivered property added
+    const newItem = {
+      ...item,
+      delivered: productReceivedOrNot(date),
+    };
+
+    acc[date].push(newItem);
+    
+    return acc;
+
+  },{});
   
   // Render a loading or placeholder state until the client hydrates
   if (!isClient) {
@@ -142,17 +152,28 @@ const OrderItems = () => {
         const isReceived = items.some((item:OrderItems) => productReceivedOrNot(item.conformDate));
 
         // pending items
-        const pendingItems = items.filter(
-          (item: OrderItems) => !productReceivedOrNot(item.conformDate)
-        );
+        // const pendingItems = items.filter(
+        //   (item: OrderItems) => !productReceivedOrNot(item.conformDate)
+        // );
 
-        // customer received items
-        const receivedItems = items.filter(
-          (item: OrderItems) => productReceivedOrNot(item.conformDate)
-        );
+        // // customer received items
+        // const receivedItems = items.filter(
+        //   (item: OrderItems) => productReceivedOrNot(item.conformDate)
+        // );
+
+        const pending = [];
+        const delivered = [];
+
+        items.forEach((item:OrderItems)=>{
+          if(item.delivered){
+            pending.push(item)
+          }else{
+            delivered.push(item)
+          }
+        })
 
         // merge pending items and received items
-        const sortedItems = [...pendingItems,...receivedItems];
+        const sortedItems = [...pending,...delivered];
 
         return (
         <div
