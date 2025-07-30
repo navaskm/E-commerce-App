@@ -64,6 +64,7 @@ const OrderItems = () => {
     // set this localStorage in the PaymentPage
     const hasPendingOrder = localStorage.getItem('pendingOrder');
     if(hasPendingOrder === "true" && isSignedIn){
+      alert('hello')
       dispatch(userOrder());
       dispatch(removeAllItem());
       dispatch(removeAllQuantity());
@@ -72,7 +73,7 @@ const OrderItems = () => {
     // Clear the localStorage
     localStorage.removeItem("pendingOrder");
 
-  },[isSignedIn,dispatch,conformDeliveryDate]);
+  },[]);
 
   // Ensure rendering happens only on the client
   useEffect(() => {
