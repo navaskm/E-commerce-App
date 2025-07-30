@@ -71,18 +71,23 @@ const PaymentPage = () => {
   // get tax amount in cents
   const taxCents = (totalBeforeTax / 100) * 0.1;
 
+  // get amount
+  const totalAmount = taxCents + totalBeforeTax;
+
   // Function to format prices
   function fixed(price: number) {
     return price.toFixed(2);
   }
-
-  const totalAmount = taxCents + totalBeforeTax;
 
   // order button clicked time work
   const handleOrder = () => {
 
     // if user not login
     if(!isSignedIn){
+
+      // save this in localStorage. and this check in /components/OrderPage
+      localStorage.setItem("pendingOrder", "true");
+
       const redirectUrl = `${window.location.origin}/components/OrderPage`;
       route.push(`https://fit-katydid-33.accounts.dev/sign-in?redirect_url=${encodeURIComponent(redirectUrl)}`);
       return;

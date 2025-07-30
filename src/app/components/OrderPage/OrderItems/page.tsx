@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 
 import { useAppDispatch,useAppSelector } from "@/app/lib/store/hooks/hooks";
@@ -8,6 +9,9 @@ import { hydrateOrder } from "@/app/lib/store/feature/deliverydate/deliverydate"
 
 import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 import { addItem } from "@/app/lib/store/feature/items/itemsslice";
+import { userOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
+import { removeAllItem } from "@/app/lib/store/feature/items/itemsslice";
+import { removeAllQuantity } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/page";
 
 type OrderItems = {
@@ -30,7 +34,7 @@ type Products = {
   selectedSize: string;
 };
 
-type hello = {
+type FinalOrderItems = {
   received: { [date: string]: OrderItems[] };
   pending: { [date: string]: OrderItems[] };
 };
@@ -40,6 +44,7 @@ const OrderItems = () => {
   const checkoutItems = useAppSelector((state) => state.cartItems.items);
   const conformDeliveryDate = useAppSelector((state) => state.deliveryDate.userOrder)as OrderItems[];
   const dispatch = useAppDispatch();
+  const {isSignedIn} = useAuth();
 
   const [isClient, setIsClient] = useState(false);
   const [buttonState, setButtonState] = useState<{ [key: string]: string }>({});
@@ -52,6 +57,22 @@ const OrderItems = () => {
       dispatch(hydrateOrder({ deliveryDate, userOrder }));
     }
   }, [dispatch]);
+
+  // user order button click time login
+  useEffect(()=>{
+
+    // set this localStorage in the PaymentPage
+    const hasPendingOrder = localStorage.getItem('pendingOrder');
+    if(hasPendingOrder === "true" && isSignedIn){
+      dispatch(userOrder());
+      dispatch(removeAllItem());
+      dispatch(removeAllQuantity());
+    };
+
+    // Clear the localStorage
+    localStorage.removeItem("pendingOrder");
+
+  },[isSignedIn]);
 
   // Ensure rendering happens only on the client
   useEffect(() => {
@@ -109,7 +130,7 @@ const OrderItems = () => {
   };
 
   // (set received and pending object). (and inside that 2 object date based object). (and inside date object array)
-  const groupedItems = conformDeliveryDate.reduce<hello>((acc, item) => {
+  const groupedItems = conformDeliveryDate.reduce<FinalOrderItems>((acc, item) => {
 
     // get item delivering date
     const date = item.conformDate;
