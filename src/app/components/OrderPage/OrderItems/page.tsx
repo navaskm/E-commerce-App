@@ -72,7 +72,7 @@ const OrderItems = () => {
     // Clear the localStorage
     localStorage.removeItem("pendingOrder");
 
-  },[isSignedIn]);
+  },[isSignedIn,dispatch]);
 
   // Ensure rendering happens only on the client
   useEffect(() => {
