@@ -70,6 +70,7 @@ const OrderItems = () => {
       dispatch(removeAllQuantity());
     };
 
+    alert('hi');
     // Clear the localStorage
     localStorage.removeItem("pendingOrder");
 
