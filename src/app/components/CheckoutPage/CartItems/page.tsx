@@ -20,7 +20,9 @@ type Products = {
 };
 
 const CartItems = () => {
+
   const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: string }>({});
+
   const checkoutItems = useAppSelector((state) => state.cartItems.items);
   const dispatch = useAppDispatch();
 
@@ -35,30 +37,44 @@ const CartItems = () => {
   // Initialize default delivery options
   useEffect(() => {
     if (checkoutItems.length > 0) {
+
       const defaultOptions = checkoutItems.reduce((acc: { [key: string]: string }, item:Products) => {
+
+        // replace .size- from size
         const productSize = item.selectedSize.replace(".size-", "");
+
+        // set key
         const key = `${item.id}-${productSize}`;
+
         if (!(key in acc)) {
-          acc[key] = selectedOptions[key] || "option1"; // Retain existing or set default
+          acc[key] = selectedOptions[key] || "option1";
         }
         return acc;
       }, {} as { [key: string]: string });
 
       setSelectedOptions((prev) => ({ ...prev, ...defaultOptions }));
+
     }
   }, [checkoutItems]);
 
   useEffect(() => {
+
     Object.entries(selectedOptions).forEach(([key, selectedOption]) => {
-      const existingItem = checkoutItems.find(
-        (item) => `${item.id}-${item.selectedSize.replace(".size-", "")}` === key
-      );
+
+      //const existingItem = checkoutItems.find((item) => `${item.id}-${item.selectedSize.replace(".size-", "")}` === key
+      //);
+      const existingItem = checkoutItems.find(item => {
+        const itemKey:string = `${item.id}-${item.selectedSize.replace(".size-", "")}`;
+        return itemKey === key
+      })
   
       if (existingItem) {
-        // Instead of document.querySelector, compute delivery date in state
-        const deliveryDate = findDeliveryDate(
-          selectedOption === "option1" ? 7 : selectedOption === "option2" ? 5 : 3
-        );
+
+        // get the delivery option
+        const deliveryOption = selectedOption === "option1" ? 7 : selectedOption === "option2" ? 5 : 3;
+
+        // get the delivery date
+        const deliveryDate = findDeliveryDate(deliveryOption);
   
         const { name, image, price, quantity, selectedSize } = existingItem;
   
@@ -66,7 +82,7 @@ const CartItems = () => {
           addDeliveryDate({
             id: key,
             selectedOption,
-            conformDate: `${deliveryDate.dayName}, ${deliveryDate.monthName} ${deliveryDate.today}`, // Use computed value instead of querying DOM
+            conformDate: `${deliveryDate.dayName}, ${deliveryDate.monthName} ${deliveryDate.today}`,
             name,
             image,
             price,
@@ -76,6 +92,7 @@ const CartItems = () => {
         );
       }
     });
+
   }, [selectedOptions, checkoutItems, dispatch]);
 
   const findDeliveryDate = (deliveryDate: number) => {
@@ -136,9 +153,15 @@ const CartItems = () => {
   return checkoutItems.length != 0 ? (
     <div className="col-12 col-lg-8 cart-items-container">
       <h3>Review your order</h3>
+
       {checkoutItems.map((item: Products, index: number) => {
+
+        // remove .size- from size
         const productSize = item.selectedSize.replace(".size-", "");
+
+        // get delivery Option
         const selectedOption = selectedOptions[`${item.id}-${productSize}`];
+
         const deliveryDate =
           selectedOption === "option1"
             ? findDeliveryDate(7)
