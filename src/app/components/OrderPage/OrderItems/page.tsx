@@ -61,6 +61,9 @@ const OrderItems = () => {
   // user order button click time login
   useEffect(()=>{
 
+    // only run when auth is ready
+    if (isSignedIn === undefined) return;
+
     // set this localStorage in the PaymentPage
     const hasPendingOrder = localStorage.getItem('pendingOrder');
     if(hasPendingOrder === "true" && isSignedIn){
@@ -74,7 +77,7 @@ const OrderItems = () => {
     // Clear the localStorage
     localStorage.removeItem("pendingOrder");
 
-  },[]);
+  },[isSignedIn]);
 
   // Ensure rendering happens only on the client
   useEffect(() => {
