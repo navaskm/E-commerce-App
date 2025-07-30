@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useAuth } from "@clerk/nextjs";
 
 import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
 import { userOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
@@ -41,9 +42,11 @@ type ShippingType = {
 
 const PaymentPage = () => {
 
-  const dispatch = useAppDispatch();
   const checkoutItems = useAppSelector((state:QuantityType)=> state.cart.cartBase || 0);
   const conformItems = useAppSelector((state:CartItemType)=> state.cartItems.items || {});
+  const dispatch = useAppDispatch();
+  const {isSignedIn} = useAuth();
+  const route = useRouter();
 
   // get shipping cost
   const shippingCost = useAppSelector((state:ShippingType) => state.deliveryDate.shippingCost);
@@ -68,17 +71,24 @@ const PaymentPage = () => {
   // get tax amount in cents
   const taxCents = (totalBeforeTax / 100) * 0.1;
 
-    // Function to format prices
-    function fixed(price: number) {
-      return price.toFixed(2);
-    }
+  // Function to format prices
+  function fixed(price: number) {
+    return price.toFixed(2);
+  }
 
   const totalAmount = taxCents + totalBeforeTax;
 
   // order button clicked time work
-  const route = useRouter();
-  
   const handleOrder = () => {
+
+    // if user not login
+    if(!isSignedIn){
+      const redirectUrl = `${window.location.origin}/components/OrderPage`;
+      route.push(`https://fit-katydid-33.accounts.dev/sign-in?redirect_url=${encodeURIComponent(redirectUrl)}`);
+      return;
+    }
+
+    // user is already login this code is work
     dispatch(userOrder());
     dispatch(removeAllItem());
     dispatch(removeAllQuantity());
