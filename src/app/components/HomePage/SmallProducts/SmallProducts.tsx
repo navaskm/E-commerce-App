@@ -1,7 +1,8 @@
 import '@/app/homepagesmall/smallproducts.scss'
 
-import { fetchProduct } from "@/app/DataFetching/productdata";
 import Link from "next/link";
+import { fetchProduct } from "@/app/DataFetching/productdata";
+const response = await fetchProduct();
 
 type Products = {
   name: string,
@@ -18,19 +19,20 @@ type Products = {
   size:string,
 }
 
-const fourItems:Products[] = [];
+const allowedTypes = [
+  'watch',
+  'shoes',
+  'mens-clothes',
+  'women-clothes',
+  'Jewelry',
+  'sound-hub',
+  'sunglass',
+  'toys',
+];
 
-const response = await fetchProduct();
-const productWatch = response.filter((watch:Products) => watch.type === 'watch');
-const productShoes = response.filter((Shoes:Products) => Shoes.type === 'shoes');
-const productForMens = response.filter((Mens:Products) => Mens.type === 'mens-clothes');
-const productForWomen = response.filter((women:Products) => women.type == 'women-clothes');
-const productJewelry = response.filter((jewelry:Products) => jewelry.type === 'Jewelry');
-const productSoundHub = response.filter((soundHub:Products) => soundHub.type === 'sound-hub');
-const productSunglass = response.filter((sunglass:Products) => sunglass.type === 'sunglass');
-const productToys = response.filter((toys:Products) => toys.type === 'toys');
-
-fourItems.push( ...productWatch, ...productShoes, ...productForMens, ...productForWomen, ...productJewelry, ...productSoundHub, ...productSunglass, ...productToys)
+const fourItems: Products[] = response.filter((product: Products) =>
+  allowedTypes.includes(product.type)
+);
 
 function SmallProducts() {
   return (
@@ -44,6 +46,8 @@ function SmallProducts() {
             return fourItems.filter((item: Products) => item.type === productType);
           }
           const oneProduct = findProduct(product.type);
+
+          console.log(oneProduct);
 
           // create only only product display
           let displayOneItem = index % 3 === 2;
