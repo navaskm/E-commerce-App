@@ -1,6 +1,5 @@
-import '@/app/homepagesmall/smallproducts.scss'
-
 import Link from "next/link";
+import '@/app/homepagesmall/smallproducts.scss'
 import { fetchProduct } from "@/app/DataFetching/productdata";
 const response = await fetchProduct();
 
@@ -35,100 +34,71 @@ const fourItems: Products[] = response.filter((product: Products) =>
 );
 
 function SmallProducts() {
+
   return (
     <div className="container-of-all-products row">
+      {allowedTypes.map((type) => {
 
-      {
-        fourItems.map((product:Products, index:number) => {
+        // grouped item get (4 items)
+        const oneProductList = fourItems.filter((item) => item.type === type);
 
-          // find which product display
-          const findProduct = (productType:string) => {
-            return fourItems.filter((item: Products) => item.type === productType);
-          }
-          const oneProduct = findProduct(product.type);
+        // get first product in the 4 grouped items
+        const product = oneProductList[0];
 
-          console.log(oneProduct);
+        // toys and sunglass items only display in large device
+        const largeDeviceDisplay = (product.type === 'toys' || product.type === 'sunglass') ? 'only-large-device' : null;
 
-          // create only only product display
-          let displayOneItem = index % 3 === 2;
-          if(index === 11 || index === 23){
-            displayOneItem = false;
-          }
-
-          const largeDeviseDisplay = (product.type === 'toys' || product.type === 'sunglass')? 'only-large-device':null;
-
-          return displayOneItem && (
-            <div className={`container-of-one-product col-12 col-md-4 col-xl-3 ${largeDeviseDisplay}`}
-            key={product.id}>
-
-              <div className='title'>
-                <h3>{product.title}</h3>
-              </div>
-              
-              <div className='product-body'>
-                {
-                  oneProduct.map((item:Products) => {
-                    return (
-                      <div key={item.id} className="product-details-display">
-
-                        {/* image click time pass value to selected page */}
-                        <Link href={{
-                          pathname: "/components/SelectedPage",
-                          query: {
-                            name: encodeURIComponent(item.name),
-                            priceCents: item.priceCents,
-                            image: encodeURIComponent(item.image),
-                            rating: item.rating,
-                            id: item.id,
-                            type: item.type,
-                            keywords: item.keywords,
-                            company: encodeURIComponent(item.company),
-                            madein: encodeURIComponent(item.madein),
-                            Feature: encodeURIComponent(item.Feature),
-                            size: item.size,
-                          }
-                          }}>
-                            <img src={item.image} alt={item.name}/>
-                        </Link>
-
-                          {/* this div click time pass value to selected page */}
-                        <Link style={{ textDecoration: 'none' }} href={{
-                          pathname: "/components/SelectedPage",
-                          query: {
-                            name: encodeURIComponent(item.name),
-                            priceCents: item.priceCents,
-                            image: encodeURIComponent(item.image),
-                            rating: item.rating,
-                            type: item.type,
-                            id: item.id,
-                            keywords: item.keywords,
-                            company: encodeURIComponent(item.company),
-                            madein: encodeURIComponent(item.madein),
-                            Feature: encodeURIComponent(item.Feature),
-                            size: item.size,
-                          }
-                          }}>
-                            <div className='name-price-display'>
-                              <h6>{item.name}</h6>
-                              <div className='price-star-display'>
-                                <b><span>₹</span>{item.priceCents}</b>
-                                <p>{item.rating}&#9733;</p>
-                              </div>
-                            </div>
-                        </Link>
-
-                      </div>
-                    )
-                  })
-                }
-              </div>
+        return oneProductList && (
+          <div
+            className={`container-of-one-product col-12 col-md-4 col-xl-3 ${largeDeviceDisplay}`}
+            key={product.id}
+          >
+            <div className="title">
+              <h3>{product.title}</h3>
             </div>
-          )
-        })
-      }
 
+            <div className="product-body">
+              {oneProductList.map((item:Products) => (
+                <div key={item.id} className="product-details-display">
+
+                  {/* this div click time pass value to selected page */}
+                  <Link style={{ textDecoration: 'none' }} href={{
+                    pathname: "/components/SelectedPage",
+                    query: {
+                      name: encodeURIComponent(item.name),
+                      priceCents: item.priceCents,
+                      image: encodeURIComponent(item.image),
+                      rating: item.rating,
+                      type: item.type,
+                      id: item.id,
+                      keywords: item.keywords,
+                      company: encodeURIComponent(item.company),
+                      madein: encodeURIComponent(item.madein),
+                      Feature: encodeURIComponent(item.Feature),
+                      size: item.size,
+                    }
+                  }}>
+
+                    <img src={item.image} alt={item.name}/>
+
+                    <div className='name-price-display'>
+                      <h6>{item.name}</h6>
+                      <div className='price-star-display'>
+                        <b><span>₹</span>{item.priceCents}</b>
+                        <p>{item.rating}&#9733;</p>
+                      </div>
+                    </div>
+                  
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
-  )
+  );
+
 }
 
 export default SmallProducts;
