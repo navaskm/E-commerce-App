@@ -23,30 +23,22 @@ type BagsSports = {
 
 function BagsSports({product,order}:BagsSports) {
 
-  // scrolling left side
-  const scrollLeft = () => {
-    const scrollContainer = document.querySelector(`.scrolling-products-${order}`);
+  // left and right side button handle click
+  const scrolling = (direction:'left' | 'right')=>{
 
-    if(scrollContainer){
-      const scrollDistance = - (window.innerWidth-100)
-      scrollContainer.scrollBy({left: scrollDistance, behavior: 'smooth'})
-    }
-  }
-  
-  // scrolling right side
-  const scrollRight = () => {
     const scrollContainer = document.querySelector(`.scrolling-products-${order}`);
+    if(!scrollContainer) return null;
 
-    if(scrollContainer){
-      const scrollDistance = window.innerWidth-100
-      scrollContainer.scrollBy({left: scrollDistance, behavior: 'smooth'})
-    }
-  }
+    const scrollOfSet = window.innerWidth-100;
+    const scrollDistance = direction === "left" ? -scrollOfSet : scrollOfSet;
+
+    scrollContainer.scrollBy({left: scrollDistance, behavior: 'smooth'});
+  };
 
   return (
     <div className="scrolling-product-container">
 
-      <button className="scroll-button left" onClick={scrollLeft}>←</button>
+      <button className="scroll-button left" onClick={()=>scrolling('left')}>←</button>
 
         <div className={`scrolling-products-${order}`}>
           {
@@ -90,7 +82,6 @@ function BagsSports({product,order}:BagsSports) {
                         <h4>{item.offer}</h4>
                       </div>
                     </div>
-                    
 
                   </Link>
                   
@@ -100,10 +91,10 @@ function BagsSports({product,order}:BagsSports) {
           }
         </div>
 
-      <button className="scroll-button right" onClick={scrollRight}>→</button>
+      <button className="scroll-button right" onClick={()=>scrolling('right')}>→</button>
 
     </div>
   )
 }
 
-export default BagsSports
+export default BagsSports;
