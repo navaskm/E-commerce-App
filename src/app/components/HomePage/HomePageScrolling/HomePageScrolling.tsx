@@ -12,6 +12,10 @@ type Products = {
   type: string,
   keywords: string,
   offer: string,
+  company: string,
+  madein: string,
+  Feature: string,
+  size:string,
 }
 
 type Items ={
@@ -21,16 +25,15 @@ type Items ={
 const HomePageScrolling = async ({item}:Items) => {
 
   const product = await fetchScrollingProduct();
-
-  const bags = product.filter((product:Products) => product.type == "bag");
-  const sports = product.filter((product:Products) => product.type == "sports-item");
+  const arrayOfProducts = product.filter((product:Products)=>product.type === item);
 
   return (
     <div className="homepage-scrolling">
 
+      {/* display heading (bags of sport items) */}
       <div className="scrolling-title">
         {
-          item == 'bag'? (
+          item === 'bag'? (
             <h1>Your Perfect Bag Awaits</h1>
           ):(
             <h1>Amazing Deals on Sports Gear</h1>
@@ -38,17 +41,9 @@ const HomePageScrolling = async ({item}:Items) => {
         }
       </div>
 
-      {
-        item == 'bag'? (
-          <Suspense fallback={<p>bag.....</p>}>
-            <BagsSports product={bags} order={item}/> 
-          </Suspense>
-        ):(
-          <Suspense fallback={<p>bag.....</p>}>
-            <BagsSports product={sports} order={item}/> 
-          </Suspense>
-        )
-      }
+      <Suspense fallback={<p>loading.....</p>}>
+        <BagsSports product={arrayOfProducts} order={item}/> 
+      </Suspense>
 
     </div> 
   )
