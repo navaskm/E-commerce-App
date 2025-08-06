@@ -120,51 +120,49 @@ async function TwoProducts({product}:ItemOne) {
     //last two items
     <div className={`col-6 col-md-4 col-lg-3 container-of-two-product  ${item?.[0]?.type || null}`}>
 
-      <div className='title-of-two-product'>
-        {
-          item && item.length > 0 && <h3>{item[0].title}</h3>
-        }
-      </div>
-      {
+      {item.map((item:Products,index:number) => (
 
-        item && item.map((item:Products,index:number) => {
+        <React.Fragment key={item.id}>
 
-          // create first image classname
-          const marginBottom = index === 0 ? 'marginBottom' : null;
+          {/* display heading */}
+          {index === 0 && (
+            <div className='title-of-two-product'>
+              <h3>{item.title}</h3>
+            </div>
+          )}
 
-          return (
-            <Link  key={item.id}
-              style={{textDecoration:"none"}}
-              href={{
-                pathname: "/components/SelectedPage",
-                query: {
-                  name: encodeURIComponent(item.name),
-                  priceCents: item.priceCents,
-                  image: encodeURIComponent(item.image),
-                  rating: item.rating,
-                  id: item.id,
-                  type: item.type,
-                  keywords: item.keywords,
-                  company: encodeURIComponent(item.company),
-                  madein: encodeURIComponent(item.madein),
-                  Feature: encodeURIComponent(item.Feature),
-                  size: item.size,
-                }
-              }}>
+          <Link
+            style={{textDecoration:"none"}}
+            href={{
+              pathname: "/components/SelectedPage",
+              query: {
+                name: encodeURIComponent(item.name),
+                priceCents: item.priceCents,
+                image: encodeURIComponent(item.image),
+                rating: item.rating,
+                id: item.id,
+                type: item.type,
+                keywords: item.keywords,
+                company: encodeURIComponent(item.company),
+                madein: encodeURIComponent(item.madein),
+                Feature: encodeURIComponent(item.Feature),
+                size: item.size,
+              }
+            }}
+          >
 
-              <div className={`last-products-display ${marginBottom}`}>
-                <img src={item.image} alt={item.name}/>
-                <h5>{item.offer}</h5>
-              </div>
+            <div className={`last-products-display ${index === 0 && 'marginBottom'}`}>
+              <img src={item.image} alt={item.name}/>
+              <h5>{item.offer}</h5>
+            </div>
 
-            </Link>
-          )
-        })
-        
-      }
+          </Link>
+
+        </React.Fragment>
+      ))}
     </div>  
     
-  )
-}
+  );
+};
 
 export default TwoProducts;
