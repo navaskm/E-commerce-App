@@ -68,7 +68,7 @@ async function TwoProducts({product}:ItemOne) {
                     {/* only first letter display in upper case */}
                     <h3>{productType.charAt(0).toUpperCase() + productType.slice(1).toLowerCase()}</h3>
                   </div>
-                )};
+                )}
 
                 <div className={`image-offer-display-of-two-product ${index === 0 && 'marginBottom'}`}>
                   <Link 
@@ -106,12 +106,12 @@ async function TwoProducts({product}:ItemOne) {
                 </div>
 
               </React.Fragment>
-            ))};
+            ))}
 
           </div>
         );
 
-      })};
+      })}
 
     </div>
 
