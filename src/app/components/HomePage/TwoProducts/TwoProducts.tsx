@@ -23,46 +23,24 @@ type ItemOne = {
   product?: string,
 }
 
-const smallItems:Products[] = [];
+const allowedTypes = [
+  'lapTop',
+  'perFume',
+  'cooker',
+  'bulb',
+  'umbrella',
+  'chair',
+];
 
-const response = await fetchProduct();
+async function TwoProducts({product}:ItemOne) {
 
-// first two products
-const lapTop = response.filter((lapTop:Products) => lapTop.type === 'lapTop');
-const perFume = response.filter((perfume:Products) => perfume.type === 'perFume');
-const cooker = response.filter((cooker:Products) => cooker.type === 'cooker');
-const bulb = response.filter((bulb:Products) => bulb.type === 'bulb');
-const umbrella = response.filter((umbrella:Products) => umbrella.type === 'umbrella');
-const chair = response.filter((chair:Products) => chair.type === 'chair');
+  const response = await fetchProduct();
 
-smallItems.push(...lapTop,...perFume,...cooker,...bulb,...umbrella,...chair);
-
-// last two items
-const tv = response.filter((tv:Products) => tv.type === 'tv');
-const slipper = response.filter((slipper:Products) => slipper.type === 'slipper');
-const clock = response.filter((clock:Products) => clock.type === 'Clock');
-const waterBottle = response.filter((waterBottle:Products) => waterBottle.type === 'WaterBottle');
-const healthyFood = response.filter((healthyFood:Products) => healthyFood.type === 'healthyFood');
-const phoneCharger = response.filter((phoneCharger:Products) => phoneCharger.type === 'phoneCharger');
-
-function TwoProducts({product}:ItemOne) {
-
-  // find which item display
-  let item: Products[] | null = null;
-
-  if (product == 'tv'){
-    item = tv;
-  }else if (product == 'slipper'){
-    item = slipper;
-  }else if (product == 'Clock'){
-    item = clock;
-  }else if (product == 'WaterBottle'){
-    item = waterBottle;
-  }else if (product == 'healthyFood'){
-    item = healthyFood;
-  }else if (product == 'phoneCharger'){
-    item = phoneCharger;
-  }
+  if(product == null){
+    var smallItems = response.filter((items:Products) => allowedTypes.includes(items.type));
+  }else {
+    var item = response.filter((items:Products) => items.type === product);
+  };
 
   // first two products
   return product == null?  (
