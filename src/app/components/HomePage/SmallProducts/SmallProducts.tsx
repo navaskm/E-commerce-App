@@ -46,7 +46,7 @@ function SmallProducts() {
         const product = oneProductList[0];
 
         // toys and sunglass items only display in large device
-        const largeDeviceDisplay = (product.type === 'toys' || product.type === 'sunglass') ? 'only-large-device' : null;
+        const largeDeviceDisplay = (product.type === 'toys' || product.type === 'sunglass') && 'only-large-device';
 
         return oneProductList && (
           <div

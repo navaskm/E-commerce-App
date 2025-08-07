@@ -53,7 +53,7 @@ async function TwoProducts({product}:ItemOne) {
         const Product = smallItems.filter((product:Products) => product.type === productType);
 
         // umbrella and chair only medium device display 
-        const onlyMediumDevice = (productType === 'umbrella' || productType === 'chair')? 'only-medium-device': null;
+        const onlyMediumDevice = (productType === 'umbrella' || productType === 'chair') && 'only-medium-device';
 
         return (
           <div key={index} className={`col-6 col-md-4 col-lg-3 container-of-two-product ${onlyMediumDevice}`}>
