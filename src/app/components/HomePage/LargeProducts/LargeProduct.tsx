@@ -1,6 +1,7 @@
-import '@/app/styles/homepage/largeproduct/largeproduct.scss';
-import { fetchProduct } from "@/app/DataFetching/productdata";
+import React from 'react';
 import Link from 'next/link';
+import { fetchProduct } from "@/app/DataFetching/productdata";
+import '@/app/styles/homepage/largeproduct/largeproduct.scss';
 
 type Products = {
   name: string,
@@ -21,25 +22,26 @@ type ItemOne = {
   product?: string,
 }
 
-const items : Products[] = [];
+const allowedType = [
+  'refrigerator',
+  'washing-machine',
+  'bed',
+  'table',
+  'gas-cooker',
+  'ac'
+]
 
-const response = await fetchProduct();
-// first large products
-const refrigerator = response.filter((product:Products) => product.type === 'refrigerator');
-const washingMachine = response.filter((product:Products) => product.type === 'washing-machine');
-const bed = response.filter((bed:Products) => bed.type === 'bed');
-const table = response.filter((table:Products) => table.type === 'table');
-const gasCooker = response.filter((gasCooker:Products) => gasCooker.type === 'gas-cooker');
-const ac = response.filter((ac:Products) => ac.type === 'ac');
+async function LargeProduct({product}:ItemOne) {
 
-items.push(...refrigerator, ...washingMachine, ...bed, ...table, ...gasCooker, ...ac);
+  const response = await fetchProduct();
 
-// last large products
-const curtain = response.filter((curtain:Products) => curtain.type === 'curtain');
-const waterHouse = response.filter((waterHouse:Products) => waterHouse.type === 'waterHouse');
-const waterTank = response.filter((waterTank:Products) => waterTank.type === 'waterTank');
+  const items = response.filter((item:Products)=> allowedType.includes(item.type));
 
-function LargeProduct({product}:ItemOne) {
+  // last large products
+  const curtain = response.filter((curtain:Products) => curtain.type === 'curtain');
+  const waterHouse = response.filter((waterHouse:Products) => waterHouse.type === 'waterHouse');
+  const waterTank = response.filter((waterTank:Products) => waterTank.type === 'waterTank');
+
 
   // last large items store
   let item: Products[] | null = null;
@@ -52,57 +54,53 @@ function LargeProduct({product}:ItemOne) {
     item = waterTank;
   }
 
-  // first large items display
   return product == null ? (
+
+    // first large items display
     <div className="homepage-dynamic-large">
 
-      {
-        items.map(productOne => {
+      {allowedType.map((productType:string, index:number) => {
 
-          const findProduct = (productType:string) => {
-            return items.filter((product:Products) => product.type == productType);
-          }
+        const oneProduct = items.filter((product:Products) => product.type == productType);
+        const mediumDeviceDisplay = (productType == 'table' || productType == 'bed') && 'medium-device-display';
 
-          const oneProduct = findProduct(productOne.type);
+        return (
+          <div className={`homepage-large-container col-6 col-md-4 col-lg-3 ${mediumDeviceDisplay}`} key={index}>
+            {oneProduct.map((item:Products) => (
 
-          const mediumDeviceDisplay = (productOne.type == 'table' || productOne.type == 'bed') ? 
-          'medium-device-display': null;
+              <React.Fragment key={item.id}>
 
-          return (
-            <div className={`homepage-large-container col-6 col-md-4 col-lg-3 ${mediumDeviceDisplay}`} key={productOne.id}>
-              <div className="large-product-title">
-                <h3>{productOne.title}</h3>
-              </div>
-              {
-                oneProduct.map((item:Products) => {
-                  return (
-                    <div key={item.id} className="product-card">
-                      <Link href={{
-                        pathname: "/components/SelectedPage",
-                        query: {
-                          name: encodeURIComponent(item.name),
-                          priceCents: item.priceCents,
-                          image: encodeURIComponent(item.image),
-                          rating: item.rating,
-                          id: item.id,
-                          type: item.type,
-                          keywords: item.keywords,
-                          company: encodeURIComponent(item.company),
-                          madein: encodeURIComponent(item.madein),
-                          Feature: encodeURIComponent(item.Feature),
-                          size: item.size,
-                        }
-                      }}>
-                        <img src={item.image} alt={item.name} />
-                      </Link>
-                    </div>
-                  )
-                })
-              }
+                <div className="large-product-title">
+                  <h3>{item.title}</h3>
+                </div>
+
+                <div className="product-card">
+                  <Link href={{
+                    pathname: "/components/SelectedPage",
+                    query: {
+                      name: encodeURIComponent(item.name),
+                      priceCents: item.priceCents,
+                      image: encodeURIComponent(item.image),
+                      rating: item.rating,
+                      id: item.id,
+                      type: item.type,
+                      keywords: item.keywords,
+                      company: encodeURIComponent(item.company),
+                      madein: encodeURIComponent(item.madein),
+                      Feature: encodeURIComponent(item.Feature),
+                      size: item.size,
+                    }
+                  }}>
+                    <img src={item.image} alt={item.name} />
+                  </Link>
+                </div>
+              </React.Fragment>
+
+            ))}
           </div>
-          )
-        })
-      }
+        )
+
+      })}
 
     </div>
 
@@ -151,4 +149,4 @@ function LargeProduct({product}:ItemOne) {
   )
 }
 
-export default LargeProduct
+export default LargeProduct;
