@@ -1,12 +1,10 @@
 import { lazy,Suspense } from "react";
 const TwoProducts = lazy(()=> import("../TwoProducts/TwoProducts"));
 const LargeProduct = lazy(()=> import("../LargeProducts/LargeProduct"));
-import '@/app/styles/homepage/lastoneproducts/lastoneproducts.scss';
 
 function LastOneProducts() {
   return (
-    <div className="last-one-item-container">
-
+    <>
       <Suspense fallback={<p>Loading two products</p>}>
         <TwoProducts product='tv'/>
       </Suspense>
@@ -34,14 +32,12 @@ function LastOneProducts() {
       <Suspense fallback={<p>Loading two products</p>}>
         <TwoProducts product='healthyFood'/>
       </Suspense>
-
  
       <Suspense fallback={<p>Loading two products</p>}>
         <TwoProducts product='phoneCharger'/>
-      </Suspense>   
-
-    </div>
+      </Suspense>
+    </>
   )
 }
 
-export default LastOneProducts
+export default LastOneProducts;

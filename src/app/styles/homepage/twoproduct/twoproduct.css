@@ -65,4 +65,8 @@
   .home-page-two-product .only-medium-device {
     display: flex;
   }
+}
+
+.last-one {
+  border: 1px solid blue;
 }/*# sourceMappingURL=twoproduct.css.map */

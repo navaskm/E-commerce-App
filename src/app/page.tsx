@@ -49,7 +49,7 @@ export default function Home() {
       </Suspense>
 
       <Suspense fallback={<ScrollingSkeleton/>}>
-        <SmallScrolling item='faceWash' />
+        <SmallScrolling item='face-wash' />
       </Suspense>
       <Suspense fallback={<ScrollingSkeleton/>}>
         <SmallScrolling item='phone'/>

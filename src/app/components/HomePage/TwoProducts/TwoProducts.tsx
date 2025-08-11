@@ -1,7 +1,7 @@
 import React from 'react';
 import  Link  from 'next/link';
-import '@/app/styles/homepage/twoproduct/twoproduct.scss';
 import { fetchProduct } from "@/app/DataFetching/productdata";
+import '@/app/styles/homepage/twoproduct/twoproduct.scss';
 
 type Products = {
   name: string,
@@ -32,41 +32,57 @@ const allowedTypes = [
   'chair',
 ];
 
+const allAllowedTypes = [
+  'lapTop',
+  'perFume',
+  'cooker',
+  'bulb',
+  'umbrella',
+  'chair',
+  'tv',
+  'slipper',
+  'Clock',
+  'WaterBottle',
+  'healthyFood',
+  'phoneCharger',
+];
+
 async function TwoProducts({product}:ItemOne) {
 
   const response = await fetchProduct();
 
+  let products = [];
+
   if(product == null){
-    var smallItems = response.filter((items:Products) => allowedTypes.includes(items.type));
-  }else {
-    var item = response.filter((items:Products) => items.type === product);
+    products = response.filter((items:Products) => allowedTypes.includes(items.type));
+  }else{
+    products = response.filter((items:Products) => items.type === product);
   };
 
-  return product == null ? (
+  return (
 
-    // first two products
-    <div className='home-page-two-product'>
+    <div className={`${product == null ? 'home-page-two-product' : 'last-two-items'}`}>
 
-      {allowedTypes.map((productType:string, index:number) => {
+      {allAllowedTypes.map((productType:string, index:number) => {
 
         // get product group
-        const Product = smallItems.filter((product:Products) => product.type === productType);
+        const product = products.filter((product:Products) => product.type === productType);
 
         // umbrella and chair only medium device display 
         const onlyMediumDevice = (productType === 'umbrella' || productType === 'chair') && 'only-medium-device';
 
-        return (
-          <div key={index} className={`col-6 col-md-4 col-lg-3 container-of-two-product ${onlyMediumDevice}`}>
+        return product.length > 0 && (
+          <div key={index} className={`container-of-two-product col-6 col-md-4 col-lg-3 ${onlyMediumDevice} 
+          ${product[0]?.type}`}>
 
-            {Product.map((Product:Products, index:number) => (
+            {product.map((item:Products, index:number) => (
 
-              <React.Fragment key={Product.id}>
+              <React.Fragment key={item.id}>
 
                 {/* display heading */}
                 { index === 0 && (
-                  <div key={Product.id} className='title-of-two-product'>
-                    {/* only first letter display in upper case */}
-                    <h3>{productType.charAt(0).toUpperCase() + productType.slice(1).toLowerCase()}</h3>
+                  <div key={item.id} className='title-of-two-product'>
+                    <h3>{item.title}</h3>
                   </div>
                 )}
 
@@ -83,23 +99,23 @@ async function TwoProducts({product}:ItemOne) {
                     href={{
                       pathname: "/components/SelectedPage",
                       query: {
-                        name: encodeURIComponent(Product.name),
-                        priceCents: Product.priceCents,
-                        image: encodeURIComponent(Product.image),
-                        rating: Product.rating,
-                        id: Product.id,
-                        type: Product.type,
-                        keywords: Product.keywords,
-                        company: encodeURIComponent(Product.company),
-                        madein: encodeURIComponent(Product.madein),
-                        Feature: encodeURIComponent(Product.Feature),
-                        size: Product.size,
+                        name: encodeURIComponent(item.name),
+                        priceCents: item.priceCents,
+                        image: encodeURIComponent(item.image),
+                        rating: item.rating,
+                        id: item.id,
+                        type: item.type,
+                        keywords: item.keywords,
+                        company: encodeURIComponent(item.company),
+                        madein: encodeURIComponent(item.madein),
+                        Feature: encodeURIComponent(item.Feature),
+                        size: item.size,
                       }
                     }}
                   >
 
-                    <img  src={Product.image} alt={Product.name}/>
-                    <h5>{Product.offer}</h5>
+                    <img  src={item.image} alt={item.name}/>
+                    <h5>{item.offer}</h5>
 
                   </Link>
                   
@@ -109,60 +125,14 @@ async function TwoProducts({product}:ItemOne) {
             ))}
 
           </div>
-        );
+        )
 
       })}
 
     </div>
 
-  ):(
-      
-    //last two items
-    <div className={`col-6 col-md-4 col-lg-3 container-of-two-product  ${item?.[0]?.type || null}`}>
-
-      {item.map((item:Products,index:number) => (
-
-        <React.Fragment key={item.id}>
-
-          {/* display heading */}
-          {index === 0 && (
-            <div className='title-of-two-product'>
-              <h3>{item.title}</h3>
-            </div>
-          )}
-
-          <Link
-            style={{textDecoration:"none"}}
-            href={{
-              pathname: "/components/SelectedPage",
-              query: {
-                name: encodeURIComponent(item.name),
-                priceCents: item.priceCents,
-                image: encodeURIComponent(item.image),
-                rating: item.rating,
-                id: item.id,
-                type: item.type,
-                keywords: item.keywords,
-                company: encodeURIComponent(item.company),
-                madein: encodeURIComponent(item.madein),
-                Feature: encodeURIComponent(item.Feature),
-                size: item.size,
-              }
-            }}
-          >
-
-            <div className={`last-products-display ${index === 0 && 'marginBottom'}`}>
-              <img src={item.image} alt={item.name}/>
-              <h5>{item.offer}</h5>
-            </div>
-
-          </Link>
-
-        </React.Fragment>
-      ))}
-    </div>  
-    
   );
+
 };
 
 export default TwoProducts;

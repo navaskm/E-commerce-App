@@ -23,6 +23,10 @@
     position: absolute;
     transform: translateY(-50px);
   }
+  .navbar .app-logo-link .app-logo {
+    width: 50px;
+    padding-top: 5px;
+  }
 }
 .navbar .searchbar-container {
   width: 40%;
@@ -186,6 +190,13 @@
     right: 100px;
   }
 }
+@media (max-width: 768px) {
+  .navbar .user-button {
+    position: absolute;
+    transform: translateY(-50px);
+    right: 100px;
+  }
+}
 .navbar .cart-logo {
   width: 10%;
   position: relative;
@@ -216,6 +227,7 @@
     position: absolute;
     transform: translateY(-50px);
     right: 50px;
+    margin-top: 8px;
   }
 }
 .navbar .menu-icon {
@@ -244,5 +256,10 @@
   .navbar {
     height: 160px;
     padding-top: 10px !important;
+  }
+}
+@media (min-width: 769px) {
+  .navbar {
+    padding: 10px;
   }
 }/*# sourceMappingURL=navbar.css.map */

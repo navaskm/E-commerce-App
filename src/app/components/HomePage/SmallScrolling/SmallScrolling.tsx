@@ -22,106 +22,61 @@ type Item = {
   item: string;
 }
 
-const response = await fetchScrollingProduct();
-const faceWash = response.filter((faceWash:Products) => faceWash.type === 'face-wash');
-const phone = response.filter((phone:Products) => phone.type === 'phone');
+async function SmallScrolling({item}: Item) {
 
-function SmallScrolling({item}: Item) {
+  const response = await fetchScrollingProduct();
+  const products = response.filter((product:Products) =>  product.type === item);
+
   return (
     <div className={`container-small-scrolling ${item}`}>
 
       <div className='title-of-small-scrolling'>
-        {
-          item === 'faceWash'? (
+        {item === 'face-wash'? (
             <h2>Unveil the Glow Within</h2>
           ):(
             <h2>Luxury in Every Swipe</h2>
-          )
-        }
-        
+        )}
       </div>
 
       <div className='container-of-small-product'>
-        {
-          item === 'faceWash'?(
-            faceWash.map((faceWash:Products) => {
-              return (
-                <Link key={faceWash.id}
-                style={{textDecoration:"none"}}
-                href={{
-                  pathname: "/components/SelectedPage",
-                  query: {
-                    name: encodeURIComponent(faceWash.name),
-                    priceCents: faceWash.priceCents,
-                    image: encodeURIComponent(faceWash.image),
-                    rating: faceWash.rating,
-                    id: faceWash.id,
-                    type: faceWash.type,
-                    keywords: faceWash.keywords,
-                    company: encodeURIComponent(faceWash.company),
-                    madein: encodeURIComponent(faceWash.madein),
-                    Feature: encodeURIComponent(faceWash.Feature),
-                    size: faceWash.size,
-                  }
-                }}>
+        {products.map((product:Products) => (
+          <Link key={product.id}
+            style={{textDecoration:"none"}}
+            href={{
+              pathname: "/components/SelectedPage",
+              query: {
+                name: encodeURIComponent(product.name),
+                priceCents: product.priceCents,
+                image: encodeURIComponent(product.image),
+                rating: product.rating,
+                id: product.id,
+                type: product.type,
+                keywords: product.keywords,
+                company: encodeURIComponent(product.company),
+                madein: encodeURIComponent(product.madein),
+                Feature: encodeURIComponent(product.Feature),
+                size: product.size,
+              }
+            }}
+          >
 
-                 <div className='item-box'>
-                  <img src={faceWash.image} alt={faceWash.name}/>
-                    <div>
-                      <p>{faceWash.name}</p>
-                    </div>
-                    <div>
-                      <h4>{faceWash.offer}</h4>
-                    </div>
-                 </div>
+            <div className='item-box'>
+              <img src={product.image} alt={product.name}/>
+              <div>
+                <p>{product.name}</p>
+              </div>
+              <div>
+                <h4>{product.offer}</h4>
+              </div>
+            </div>
 
-                </Link>
-                
-              )
-            })
-
-          ):(
-
-            phone.map((phone:Products) => {
-              return (
-                <Link key={phone.id}
-                style={{textDecoration:"none"}}
-                href={{
-                  pathname: "/components/SelectedPage",
-                  query: {
-                    name: encodeURIComponent(phone.name),
-                    priceCents: phone.priceCents,
-                    image: encodeURIComponent(phone.image),
-                    rating: phone.rating,
-                    id: phone.id,
-                    type: phone.type,
-                    keywords: phone.keywords,
-                    company: encodeURIComponent(phone.company),
-                    madein: encodeURIComponent(phone.madein),
-                    Feature: encodeURIComponent(phone.Feature),
-                    size: phone.size,
-                  }
-                }}>
-                  <div className='item-box'>
-                    <img src={phone.image} alt={phone.name}/>
-                    <div>
-                      <p>{phone.name}</p>
-                    </div>
-                    <div>
-                      <h4>{phone.offer}</h4>
-                    </div>
-                  </div>
+          </Link>
               
-                </Link>
-              )
-            })
-          )
-          
-        }
+        ))}
       </div>
 
     </div>
-  )
-}
+  );
+};
 
-export default SmallScrolling
+export default SmallScrolling;

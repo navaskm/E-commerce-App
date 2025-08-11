@@ -12,6 +12,12 @@
   width: 200px;
   transform: translate(0px, -40px);
 }
+@media (max-width: 768px) {
+  .top-bar a img {
+    width: 100px;
+    transform: translate(0px, -1px);
+  }
+}
 .top-bar h2 {
   display: flex;
   align-items: center;
@@ -29,14 +35,6 @@
   }
 }
 
-.cart-items-payment-section-container {
-  display: flex;
-}
-@media (max-width: 991px) {
-  .cart-items-payment-section-container {
-    flex-direction: column;
-  }
-}
 .cart-items-payment-section-container .cart-items-container {
   background-color: white;
   display: flex;
@@ -144,6 +142,27 @@
   background-color: white;
   color: rgb(156, 151, 151);
 }
+@media (max-width: 767px) {
+  .cart-items-payment-section-container .cart-items-container .cart-each-items .cart-details-container .cart-details-display div .quantity-plus-mines-button-display p .minus-button,
+  .cart-items-payment-section-container .cart-items-container .cart-each-items .cart-details-container .cart-details-display div .quantity-plus-mines-button-display p .plus-button {
+    font-size: 14px;
+    padding: 0px 4px;
+    font-weight: 500;
+    margin: 2;
+  }
+}
+@media (max-width: 767px) {
+  .cart-items-payment-section-container .cart-items-container .cart-each-items .cart-details-container .cart-details-display div .quantity-plus-mines-button-display p span {
+    margin: 5px;
+    padding: 0px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 3px;
+    padding: 0px 15px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
 .cart-items-payment-section-container .cart-items-container .cart-each-items .cart-details-container .delivery-date-option-container {
   /* Style the custom radio button */
   /* Style for checked state */
@@ -209,7 +228,7 @@
   .cart-items-payment-section-container .payment-container {
     position: fixed;
     top: 0;
-    right: -10;
+    right: 0;
   }
 }
 .cart-items-payment-section-container .payment-container h4 {
@@ -300,6 +319,11 @@
   border: 1px solid rgb(219, 219, 219);
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+.empty-cart-container img {
+  min-width: 0;
+  max-width: 100vw;
+  height: auto;
 }
 .empty-cart-container p {
   color: rgb(158, 158, 158);
