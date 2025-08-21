@@ -3,7 +3,7 @@ import "@/app/styles/homepage/homepagescrolling/homepagescrolling.scss";
 const BagsSports = lazy(() => import("./BagSports/BagSports"));
 import { Items } from "@/types/type";
 
-const HomePageScrolling = async ({products}:Items) => {
+const HomePageScrolling = ({products}:Items) => {
 
   return (
     <div className="homepage-scrolling">

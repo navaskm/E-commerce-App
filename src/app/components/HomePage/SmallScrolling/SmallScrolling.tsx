@@ -2,7 +2,7 @@ import { Items } from '@/types/type';
 import '@/app/styles/homepage/smallScrolling/smallScrolling.scss';
 import Link from 'next/link';
 
-async function SmallScrolling({products}: Items) {
+function SmallScrolling({products}: Items) {
   
   return(
     <div className={`container-small-scrolling ${products?.[0]?.type}`}>
