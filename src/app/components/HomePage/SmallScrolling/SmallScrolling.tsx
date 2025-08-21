@@ -1,37 +1,14 @@
-import { fetchScrollingProduct } from '@/app/DataFetching/productdata';
+import { Items } from '@/types/type';
 import '@/app/styles/homepage/smallScrolling/smallScrolling.scss';
-
 import Link from 'next/link';
 
-type Products = {
-  name: string,
-  image: string,
-  rating: string,
-  priceCents:string,
-  type: string,
-  keywords: string,
-  id: number,
-  offer: string,
-  company: string,
-  madein: string,
-  Feature: string,
-  size:string,
-}
-
-type Item = {
-  item: string;
-}
-
-async function SmallScrolling({item}: Item) {
-
-  const response = await fetchScrollingProduct();
-  const products = response.filter((product:Products) =>  product.type === item);
-
-  return (
-    <div className={`container-small-scrolling ${item}`}>
+async function SmallScrolling({products}: Items) {
+  
+  return(
+    <div className={`container-small-scrolling ${products?.[0]?.type}`}>
 
       <div className='title-of-small-scrolling'>
-        {item === 'face-wash'? (
+        {products?.[0]?.type === 'face-wash'? (
             <h2>Unveil the Glow Within</h2>
           ):(
             <h2>Luxury in Every Swipe</h2>
@@ -39,7 +16,7 @@ async function SmallScrolling({item}: Item) {
       </div>
 
       <div className='container-of-small-product'>
-        {products.map((product:Products) => (
+        {products.map((product) => (
           <Link key={product.id}
             style={{textDecoration:"none"}}
             href={{

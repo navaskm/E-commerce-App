@@ -32,3 +32,4 @@ export const allowedTypes = [
 
 // scrolling product type
 export const scrollingProduct = ['bag', 'sports-item'];
+export const smallScrollingProduct = ['face-wash', 'phone'];

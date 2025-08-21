@@ -29,6 +29,7 @@ const Footer = lazy(()=>import("./components/HomePage/Footer/page"));
 import { Products } from "@/types/type";
 import { allowedTypes } from "@/types/type";
 import { scrollingProduct } from "@/types/type";
+import { smallScrollingProduct } from "@/types/type";
 
 const fourItems: Products[] = response.filter((product: Products) =>
   allowedTypes.includes(product.type)
@@ -49,6 +50,7 @@ export default function Home() {
         <SmallProducts products={fourItems}/>
       </Suspense>
 
+      {/* bags and sports items */}
       {scrollingProduct.map(key => {
         const items = responseOfScrollingProducts.filter((product: Products) => product.type === key);
 
@@ -67,15 +69,18 @@ export default function Home() {
         <TwoProducts />
       </Suspense>
 
-      <Suspense fallback={<ScrollingSkeleton/>}>
-        <SmallScrolling item='face-wash' />
-      </Suspense>
-      <Suspense fallback={<ScrollingSkeleton/>}>
-        <SmallScrolling item='phone'/>
-      </Suspense>
+      {/* face wash and phone items */}
+      {smallScrollingProduct.map(key => {
+        const items = responseOfScrollingProducts.filter((product: Products) => product.type === key);
+
+        return (
+          <Suspense fallback={<ScrollingSkeleton />} key={key}>
+            <SmallScrolling products={items} />
+          </Suspense>
+        )
+      })}
 
       {/* Add more products here */}
-
        <Suspense fallback={<LargeProductSkeleton/>}>
         <LastOneProducts />
       </Suspense> 
