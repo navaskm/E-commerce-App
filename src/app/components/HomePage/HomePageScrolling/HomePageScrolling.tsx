@@ -1,31 +1,9 @@
 import { lazy,Suspense } from "react";
-import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
 import "@/app/styles/homepage/homepagescrolling/homepagescrolling.scss";
 const BagsSports = lazy(() => import("./BagSports/BagSports"));
+import { Items } from "@/types/type";
 
-type Products = {
-  id:string;
-  name: string,
-  image: string,
-  priceCents: string,
-  rating: string,
-  type: string,
-  keywords: string,
-  offer: string,
-  company: string,
-  madein: string,
-  Feature: string,
-  size:string,
-}
-
-type Items ={
-  item: string;
-}
-
-const HomePageScrolling = async ({item}:Items) => {
-
-  const product = await fetchScrollingProduct();
-  const arrayOfProducts = product.filter((product:Products)=>product.type === item);
+const HomePageScrolling = async ({products}:Items) => {
 
   return (
     <div className="homepage-scrolling">
@@ -33,7 +11,7 @@ const HomePageScrolling = async ({item}:Items) => {
       {/* display heading (bags of sport items) */}
       <div className="scrolling-title">
         {
-          item === 'bag'? (
+          products?.[0]?.type === 'bag'? (
             <h1>Your Perfect Bag Awaits</h1>
           ):(
             <h1>Amazing Deals on Sports Gear</h1>
@@ -42,7 +20,7 @@ const HomePageScrolling = async ({item}:Items) => {
       </div>
 
       <Suspense fallback={<p>loading.....</p>}>
-        <BagsSports product={arrayOfProducts} order={item}/> 
+        <BagsSports products={products}/> 
       </Suspense>
 
     </div> 

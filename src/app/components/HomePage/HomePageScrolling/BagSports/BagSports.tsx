@@ -1,32 +1,13 @@
 "use client";
 import Link from "next/link";
+import { Items } from "@/types/type";
 
-type Products = {
-  id:string;
-  name: string,
-  image: string,
-  priceCents: string,
-  rating: string,
-  type: string,
-  keywords: string,
-  offer: string,
-  company: string,
-  madein: string,
-  Feature: string,
-  size:string,
-}
-
-type BagsSports = {
-  product : Products[],
-  order: string,
-}
-
-function BagsSports({product,order}:BagsSports) {
+function BagsSports({products}:Items) {
 
   // left and right side button handle click
   const scrolling = (direction:'left' | 'right')=>{
 
-    const scrollContainer = document.querySelector(`.scrolling-products-${order}`);
+    const scrollContainer = document.querySelector(`.scrolling-products-${products?.[0]?.type}`);
     if(!scrollContainer) return null;
 
     const scrollOfSet = window.innerWidth-100;
@@ -40,8 +21,8 @@ function BagsSports({product,order}:BagsSports) {
 
       <button className="scroll-button left" onClick={()=>scrolling('left')}>←</button>
 
-      <div className={`scrolling-products-${order}`}>
-        {product.map((item:Products) => (
+      <div className={`scrolling-products-${products?.[0]?.type}`}>
+        {products.map((item) => (
           <div  key={item.id}>
 
             <Link 

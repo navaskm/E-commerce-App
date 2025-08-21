@@ -1,6 +1,12 @@
 import { Suspense, lazy } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 
+import { fetchProduct } from "@/app/DataFetching/productdata";
+import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
+
+const response = await fetchProduct();
+const responseOfScrollingProducts = await fetchScrollingProduct();
+
 //Loading imports
 import NavbarSkeleton from "./components/HomePage/navbar/Skeleton/NavbarSkeleton";
 import MainOfferSkeleton from "./components/HomePage/mainofferce/skeleton/mainofferskeleton";
@@ -8,6 +14,7 @@ import SmallProductsSkeleton from "./components/HomePage/SmallProducts/smallprod
 import ScrollingSkeleton from "./components/HomePage/HomePageScrolling/Skeleton/ScrollingSkeleton";
 import LargeProductSkeleton from "./components/HomePage/LargeProducts/Skeleton/LargeProductSkeleton";
 
+// component imports
 const NavBar = lazy(() => import("./components/HomePage/navbar/NavBar"));
 const MainOffers = lazy(() => import ("./components/HomePage/mainofferce/mainoffers"));
 const SmallProducts = lazy(() => import("./components/HomePage/SmallProducts/SmallProducts"));
@@ -17,6 +24,15 @@ const TwoProducts = lazy(() => import("./components/HomePage/TwoProducts/TwoProd
 const SmallScrolling = lazy(() => import("./components/HomePage/SmallScrolling/SmallScrolling"));
 const LastOneProducts = lazy (() => import("./components/HomePage/LastOneProducts/LastOneProducts"));
 const Footer = lazy(()=>import("./components/HomePage/Footer/page"));
+
+// type imports
+import { Products } from "@/types/type";
+import { allowedTypes } from "@/types/type";
+import { scrollingProduct } from "@/types/type";
+
+const fourItems: Products[] = response.filter((product: Products) =>
+  allowedTypes.includes(product.type)
+);
 
 export default function Home() {
   return (
@@ -30,15 +46,18 @@ export default function Home() {
       </Suspense>
 
       <Suspense fallback={<SmallProductsSkeleton/>}>
-        <SmallProducts />
+        <SmallProducts products={fourItems}/>
       </Suspense>
-        
-      <Suspense fallback={<ScrollingSkeleton/>}>
-        <HomePageScrolling item='bag'/>
-      </Suspense>
-      <Suspense fallback={<ScrollingSkeleton/>}>
-        <HomePageScrolling item='sports-item'/>
-      </Suspense>
+
+      {scrollingProduct.map(key => {
+        const items = responseOfScrollingProducts.filter((product: Products) => product.type === key);
+
+        return (
+          <Suspense fallback={<ScrollingSkeleton />} key={key}>
+            <HomePageScrolling products={items} />
+          </Suspense>
+        )
+      })}
 
       <Suspense fallback={<LargeProductSkeleton/>}>
         <LargeProduct />
@@ -66,4 +85,4 @@ export default function Home() {
       </Suspense> 
     </SkeletonTheme>
   );
-}
+};

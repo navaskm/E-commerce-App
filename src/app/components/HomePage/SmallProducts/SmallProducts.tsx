@@ -1,64 +1,31 @@
 import Link from "next/link";
-import '@/app/homepagesmall/smallproducts.scss'
-import { fetchProduct } from "@/app/DataFetching/productdata";
-const response = await fetchProduct();
+import { Items } from "@/types/type";
+import { allowedTypes } from "@/types/type";
+import '@/app/homepagesmall/smallproducts.scss';
 
-type Products = {
-  name: string,
-  title:string,
-  image: string,
-  rating: string,
-  priceCents:string,
-  type: string,
-  keywords: string,
-  id: number,
-  company: string,
-  madein: string,
-  Feature: string,
-  size:string,
-}
-
-const allowedTypes = [
-  'watch',
-  'shoes',
-  'mens-clothes',
-  'women-clothes',
-  'Jewelry',
-  'sound-hub',
-  'sunglass',
-  'toys',
-];
-
-const fourItems: Products[] = response.filter((product: Products) =>
-  allowedTypes.includes(product.type)
-);
-
-function SmallProducts() {
+function SmallProducts({products}:Items) {
 
   return (
     <div className="container-of-all-products row">
       {allowedTypes.map((type) => {
 
         // grouped item get (4 items)
-        const oneProductList = fourItems.filter((item) => item.type === type);
-
-        // get first product in the 4 grouped items
-        const product = oneProductList[0];
+        const oneProductList = products.filter((item) => item.type === type);
 
         // toys and sunglass items only display in large device
-        const largeDeviceDisplay = (product.type === 'toys' || product.type === 'sunglass') && 'only-large-device';
+        const largeDeviceDisplay = (oneProductList[0].type === 'toys' || oneProductList[0].type === 'sunglass') && 'only-large-device';
 
         return oneProductList && (
           <div
             className={`container-of-one-product col-12 col-md-4 col-xl-3 ${largeDeviceDisplay}`}
-            key={product.id}
+            key={type}
           >
             <div className="title">
-              <h3>{product.title}</h3>
+              <h3>{oneProductList[0].title}</h3>
             </div>
 
             <div className="product-body">
-              {oneProductList.map((item:Products) => (
+              {oneProductList.map((item) => (
                 <div key={item.id} className="product-details-display">
 
                   {/* this div click time pass value to selected page */}
