@@ -4,7 +4,7 @@ import { Items } from '@/types/type';
 import { allAllowedAllTwoProductsTypes } from '@/types/type';
 import '@/app/styles/homepage/twoproduct/twoproduct.scss';
 
-async function TwoProducts({products}:Items) {
+function TwoProducts({products}:Items) {
 
   return (
 

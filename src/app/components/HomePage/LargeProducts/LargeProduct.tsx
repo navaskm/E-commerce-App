@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Items } from '@/types/type';
 import '@/app/styles/homepage/largeproduct/largeproduct.scss';
 
-  async function LargeProduct({products}:Items) {
+function LargeProduct({products}:Items) {
 
   return (
     <div className={`${products.length > 1 ? 'homepage-dynamic-large' : 'last-large-items'}`}>
