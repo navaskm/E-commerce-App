@@ -34,10 +34,24 @@ import { allowedLastOneProductTypes } from "@/types/type";
 import { allowedFirstTwoTypes } from "@/types/type";
 import { smallScrollingProduct } from "@/types/type";
 
-const fourItems = response.filter((product: Products) => allowedSmallProductTypes.includes(product.type));
-const firstLargeProducts = response.filter((item:Products)=> allowedFirstLargeProductTypes.includes(item.type));
-const lastOneProducts = response.filter((item:Products)=> allowedLastOneProductTypes.includes(item.type));
-const firstTwoProducts = response.filter((items:Products) => allowedFirstTwoTypes.includes(items.type));
+const fourItems : Products[] = [];
+const firstLargeProducts : Products[] = [];
+const lastOneProducts : Products[] = [];
+const firstTwoProducts : Products[] = [];
+
+response.forEach((item: Products) => {
+
+  if(allowedSmallProductTypes.includes(item.type)){
+    fourItems.push(item);
+  }else if(allowedFirstLargeProductTypes.includes(item.type)){
+    firstLargeProducts.push(item);
+  }else if(allowedLastOneProductTypes.includes(item.type)){
+    lastOneProducts.push(item);
+  }else if(allowedFirstTwoTypes.includes(item.type)){
+    firstTwoProducts.push(item);
+  };
+
+});
 
 export default function Home() {
   return (
