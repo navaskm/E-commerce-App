@@ -1,4 +1,4 @@
-// product type
+// all product types
 export type Products = {
   name: string,
   title:string,
@@ -32,4 +32,23 @@ export const allowedTypes = [
 
 // scrolling product type
 export const scrollingProduct = ['bag', 'sports-item'];
+
+// small scrolling type
 export const smallScrollingProduct = ['face-wash', 'phone'];
+
+// large first product type
+export const allowedFirstLargeProductTypes = [
+  'refrigerator',
+  'washing-machine',
+  'bed',
+  'table',
+  'gas-cooker',
+  'ac'
+]
+
+// large first product type
+export const allowedLastLargeProductTypes = [
+  'waterHouse',
+  'curtain',
+  'waterTank'
+]

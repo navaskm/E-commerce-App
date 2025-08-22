@@ -30,10 +30,12 @@ import { Products } from "@/types/type";
 import { allowedTypes } from "@/types/type";
 import { scrollingProduct } from "@/types/type";
 import { smallScrollingProduct } from "@/types/type";
+import { allowedFirstLargeProductTypes } from "@/types/type";
+import { allowedLastLargeProductTypes } from "@/types/type";
 
-const fourItems: Products[] = response.filter((product: Products) =>
-  allowedTypes.includes(product.type)
-);
+const fourItems = response.filter((product: Products) => allowedTypes.includes(product.type));
+const firstLargeProducts = response.filter((item:Products)=> allowedFirstLargeProductTypes.includes(item.type));
+const lastLargeProducts = response.filter((item:Products)=> allowedLastLargeProductTypes.includes(item.type));
 
 export default function Home() {
   return (
@@ -62,7 +64,7 @@ export default function Home() {
       })}
 
       <Suspense fallback={<LargeProductSkeleton/>}>
-        <LargeProduct />
+        <LargeProduct products={firstLargeProducts}/>
       </Suspense>
 
       <Suspense fallback={<LargeProductSkeleton/>}>
@@ -82,7 +84,7 @@ export default function Home() {
 
       {/* Add more products here */}
        <Suspense fallback={<LargeProductSkeleton/>}>
-        <LastOneProducts />
+        <LastOneProducts products={lastLargeProducts}/>
       </Suspense> 
 
       <Suspense fallback={<NavbarSkeleton/>}>

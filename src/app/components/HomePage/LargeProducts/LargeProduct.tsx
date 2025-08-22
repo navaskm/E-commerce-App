@@ -1,52 +1,13 @@
-import React from 'react';
 import Link from 'next/link';
-import { fetchProduct } from "@/app/DataFetching/productdata";
+import { Items } from '@/types/type';
 import '@/app/styles/homepage/largeproduct/largeproduct.scss';
 
-type Products = {
-  name: string,
-  image: string,
-  rating: string,
-  priceCents:string,
-  type: string,
-  title: string,
-  keywords: string,
-  id: number,
-  company: string,
-  madein: string,
-  Feature: string,
-  size:string,
-}
-
-type ItemOne = {
-  product?: string,
-}
-
-const allowedType = [
-  'refrigerator',
-  'washing-machine',
-  'bed',
-  'table',
-  'gas-cooker',
-  'ac'
-]
-
-async function LargeProduct({product}:ItemOne) {
-
-  const response = await fetchProduct();
-
-  let products = [];
-  
-  if(product == null){
-    products = response.filter((item:Products)=> allowedType.includes(item.type));
-  }else{
-    products = response.filter((item:Products) => item.type === product);
-  };
+  async function LargeProduct({products}:Items) {
 
   return (
-    <div className={`${product == null ? 'homepage-dynamic-large' : 'last-large-items'}`}>
+    <div className={`${products.length > 1 ? 'homepage-dynamic-large' : 'last-large-items'}`}>
       
-      {products.map((item:Products) => {
+      {products.map((item) => {
 
         const mediumDeviceDisplay = (item.type === 'table' || item.type === 'bed') && 'medium-device-display';
 
