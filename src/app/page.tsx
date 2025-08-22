@@ -27,15 +27,17 @@ const Footer = lazy(()=>import("./components/HomePage/Footer/page"));
 
 // type imports
 import { Products } from "@/types/type";
-import { allowedTypes } from "@/types/type";
+import { allowedSmallProductTypes } from "@/types/type";
 import { scrollingProduct } from "@/types/type";
-import { smallScrollingProduct } from "@/types/type";
 import { allowedFirstLargeProductTypes } from "@/types/type";
-import { allowedLastLargeProductTypes } from "@/types/type";
+import { allowedLastOneProductTypes } from "@/types/type";
+import { allowedFirstTwoTypes } from "@/types/type";
+import { smallScrollingProduct } from "@/types/type";
 
-const fourItems = response.filter((product: Products) => allowedTypes.includes(product.type));
+const fourItems = response.filter((product: Products) => allowedSmallProductTypes.includes(product.type));
 const firstLargeProducts = response.filter((item:Products)=> allowedFirstLargeProductTypes.includes(item.type));
-const lastLargeProducts = response.filter((item:Products)=> allowedLastLargeProductTypes.includes(item.type));
+const lastOneProducts = response.filter((item:Products)=> allowedLastOneProductTypes.includes(item.type));
+const firstTwoProducts = response.filter((items:Products) => allowedFirstTwoTypes.includes(items.type));
 
 export default function Home() {
   return (
@@ -68,7 +70,7 @@ export default function Home() {
       </Suspense>
 
       <Suspense fallback={<LargeProductSkeleton/>}>
-        <TwoProducts />
+        <TwoProducts products={firstTwoProducts}/>
       </Suspense>
 
       {/* face wash and phone items */}
@@ -84,7 +86,7 @@ export default function Home() {
 
       {/* Add more products here */}
        <Suspense fallback={<LargeProductSkeleton/>}>
-        <LastOneProducts products={lastLargeProducts}/>
+        <LastOneProducts products={lastOneProducts}/>
       </Suspense> 
 
       <Suspense fallback={<NavbarSkeleton/>}>

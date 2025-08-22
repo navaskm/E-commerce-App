@@ -19,7 +19,7 @@ export type Items = {
 };
 
 // small products type
-export const allowedTypes = [
+export const allowedSmallProductTypes = [
   'watch',
   'shoes',
   'mens-clothes',
@@ -33,9 +33,6 @@ export const allowedTypes = [
 // scrolling product type
 export const scrollingProduct = ['bag', 'sports-item'];
 
-// small scrolling type
-export const smallScrollingProduct = ['face-wash', 'phone'];
-
 // large first product type
 export const allowedFirstLargeProductTypes = [
   'refrigerator',
@@ -47,8 +44,41 @@ export const allowedFirstLargeProductTypes = [
 ]
 
 // large first product type
-export const allowedLastLargeProductTypes = [
+export const allowedLastOneProductTypes = [
   'waterHouse',
   'curtain',
-  'waterTank'
+  'waterTank',
+  'tv',
+  'slipper',
+  'Clock',
+  'WaterBottle',
+  'healthyFood',
+  'phoneCharger',
 ]
+
+export const allowedFirstTwoTypes = [
+  'lapTop',
+  'perFume',
+  'cooker',
+  'bulb',
+  'umbrella',
+  'chair',
+];
+
+export const allAllowedAllTwoProductsTypes = [
+  'lapTop',
+  'perFume',
+  'cooker',
+  'bulb',
+  'umbrella',
+  'chair',
+  'tv',
+  'slipper',
+  'Clock',
+  'WaterBottle',
+  'healthyFood',
+  'phoneCharger',
+];
+
+// small scrolling type
+export const smallScrollingProduct = ['face-wash', 'phone'];

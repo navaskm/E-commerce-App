@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Items } from "@/types/type";
-import { allowedTypes } from "@/types/type";
+import { allowedSmallProductTypes } from "@/types/type";
 import '@/app/homepagesmall/smallproducts.scss';
 
 function SmallProducts({products}:Items) {
 
   return (
     <div className="container-of-all-products row">
-      {allowedTypes.map((type) => {
+      {allowedSmallProductTypes.map((type) => {
 
         // grouped item get (4 items)
         const oneProductList = products.filter((item) => item.type === type);

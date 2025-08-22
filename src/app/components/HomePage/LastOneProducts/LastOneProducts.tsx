@@ -9,17 +9,24 @@ function LastOneProducts({products}:Items) {
   const curtain = products.filter((item)=> item.type === "curtain");
   const waterTank = products.filter((item)=> item.type === "waterTank");
 
+  const tv = products.filter((item)=> item.type === "tv");
+  const slipper = products.filter((item)=> item.type === "slipper");
+  const clock = products.filter((item)=> item.type === "Clock");
+  const waterBottle = products.filter((item)=> item.type === "WaterBottle");
+  const healthyFood = products.filter((item)=> item.type === "healthyFood");
+  const phoneCharger = products.filter((item)=> item.type === "phoneCharger");
+
   return (
     <>
       <Suspense fallback={<p>Loading two products</p>}>
-        <TwoProducts product='tv'/>
+        <TwoProducts products={tv}/>
       </Suspense>
       <Suspense fallback={<p>Loading largeProducts</p>}>
         <LargeProduct products={waterHouse}/>
       </Suspense>
 
       <Suspense fallback={<p>Loading two products</p>}>
-        <TwoProducts product='slipper'/>
+        <TwoProducts products={slipper}/>
       </Suspense>
       <Suspense fallback={<p>Loading largeProducts</p>}>
         <LargeProduct products={curtain} />
@@ -29,18 +36,18 @@ function LastOneProducts({products}:Items) {
         <LargeProduct products={waterTank} />
       </Suspense>
       <Suspense fallback={<p>Loading two products</p>}>
-        <TwoProducts product='Clock'/>
+        <TwoProducts products={clock}/>
       </Suspense>
 
       <Suspense fallback={<p>Loading two products</p>}>
-        <TwoProducts product='WaterBottle'/>
+        <TwoProducts products={waterBottle}/>
       </Suspense>
       <Suspense fallback={<p>Loading two products</p>}>
-        <TwoProducts product='healthyFood'/>
+        <TwoProducts products={healthyFood}/>
       </Suspense>
  
       <Suspense fallback={<p>Loading two products</p>}>
-        <TwoProducts product='phoneCharger'/>
+        <TwoProducts products={phoneCharger}/>
       </Suspense>
     </>
   )
