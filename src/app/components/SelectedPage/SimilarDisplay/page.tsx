@@ -4,28 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
+import SmallProductsSkeleton from "../../HomePage/SmallProducts/smallproductsskeleton";
 import { fetchProduct, fetchScrollingProduct } from "@/app/DataFetching/productdata";
 import similarProducts from '@/app/API/similar-product.json';
-import BackToTop from "./BackToTop/page";
-
-type Products = {
-  name: string;
-  title: string;
-  image: string;
-  rating: string;
-  priceCents: string;
-  type: string;
-  keywords: string;
-  id: number;
-  company: string;
-  madein: string;
-  Feature: string;
-  size?: string;
-  offer?: string;
-};
+import { Products } from "@/types/type";
 
 const SimilarProducts = () => {
 
+  const [loading, setLoading] = useState<boolean>(true);
   const [finalProduct, setFinalProduct] = useState<Products[]>([]);
 
   const searchParams = useSearchParams();
@@ -58,11 +44,19 @@ const SimilarProducts = () => {
 
       } catch (error) {
         console.error("Failed to fetch products:", error);
+      } finally {
+        setLoading(false)
       }
     };
 
     fetchData();
   }, [searchParams]);
+
+
+  // loading spinner;
+  if(loading){
+    return <SmallProductsSkeleton/>
+  }
 
   return (
     <div className="container-of-similar-product">

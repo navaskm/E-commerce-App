@@ -32,11 +32,6 @@ const SelectItemPage = () => {
     } else {
       document.title = "Product Details";
     }
-  
-    // Optional: Reset the title when unmounting
-    return () => {
-      document.title = "E-commerce site";
-    };
   }, [searchParams]);
 
   if (offerProductDisplay){
