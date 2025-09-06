@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { MdRemoveShoppingCart } from "react-icons/md";
+import { FaRupeeSign } from "react-icons/fa";
 
 import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
 import { cartItemHydrate,addItem,removeItemQuantity,removeItem } from "@/app/lib/store/feature/items/itemsslice";
@@ -183,7 +184,7 @@ const CartItems = () => {
                 <div>
                   <h5>{decodeURIComponent(item.name)}</h5>
                   <b className="price-display">
-                    Price: <span>${item.price}</span>
+                    Price: <span><FaRupeeSign style={{ fontSize: "0.9rem" }} className="align-middle"/>{item.price}</span>
                   </b>
                   {
                     item.selectedSize && <p>
