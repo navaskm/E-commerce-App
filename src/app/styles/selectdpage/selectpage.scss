@@ -315,19 +315,11 @@
 
 }
 
-
-
-
-
-
-// similar product styling
-.container-of-similar-product{
-  h3{
-    color: rgb(99, 97, 97);
-    margin-left: 3%;
-    margin-top: 5px;
-    font-family: "Barlow Condensed", serif;
-    font-style: normal;
+// similar display style
+.container-of-similar-product {
+  .offer-title {
+    color: #dc3545;
+    font-weight: 600;
   }
 
   .top-mooving{
@@ -349,100 +341,42 @@
     }
   }
 
-  .container-of-each-similar-product{
-    display: flex;
-    flex-wrap: wrap;
+  .each-similar-product {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-      .each-similar-product{
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgb(165, 164, 164);
-        margin: 5px 10px;
-        border-radius: 5px;
-        background-color: #ffffff;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    img {
+      height: 180px;
+      object-fit: contain;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 10px !important;
+    }
+
+    .card-body {
+      h6 {
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin-bottom: 5px;
+        white-space: nowrap;
         overflow: hidden;
-  
-        // image styles
-        img{
-          width: 97%;
-          aspect-ratio: 1/1;
-          object-fit: cover;
-          margin: 2px;
-          border-radius: 5px;
-        }
-  
-        // name styles
-        h5{
-          color: gray;
-          margin-left: 10px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          width: 150px;
-          display: inline-block;
-          font-family: 'Times New Roman', Times, serif;
-        }
-  
-        // price styles
-        b{
-          span{
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-          }
-          margin-left: 10px;
-          font-weight: 700;
-          font-size: 20px;
-          line-height: 16px;
-          font-family: Arial, Helvetica, sans-serif;
-          color: rgb(56, 56, 56);
-        }
-  
-        // rating styles
-        p{
-          background-color: rgb(209, 209, 209);
-          color: rgb(0, 97, 0);
-          font-size: 15px;
-          font-weight: 600;
-          padding: 0px 10px;
-          border-radius: 5px;
-          width: fit-content;
-          margin-top: 10px;
-          margin-left: 10px;
-          font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        &:hover {
-          box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-          transform: translateY(-5px) scale(1.03);
-          transition: all 0.3s ease;
-          border-color: rgba(0, 97, 0, 0.5);
-        }
-
-        @media (max-width: 768px) {
-
-          h5 {
-          margin-left: 6px;
-          width: 100px;
-          font-size: medium;
-          }
-
-          b{
-            margin-left: 6px;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 13px;
-            color: rgb(56, 56, 56);
-          }
-
-          p{
-            font-size: 13px;
-            font-weight: 400;
-            padding: 0px 7px;
-            margin-top: 8px;
-            margin-left: 6px;
-          }
-
-        }        
-
+        text-overflow: ellipsis;
       }
+
+      b {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.85rem;
+        margin-top: 3px;
+      }
+    }
   }
-}
+};

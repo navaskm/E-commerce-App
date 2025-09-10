@@ -59,55 +59,75 @@ const SimilarProducts = () => {
   }
 
   return (
-    <div className="container-of-similar-product">
+    <div className="container-of-similar-product container py-4">
       {offer ? (
-        <h3 className="offer-title">Best offer for you</h3>
+        <h3 className="offer-title mb-3">Best offer for you</h3>
       ) : (
-        <h3>Similar Products</h3>
+        <h3 className="mb-3">Similar Products</h3>
       )}
 
-      { !offer && <p onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
-          className="top-mooving"
-        >Back to top</p>
-      }
+      {!offer && (
+        <p
+          onClick={() =>
+            window.scrollTo({ top: 0, behavior: "smooth" })
+          }
+          className="top-mooving text-primary fw-semibold mb-4"
+          role="button"
+        >
+          Back to top
+        </p>
+      )}
 
-      <div className="container-of-each-similar-product">
+      <div className="container-of-all-similar-products row g-3">
         {/* Render final products */}
         {finalProduct?.map((product) => (
-          <Link
+          <div
             key={product.id}
-            style={{ textDecoration: "none" }}
-            className="col-4 col-sm-5 col-md-3 col-lg-2 each-similar-product"
-            href={{
-              pathname: "/components/SelectedPage",
-              query: {
-                name: encodeURIComponent(product.name),
-                priceCents: product.priceCents,
-                image: encodeURIComponent(product.image),
-                rating: product.rating,
-                type: product.type,
-                id: product.id,
-                keywords: product.keywords,
-                company: encodeURIComponent(product.company),
-                madein: encodeURIComponent(product.madein),
-                Feature: encodeURIComponent(product.Feature),
-                size: product.size,
-              },
-            }}
+            className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3"
           >
-            <img src={product.image} alt={product.name} />
-            <h5>{product.name}</h5>
-            <b>
-              <span>₹</span>
-              {product.priceCents}
-            </b>
-            <p>{product.rating}&#9733;</p>
-          </Link>
+            <Link
+              style={{ textDecoration: "none" }}
+              className="each-similar-product card h-100 shadow-sm border-0"
+              href={{
+                pathname: "/components/SelectedPage",
+                query: {
+                  name: encodeURIComponent(product.name),
+                  priceCents: product.priceCents,
+                  image: encodeURIComponent(product.image),
+                  rating: product.rating,
+                  type: product.type,
+                  id: product.id,
+                  keywords: product.keywords,
+                  company: encodeURIComponent(product.company),
+                  madein: encodeURIComponent(product.madein),
+                  Feature: encodeURIComponent(product.Feature),
+                  size: product.size,
+                },
+              }}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="card-img-top img-fluid"
+              />
+              <div className="card-body text-center p-2">
+                <h6 className="card-title text-dark">{product.name}</h6>
+                <b className="d-block text-success">
+                  ₹{product.priceCents}
+                </b>
+                <p className="text-warning small mb-0">
+                  {product.rating}&#9733;
+                </p>
+              </div>
+            </Link>
+          </div>
         ))}
       </div>
     </div>
   );
+
 };
+
 
 export default SimilarProducts;
 
