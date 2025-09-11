@@ -68,9 +68,6 @@ const AddToCartBtn = ({name,image,price,id,size,selectedSize}:Product) => {
 
   return (
     <>
-      {
-        isAdded&&<p>Added to Cart</p>
-      }
       <button 
       onClick={AddToCart}
       className={`add-cart-button ${imageFix}`}
@@ -80,6 +77,7 @@ const AddToCartBtn = ({name,image,price,id,size,selectedSize}:Product) => {
         </span>
         Add to Cart
       </button>
+      {isAdded && <p>Added to Cart</p>}
     </>
   )
 }
