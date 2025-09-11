@@ -12,7 +12,7 @@ const ImageFeature = () => {
   const Feature = searchParams.get('Feature');
 
   return (
-    <div className="feature-display  col-12 col-md-6">
+    <div className="feature-display col-12 col-md-6">
 
       <div className="product-basic">
         <h2>{decodeURIComponent(name)}</h2>
@@ -41,21 +41,21 @@ const ImageFeature = () => {
         <div>
           <p>Good</p>
           <b>
-            <span style={{width: "65%", backgroundColor:"#6AFF6A"}}></span>
+            <span style={{width: "65%"}}></span>
           </b>
         </div>
 
         <div>
           <p>Average</p>
           <b>
-            <span style={{width: "50%",backgroundColor:"#FCFC7F"}}></span>
+            <span style={{width: "50%"}}></span>
           </b>
         </div>
 
         <div>
           <p>Poor</p>
           <b>
-            <span style={{width: "20%",backgroundColor:"#FA3C3AA9"}}></span>
+            <span style={{width: "20%"}}></span>
           </b>
         </div>
 
@@ -65,4 +65,4 @@ const ImageFeature = () => {
   )
 }
 
-export default ImageFeature
+export default ImageFeature;
