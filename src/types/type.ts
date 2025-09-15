@@ -18,6 +18,10 @@ export type Items = {
   products: Products[];
 };
 
+export type Menu = {
+  open? : boolean,
+};
+
 // small products type
 export const allowedSmallProductTypes = [
   'watch',

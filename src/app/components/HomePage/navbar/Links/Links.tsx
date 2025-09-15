@@ -1,8 +1,6 @@
 import Link from "next/link";
+import { Menu } from "@/types/type";
 
-type Menu = {
-  open? : boolean,
-}
 function Links({open}:Menu) {
   return(
     <ul className={`nav-links ${open? 'active':''}`}>
