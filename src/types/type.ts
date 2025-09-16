@@ -22,6 +22,12 @@ export type Menu = {
   open? : boolean,
 };
 
+// search bar component types
+export type SearchBarProps = {
+  homeProducts: Products[];
+  scrollingProducts: Products[];
+}
+
 // small products type
 export const allowedSmallProductTypes = [
   'watch',

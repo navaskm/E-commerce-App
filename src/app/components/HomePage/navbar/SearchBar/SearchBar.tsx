@@ -5,40 +5,22 @@ import React, { useState,useEffect } from "react";
 import Link from "next/link";
 
 import similarProducts from '@/app/API/similar-product.json';
-
-type Search = {
-  id: number | string,
-  name: string,
-  image: string,
-  size?: string[],
-  priceCents: string,
-  rating: string,
-  madein: string,
-  Feature: string,
-  type: string,
-  company: string,
-  keyWords: string,
-}
-
-interface SearchBarProps {
-  homeProducts: Search[];
-  scrollingProducts: Search[];
-}
+import { Products, SearchBarProps } from "@/types/type";
 
 const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) => {
 
-  const [products, setProducts] = useState<Search[]>([]);
+  const [products, setProducts] = useState<Products[]>([]);
   const [searchData, setSearchData] = useState<string>('');
 
   useEffect(()=> {
     setProducts([
       ...(homeProducts),
       ...(scrollingProducts),
-      ...(similarProducts as unknown as Search[])
+      ...(similarProducts as unknown as Products[])
     ]);
    },[homeProducts, scrollingProducts])
 
-  const productName = products.filter((product:Search)=>
+  const productName = products.filter((product:Products)=>
     product.name.toLocaleLowerCase().includes(searchData.toLocaleLowerCase())
   );
 
