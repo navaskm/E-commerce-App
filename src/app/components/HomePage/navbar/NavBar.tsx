@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense,lazy,useEffect,useState } from "react";
-import { fetchProduct,fetchScrollingProduct } from "@/app/DataFetching/productdata";
+import { fetchProduct, fetchScrollingProduct } from "@/data/productdata";
 
 // loading imports
 import AppLogSkeleton from "./AppLogo/AppLogSkeleton";
