@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import SmallProductsSkeleton from "../../HomePage/SmallProducts/smallproductsskeleton";
 import { fetchProduct, fetchScrollingProduct } from "@/app/DataFetching/productdata";
-import similarProducts from '@/app/API/similar-product.json';
+import similarProducts from '../../../../api/similar-product.json';
 import { Products } from "@/types/type";
 
 const SimilarProducts = () => {
