@@ -1,8 +1,7 @@
 import { Suspense, lazy } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 
-import { fetchProduct } from "@/app/DataFetching/productdata";
-import { fetchScrollingProduct } from "@/app/DataFetching/productdata";
+import { fetchProduct,fetchScrollingProduct } from "@/data/productdata";
 
 const response = await fetchProduct();
 const responseOfScrollingProducts = await fetchScrollingProduct();
