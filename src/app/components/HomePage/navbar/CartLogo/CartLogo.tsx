@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
-import { hydrate } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { useAppDispatch,useAppSelector } from "@/lib/store/hooks/hooks";
+import { hydrate } from "@/lib/store/feature/itemquantity/itemquantityslice";
 
 const CartLogo = () => {
 

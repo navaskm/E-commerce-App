@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { FaRupeeSign } from "react-icons/fa";
 
-import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
-import { cartItemHydrate,addItem,removeItemQuantity,removeItem } from "@/app/lib/store/feature/items/itemsslice";
-import { addDeliveryDate,removeDeliveryDate } from "@/app/lib/store/feature/deliverydate/deliverydate";
-import { addToCart,removeFromCart,removeFromCartOfQuantityBase } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
+import { cartItemHydrate, addItem, removeItemQuantity, removeItem } from "@/lib/store/feature/items/itemsslice";
+import { addDeliveryDate, removeDeliveryDate } from "@/lib/store/feature/deliverydate/deliverydate";
+import { addToCart, removeFromCart, removeFromCartOfQuantityBase } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "./EmptyCart/page";
 
 type Products = {

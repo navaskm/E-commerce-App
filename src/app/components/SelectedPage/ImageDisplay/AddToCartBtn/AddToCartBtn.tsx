@@ -3,9 +3,9 @@
 import { TiShoppingCart } from "react-icons/ti";
 import { useState } from "react";
 
-import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
-import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
-import { addItem } from "@/app/lib/store/feature/items/itemsslice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
+import { addToCart } from "@/lib/store/feature/itemquantity/itemquantityslice";
+import { addItem } from "@/lib/store/feature/items/itemsslice";
 
 type Product = {
   name:string|null,

@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
 
-import { useAppDispatch, useAppSelector } from "@/app/lib/store/hooks/hooks";
-import { userOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
-import { removeAllItem } from "@/app/lib/store/feature/items/itemsslice";
-import { removeAllQuantity } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
-import { hydrate } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
+import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
+import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
+import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
+import { hydrate } from "@/lib/store/feature/itemquantity/itemquantityslice";
 
 type Products = {
   id: string;

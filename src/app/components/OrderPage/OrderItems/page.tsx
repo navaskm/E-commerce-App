@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 
-import { useAppDispatch,useAppSelector } from "@/app/lib/store/hooks/hooks";
-import { hydrateOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
+import { hydrateOrder } from "@/lib/store/feature/deliverydate/deliverydate";
 
-import { addToCart } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
-import { addItem } from "@/app/lib/store/feature/items/itemsslice";
-import { userOrder } from "@/app/lib/store/feature/deliverydate/deliverydate";
-import { removeAllItem } from "@/app/lib/store/feature/items/itemsslice";
-import { removeAllQuantity } from "@/app/lib/store/feature/itemquantity/itemquantityslice";
+import { addToCart } from "@/lib/store/feature/itemquantity/itemquantityslice";
+import { addItem } from "@/lib/store/feature/items/itemsslice";
+import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
+import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
+import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/page";
 
 type OrderItems = {

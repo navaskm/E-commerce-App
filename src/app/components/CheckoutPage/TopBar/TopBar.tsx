@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link"
-import { useAppSelector } from "@/app/lib/store/hooks/hooks";
+import Link from "next/link";
+import { useAppSelector } from "@/lib/store/hooks/hooks";
 
 type QuantityType = {
   cart: {
