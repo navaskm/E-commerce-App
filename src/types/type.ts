@@ -92,3 +92,24 @@ export const allAllowedAllTwoProductsTypes = [
 
 // small scrolling type
 export const smallScrollingProduct = ['face-wash', 'phone'];
+
+// AddToCartBtn File props types
+export type AddToCartBtnFileProps = {
+  name:string|null,
+  image: string,
+  price: string|null,
+  id: string|null,
+  size: string[],
+  selectedSize: string,
+};
+
+// AddToCartBtn File Products types
+export type AddToCartBtnFileProducts = {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  size: string;
+  selectedSize: string;
+};

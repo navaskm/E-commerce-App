@@ -6,27 +6,9 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
 import { addToCart } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import { addItem } from "@/lib/store/feature/items/itemsslice";
+import { AddToCartBtnFileProps, AddToCartBtnFileProducts } from "@/types/type";
 
-type Product = {
-  name:string|null,
-  image: string,
-  price: string|null,
-  id: string|null,
-  size: string[],
-  selectedSize: string,
-}
-
-type Products = {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-  selectedSize: string;
-};
-
-const AddToCartBtn = ({name,image,price,id,size,selectedSize}:Product) => {
+const AddToCartBtn = ({name,image,price,id,size,selectedSize}:AddToCartBtnFileProps) => {
 
   const [isAdded, setIsAdded] = useState(false);
 
@@ -45,7 +27,7 @@ const AddToCartBtn = ({name,image,price,id,size,selectedSize}:Product) => {
 
     // Check if the product is already in the cart
     const existingItem = checkoutItems.find(
-      (item:Products) => item.id === id && item.selectedSize === selectedSize
+      (item:AddToCartBtnFileProducts) => item.id === id && item.selectedSize === selectedSize
     );
 
     // Prevent adding more than 10 of the same product
@@ -82,4 +64,4 @@ const AddToCartBtn = ({name,image,price,id,size,selectedSize}:Product) => {
   )
 }
 
-export default AddToCartBtn
+export default AddToCartBtn;
