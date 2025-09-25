@@ -2,29 +2,7 @@
 
 import Link from "next/link";
 import { useAppSelector } from "@/lib/store/hooks/hooks";
-
-type QuantityType = {
-  cart: {
-    cartBase: number;
-  }
-}
-
-type Products = {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-  selectedSize: string;
-};
-
-type CartItemType = {
-  selectedSize?: string;
-  cartItems: {
-    items: Products[];
-  }
-}
+import { QuantityType, CartItemType } from "@/types/type";
 
 export default function TopBar ()  {
 
@@ -51,4 +29,4 @@ export default function TopBar ()  {
 
     </div>
   )
-}
+};

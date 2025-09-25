@@ -125,7 +125,7 @@ export type CartItemsPageProducts = {
   selectedSize: string;
 };
 
-// payment section page products types
+// payment section and top bar page products types
 export type PaymentPageProducts = {
   id: string;
   name: string;
@@ -136,7 +136,7 @@ export type PaymentPageProducts = {
   selectedSize: string;
 };
 
-// payment section page cart items types
+// payment section and top bar page cart items types
 export type CartItemType = {
   selectedSize?: string;
   cartItems: {
@@ -144,7 +144,7 @@ export type CartItemType = {
   }
 }
 
-// payment section page quantity types
+// payment section and top bar page quantity types
 export type QuantityType = {
   cart: {
     cartBase: number;
