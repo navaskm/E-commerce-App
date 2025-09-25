@@ -124,3 +124,36 @@ export type CartItemsPageProducts = {
   size: string;
   selectedSize: string;
 };
+
+// payment section page products types
+export type PaymentPageProducts = {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  size: string;
+  selectedSize: string;
+};
+
+// payment section page cart items types
+export type CartItemType = {
+  selectedSize?: string;
+  cartItems: {
+    items: PaymentPageProducts[];
+  }
+}
+
+// payment section page quantity types
+export type QuantityType = {
+  cart: {
+    cartBase: number;
+  }
+}
+
+// payment section page shipping type types
+export type ShippingType = {
+  deliveryDate: {
+    shippingCost: number;
+  }
+}

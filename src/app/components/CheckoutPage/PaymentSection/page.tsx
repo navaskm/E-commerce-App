@@ -10,35 +10,7 @@ import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
 import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
 import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import { hydrate } from "@/lib/store/feature/itemquantity/itemquantityslice";
-
-type Products = {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-  selectedSize: string;
-};
-
-type CartItemType = {
-  selectedSize?: string;
-  cartItems: {
-    items: Products[];
-  }
-}
-
-type QuantityType = {
-  cart: {
-    cartBase: number;
-  }
-}
-
-type ShippingType = {
-  deliveryDate: {
-    shippingCost: number;
-  }
-}
+import { PaymentPageProducts, QuantityType, CartItemType, ShippingType } from "@/types/type";
 
 const PaymentPage = () => {
 
@@ -53,7 +25,7 @@ const PaymentPage = () => {
 
   // get total product price
   const productPriceCents = React.useMemo(() => {
-    return conformItems.reduce((total: number, cartItem: Products) => {
+    return conformItems.reduce((total: number, cartItem: PaymentPageProducts) => {
       return total + cartItem.quantity * cartItem.price;
     }, 0);
   }, [conformItems]);
