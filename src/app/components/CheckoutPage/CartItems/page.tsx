@@ -9,16 +9,7 @@ import { cartItemHydrate, addItem, removeItemQuantity, removeItem } from "@/lib/
 import { addDeliveryDate, removeDeliveryDate } from "@/lib/store/feature/deliverydate/deliverydate";
 import { addToCart, removeFromCart, removeFromCartOfQuantityBase } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "./EmptyCart/page";
-
-type Products = {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-  selectedSize: string;
-};
+import { CartItemsPageProducts } from "@/types/type";
 
 const CartItems = () => {
 
@@ -39,7 +30,7 @@ const CartItems = () => {
   useEffect(() => {
     if (checkoutItems.length > 0) {
 
-      const defaultOptions = checkoutItems.reduce((acc: { [key: string]: string }, item:Products) => {
+      const defaultOptions = checkoutItems.reduce((acc: { [key: string]: string }, item:CartItemsPageProducts) => {
 
         // replace .size- from size
         const productSize = item.selectedSize.replace(".size-", "");
@@ -119,7 +110,7 @@ const CartItems = () => {
       dispatch(addItem({ id, selectedSize }));
 
       const item = checkoutItems.find(
-        (item:Products) => item.id === id && item.selectedSize === selectedSize
+        (item:CartItemsPageProducts) => item.id === id && item.selectedSize === selectedSize
       );
       if (item && item.quantity < 10) {
         dispatch(addToCart());
@@ -130,7 +121,7 @@ const CartItems = () => {
     } else if (value === "-") {
       dispatch(removeItemQuantity({ id, selectedSize }));
       const item = checkoutItems.find(
-        (item:Products) => item.id === id && item.selectedSize === selectedSize
+        (item:CartItemsPageProducts) => item.id === id && item.selectedSize === selectedSize
       );
       if (item && item.quantity > 1) {
         dispatch(removeFromCart());
@@ -155,7 +146,7 @@ const CartItems = () => {
     <div className="col-12 col-lg-8 cart-items-container">
       <h3>Review your order</h3>
 
-      {checkoutItems.map((item: Products, index: number) => {
+      {checkoutItems.map((item: CartItemsPageProducts, index: number) => {
 
         // remove .size- from size
         const productSize = item.selectedSize.replace(".size-", "");

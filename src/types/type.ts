@@ -113,3 +113,14 @@ export type AddToCartBtnFileProducts = {
   size: string;
   selectedSize: string;
 };
+
+// Cart items page products types
+export type CartItemsPageProducts = {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  size: string;
+  selectedSize: string;
+};
