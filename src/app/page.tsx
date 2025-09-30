@@ -8,7 +8,6 @@ const responseOfScrollingProducts = await fetchScrollingProduct();
 
 //Loading imports
 import NavbarSkeleton from "../skeletons/homepage/NavbarSkeleton";
-import MainOfferSkeleton from "./components/HomePage/mainofferce/skeleton/mainofferskeleton";
 import SmallProductsSkeleton from "./components/HomePage/SmallProducts/smallproductsskeleton";
 import ScrollingSkeleton from "./components/HomePage/HomePageScrolling/Skeleton/ScrollingSkeleton";
 import LargeProductSkeleton from "./components/HomePage/LargeProducts/Skeleton/LargeProductSkeleton";
@@ -59,9 +58,7 @@ export default function Home() {
         <NavBar />
       </Suspense>
 
-      <Suspense fallback={<MainOfferSkeleton/>}>
-        <MainOffers/>
-      </Suspense>
+      <MainOffers/>
 
       <Suspense fallback={<SmallProductsSkeleton/>}>
         <SmallProducts products={fourItems}/>
