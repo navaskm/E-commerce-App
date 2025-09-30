@@ -3,7 +3,7 @@
 import { lazy,Suspense,useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-import NavbarSkeleton from "../HomePage/navbar/Skeleton/NavbarSkeleton";
+import NavbarSkeleton from "../../../skeletons/homepage/NavbarSkeleton";
 import ImageDisplaySkeleton from "./ImageDisplay/Skeleton/ImageDisplaySkeleton";
 import SimilarProductsSkeleton from "./SimilarDisplay/Skeleton/SimilarDisplaySkeleton";
 

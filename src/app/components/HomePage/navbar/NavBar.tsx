@@ -1,13 +1,7 @@
 "use client";
 
-import { Suspense,lazy,useEffect,useState } from "react";
+import { lazy,useEffect,useState } from "react";
 import { fetchProduct, fetchScrollingProduct } from "@/data/productdata";
-
-// loading imports
-import AppLogSkeleton from "./AppLogo/AppLogSkeleton";
-import SearchBarSkeleton from "./SearchBar/Skeleton/SearchBarSkeleton";
-import LinksSkeleton from "./Links/skeleton/LinksSkeleton";
-import CartLogoSkelton from "./CartLogo/cartlogoskelton";
 
 const AppLogs = lazy(() => import('./AppLogo/AppLogs'));
 const SearchBar = lazy(() => import("./SearchBar/SearchBar"));
@@ -42,37 +36,12 @@ const NavBar =  () => {
   return (
     <nav>
       <div className="navbar">
-
-        {/* App logo section */}
-        <Suspense fallback={<AppLogSkeleton/>}>
-          <AppLogs />
-        </Suspense>
-
-        {/* search bar */}
-        <Suspense fallback={<SearchBarSkeleton/>}>
-          <SearchBar homeProducts={homeProducts} scrollingProducts={scrollingProducts}/>
-        </Suspense>
-
-        {/* Links menu section*/}
-        <Suspense fallback={<LinksSkeleton/>}>
-          <Links />
-        </Suspense>
-
-        {/* user Login section */}
-        <Suspense fallback={<div>Loading...</div>}>
-          <Login />
-        </Suspense>
-
-        {/* cart logo section view*/}
-        <Suspense fallback={<CartLogoSkelton/>}>
-          <CartLogo />
-        </Suspense>
-
-        {/* mobile hamburger menu sections*/}
-        <Suspense fallback={<div>Loading...</div>}>
-          <MobilHamburger/>
-        </Suspense>
-
+        <AppLogs />
+        <SearchBar homeProducts={homeProducts} scrollingProducts={scrollingProducts}/>
+        <Links />
+        <Login />
+        <CartLogo />
+        <MobilHamburger/>
       </div>
     </nav>
   );
