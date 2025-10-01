@@ -1,6 +1,6 @@
 import { lazy,Suspense } from "react";
 import "@/app/styles/homepage/homepagescrolling/homepagescrolling.scss";
-const BagsSports = lazy(() => import("./BagSports/BagSports"));
+const BagsSports = lazy(() => import("./BagSports"));
 import { Items } from "@/types/type";
 
 const HomePageScrolling = ({products}:Items) => {
