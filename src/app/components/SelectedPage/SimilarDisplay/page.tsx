@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import SmallProductsSkeleton from "../../../../skeletons/SmallProductsSkeleton";
+import SmallProductsSkeleton from "@/skeletons/SmallProductsSkeleton";
 import { fetchProduct,fetchScrollingProduct } from "@/data/productdata";
 import similarProducts from '../../../../api/similar-product.json';
 import { Products } from "@/types/type";
