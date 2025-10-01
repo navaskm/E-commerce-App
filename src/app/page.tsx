@@ -8,7 +8,7 @@ const responseOfScrollingProducts = await fetchScrollingProduct();
 
 //Loading imports
 import NavbarSkeleton from "../skeletons/NavbarSkeleton";
-import SmallProductsSkeleton from "../skeletons/smallproductsskeleton";
+import SmallProductsSkeleton from "../skeletons/SmallProductsSkeleton";
 import ScrollingSkeleton from "./components/HomePage/HomePageScrolling/Skeleton/ScrollingSkeleton";
 import LargeProductSkeleton from "./components/HomePage/LargeProducts/Skeleton/LargeProductSkeleton";
 
