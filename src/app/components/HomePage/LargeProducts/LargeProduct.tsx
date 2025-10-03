@@ -36,7 +36,7 @@ function LargeProduct({products}:Items) {
                 }
               }}>
                 
-                <img src={item.image} alt={item.name} />
+                <img src={item.image} alt={item.name} loading="lazy"/>
                 
               </Link>
             </div>

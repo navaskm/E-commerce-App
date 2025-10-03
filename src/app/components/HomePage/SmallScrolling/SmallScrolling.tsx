@@ -38,7 +38,7 @@ function SmallScrolling({products}: Items) {
           >
 
             <div className='item-box'>
-              <img src={product.image} alt={product.name}/>
+              <img src={product.image} alt={product.name} loading="lazy"/>
               <div>
                 <p>{product.name}</p>
               </div>

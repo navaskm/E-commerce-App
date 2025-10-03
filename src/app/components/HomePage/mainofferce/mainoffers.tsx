@@ -39,7 +39,7 @@ const MainOffers = () => {
                 }
               }}
               >
-                <img className="image-one" src="/OfferImage/Shoes/shoes-offer-image-1.jpg" alt="offer"/>
+                <img className="image-one" src="/OfferImage/Shoes/shoes-offer-image-1.jpg" alt="offer" loading="lazy"/>
               </Link>
               
               <Link href={{
@@ -51,7 +51,7 @@ const MainOffers = () => {
                   name:"Shoes Offer"
                 }
               }}>
-                <img className="image-two" src="/OfferImage/Shoes/shoes-offer-image-2.jpg" alt="offer" />
+                <img className="image-two" src="/OfferImage/Shoes/shoes-offer-image-2.jpg" alt="offer" loading="lazy"/>
               </Link>
               
               <Link href={{
@@ -63,7 +63,7 @@ const MainOffers = () => {
                   name:"Shoes Offer"
                 }
               }}>
-                <img className="image-three" src="/OfferImage/Shoes/shoes-offer-image-3.jpg" alt="offer"/>
+                <img className="image-three" src="/OfferImage/Shoes/shoes-offer-image-3.jpg" alt="offer" loading="lazy"/>
               </Link>
 
             </div>
@@ -85,7 +85,7 @@ const MainOffers = () => {
                     name:"Phone Offer"
                   }
                 }}>
-                  <img className="image-one" src="/OfferImage/Phone/phone-offer-image-1.jpg" alt="offer"/>
+                  <img className="image-one" src="/OfferImage/Phone/phone-offer-image-1.jpg" alt="offer" loading="lazy"/>
                 </Link>
                
                <Link href={{
@@ -97,7 +97,7 @@ const MainOffers = () => {
                     name:"Phone Offer"
                   }
                 }}>
-                 <img className="image-two" src="/OfferImage/Phone/phone-offer-image-2.jpg" alt="offer"/>
+                 <img className="image-two" src="/OfferImage/Phone/phone-offer-image-2.jpg" alt="offer" loading="lazy"/>
                 </Link>
                 
                 <Link href={{
@@ -109,7 +109,7 @@ const MainOffers = () => {
                     name:"Phone Offer"
                   }
                 }}>
-                 <img className="image-three" src="/OfferImage/Phone/phone-offer-image-3.jpg" alt="offer"/>
+                 <img className="image-three" src="/OfferImage/Phone/phone-offer-image-3.jpg" alt="offer"loading="lazy"/>
                 </Link>
             </div>
             
@@ -130,7 +130,7 @@ const MainOffers = () => {
                     name:"Bag Offer"
                   }
                 }}>
-                  <img className="image-one" src="/OfferImage/Bags/bag-offer-image-1.jpg" alt="offer"/>
+                  <img className="image-one" src="/OfferImage/Bags/bag-offer-image-1.jpg" alt="offer" loading="lazy"/>
                 </Link>
               
                 <Link href={{
@@ -142,7 +142,7 @@ const MainOffers = () => {
                     name:"Bag Offer"
                   }
                 }}>
-                  <img className="image-two" src="/OfferImage/Bags/bag-offer-image-2.jpg" alt="offer"/>
+                  <img className="image-two" src="/OfferImage/Bags/bag-offer-image-2.jpg" alt="offer" loading="lazy"/>
                 </Link>
               
                <Link href={{
@@ -154,7 +154,7 @@ const MainOffers = () => {
                     name:"Bag Offer"
                   }
                 }}>
-                  <img className="image-three" src="/OfferImage/Bags/bag-offer-image-3.jpg" alt="offer"/>
+                  <img className="image-three" src="/OfferImage/Bags/bag-offer-image-3.jpg" alt="offer" loading="lazy"/>
                 </Link>
               
             </div>

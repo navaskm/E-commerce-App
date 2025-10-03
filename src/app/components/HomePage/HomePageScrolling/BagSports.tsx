@@ -55,7 +55,7 @@ function BagsSports({products}:Items) {
               }}>
             
               <div className="image-wrapper">
-                <img src={item.image} alt={item.name} />
+                <img src={item.image} alt={item.name} loading="lazy"/>
                 <h5>{item.name}</h5>
                 <div className="scrolling-image-offer">
                   <h4>{item.offer}</h4>

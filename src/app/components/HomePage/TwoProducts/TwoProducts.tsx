@@ -61,7 +61,7 @@ function TwoProducts({products}:Items) {
                     }}
                   >
 
-                    <img  src={item.image} alt={item.name}/>
+                    <img  src={item.image} alt={item.name} loading="lazy"/>
                     <h5>{item.offer}</h5>
 
                   </Link>

@@ -26,6 +26,7 @@ const CartLogo = () => {
       <img
         src='/Logo/cart-logo.png'
         alt="Logo"
+        loading="lazy"
       />
     </Link>
   )

@@ -46,7 +46,7 @@ function SmallProducts({products}:Items) {
                     }
                   }}>
 
-                    <img src={item.image} alt={item.name}/>
+                    <img src={item.image} alt={item.name} loading="lazy"/>
 
                     <div className='name-price-display'>
                       <h6>{item.name}</h6>
