@@ -10,7 +10,7 @@ const responseOfScrollingProducts = await fetchScrollingProduct();
 import NavbarSkeleton from "../skeletons/NavbarSkeleton";
 import SmallProductsSkeleton from "@/skeletons/SmallProductsSkeleton";
 import ScrollingSkeleton from "../skeletons/ScrollingSkeleton";
-import LargeProductSkeleton from "./components/HomePage/LargeProducts/Skeleton/LargeProductSkeleton";
+import LargeProductSkeleton from "../skeletons/LargeProductSkeleton";
 
 // component imports
 const NavBar = lazy(() => import("./components/HomePage/navbar/NavBar"));
