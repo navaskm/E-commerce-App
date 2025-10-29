@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { lazy,Suspense } from "react";
 import { useState } from "react";
 
-const AddToCartBtn = lazy(()=> import('./AddToCartBtn/AddToCartBtn'));
+const AddToCartBtn = lazy(()=> import('./AddToCartBtn'));
 
 const ImageDisplay = () => {
 
