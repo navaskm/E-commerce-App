@@ -4,7 +4,7 @@ import { lazy,Suspense,useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 import NavbarSkeleton from "../../../skeletons/NavbarSkeleton";
-import SimilarProductsSkeleton from "./SimilarDisplay/Skeleton/SimilarDisplaySkeleton";
+import SimilarProductsSkeleton from "../../../skeletons/SimilarDisplaySkeleton";
 
 const NavBar = lazy(() => import("../../../components/HomePage/NavBar/NavBar"));
 const ImageDisplay = lazy(() => import("./ImageDisplay/ImageDisplay"));
