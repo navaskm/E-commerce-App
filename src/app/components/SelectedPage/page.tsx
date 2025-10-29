@@ -4,7 +4,6 @@ import { lazy,Suspense,useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 import NavbarSkeleton from "../../../skeletons/NavbarSkeleton";
-import ImageDisplaySkeleton from "./ImageDisplay/Skeleton/ImageDisplaySkeleton";
 import SimilarProductsSkeleton from "./SimilarDisplay/Skeleton/SimilarDisplaySkeleton";
 
 const NavBar = lazy(() => import("../HomePage/navbar/NavBar"));
@@ -50,15 +49,10 @@ const SelectItemPage = () => {
       </Suspense>
 
       <div className="image-features-container">
-          {/* image size,image, add to cart, quantity of product display*/}
-        <Suspense fallback={<ImageDisplaySkeleton/>}>
-          <ImageDisplay/>
-        </Suspense>
-
-          {/* features display */}
-        <Suspense fallback={<ImageDisplaySkeleton/>}>
-          <ImageFeature/>
-        </Suspense>
+        {/* image size,image, add to cart, quantity of product display*/}
+        <ImageDisplay/>
+        {/* features display */}
+        <ImageFeature/>
       </div>
 
       {/* similar products display */}
@@ -69,7 +63,6 @@ const SelectItemPage = () => {
       <Suspense fallback={<NavbarSkeleton/>}>
         <Footer/>
       </Suspense>
-
     </>
   )
 }
