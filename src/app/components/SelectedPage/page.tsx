@@ -6,11 +6,11 @@ import { useSearchParams } from "next/navigation";
 import NavbarSkeleton from "../../../skeletons/NavbarSkeleton";
 import SimilarProductsSkeleton from "./SimilarDisplay/Skeleton/SimilarDisplaySkeleton";
 
-const NavBar = lazy(() => import("../HomePage/navbar/NavBar"));
+const NavBar = lazy(() => import("../../../components/HomePage/NavBar/NavBar"));
 const ImageDisplay = lazy(() => import("./ImageDisplay/ImageDisplay"));
 const ImageFeature = lazy(() => import("./ImageFeature/ImageFeature"));
 const SimilarProducts = lazy(() => import("./SimilarDisplay/page"));
-const Footer = lazy(()=>import("../HomePage/Footer/page"));
+const Footer = lazy(()=>import("../../../components/HomePage/Footer/page"));
 
 import '@/app/styles/selectdpage/selectpage.scss';
 

@@ -3,12 +3,12 @@
 import { lazy,useEffect,useState } from "react";
 import { fetchProduct, fetchScrollingProduct } from "@/data/productdata";
 
-const AppLogs = lazy(() => import('./AppLogo/AppLogs'));
-const SearchBar = lazy(() => import("./SearchBar/SearchBar"));
-const Links = lazy(() => import("./Links/Links"));
-const Login = lazy(() => import("./Login/Login"));
-const CartLogo = lazy(() => import("./CartLogo/CartLogo"));
-const MobilHamburger = lazy(() => import("./MobilHamburger/MobilHamburger"));
+const AppLogs = lazy(() => import('./AppLogs'));
+const SearchBar = lazy(() => import("./SearchBar"));
+const Links = lazy(() => import("./Links"));
+const Login = lazy(() => import("./Login"));
+const CartLogo = lazy(() => import("./CartLogo"));
+const MobilHamburger = lazy(() => import("./MobilHamburger"));
 
 import "@/app/styles/homepage/navbar/navbar.scss";
 

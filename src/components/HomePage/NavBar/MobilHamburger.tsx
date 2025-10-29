@@ -4,7 +4,7 @@ import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useEffect } from "react";
 
-import Links from "../Links/Links";
+import Links from "./Links";
 
 const MobilHamburger = () => {
 

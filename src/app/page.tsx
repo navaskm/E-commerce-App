@@ -13,15 +13,15 @@ import ScrollingSkeleton from "../skeletons/ScrollingSkeleton";
 import LargeProductSkeleton from "../skeletons/LargeProductSkeleton";
 
 // component imports
-const NavBar = lazy(() => import("./components/HomePage/navbar/NavBar"));
-const MainOffers = lazy(() => import ("./components/HomePage/mainofferce/mainoffers"));
-const SmallProducts = lazy(() => import("./components/HomePage/SmallProducts/SmallProducts"));
-const HomePageScrolling = lazy(() => import("./components/HomePage/HomePageScrolling/HomePageScrolling"));
-const LargeProduct = lazy(() => import("./components/HomePage/LargeProducts/LargeProduct"));
-const TwoProducts = lazy(() => import("./components/HomePage/TwoProducts/TwoProducts"));
-const SmallScrolling = lazy(() => import("./components/HomePage/SmallScrolling/SmallScrolling"));
-const LastOneProducts = lazy (() => import("./components/HomePage/LastOneProducts/LastOneProducts"));
-const Footer = lazy(()=>import("./components/HomePage/Footer/page"));
+const NavBar = lazy(() => import("../components/HomePage/NavBar/NavBar"));
+const MainOffers = lazy(() => import ("../components/HomePage/mainofferce/mainoffers"));
+const SmallProducts = lazy(() => import("../components/HomePage/SmallProducts/SmallProducts"));
+const HomePageScrolling = lazy(() => import("../components/HomePage/HomePageScrolling/HomePageScrolling"));
+const LargeProduct = lazy(() => import("../components/HomePage/LargeProducts/LargeProduct"));
+const TwoProducts = lazy(() => import("../components/HomePage/TwoProducts/TwoProducts"));
+const SmallScrolling = lazy(() => import("../components/HomePage/SmallScrolling/SmallScrolling"));
+const LastOneProducts = lazy (() => import("../components/HomePage/LastOneProducts/LastOneProducts"));
+const Footer = lazy(()=>import("../components/HomePage/Footer/page"));
 
 // type imports
 import { Products } from "@/types/type";

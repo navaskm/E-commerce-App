@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import React, { useState,useEffect } from "react";
 import Link from "next/link";
 
-import similarProducts from '../../../../../api/similar-product.json';
+import similarProducts from '../../../api/similar-product.json';
 import { Products, SearchBarProps } from "@/types/type";
 
 const SearchBar: React.FC<SearchBarProps> =  ({homeProducts,scrollingProducts}) => {
