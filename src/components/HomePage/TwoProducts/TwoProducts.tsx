@@ -44,7 +44,7 @@ function TwoProducts({products}:Items) {
                       }
                     } 
                     href={{
-                      pathname: "/components/SelectedPage",
+                      pathname: "/product-details",
                       query: {
                         name: encodeURIComponent(item.name),
                         priceCents: item.priceCents,

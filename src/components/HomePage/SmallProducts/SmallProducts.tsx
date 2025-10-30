@@ -30,7 +30,7 @@ function SmallProducts({products}:Items) {
 
                   {/* this div click time pass value to selected page */}
                   <Link style={{ textDecoration: 'none' }} href={{
-                    pathname: "/components/SelectedPage",
+                    pathname: "/product-details",
                     query: {
                       name: encodeURIComponent(item.name),
                       priceCents: item.priceCents,

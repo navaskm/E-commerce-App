@@ -20,7 +20,7 @@ function LargeProduct({products}:Items) {
 
             <div className="product-card">
               <Link href={{
-                pathname: "/components/SelectedPage",
+                pathname: "/product-details",
                 query: {
                   name: encodeURIComponent(item.name),
                   priceCents: item.priceCents,

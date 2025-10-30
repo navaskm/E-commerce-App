@@ -20,7 +20,7 @@ function SmallScrolling({products}: Items) {
           <Link key={product.id}
             style={{textDecoration:"none"}}
             href={{
-              pathname: "/components/SelectedPage",
+              pathname: "/product-details",
               query: {
                 name: encodeURIComponent(product.name),
                 priceCents: product.priceCents,

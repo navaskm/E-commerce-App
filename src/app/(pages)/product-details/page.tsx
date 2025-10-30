@@ -7,9 +7,9 @@ import NavbarSkeleton from "../../../skeletons/NavbarSkeleton";
 import SimilarProductsSkeleton from "../../../skeletons/SimilarDisplaySkeleton";
 
 const NavBar = lazy(() => import("../../../components/HomePage/NavBar/NavBar"));
-const ImageDisplay = lazy(() => import("./ImageDisplay/ImageDisplay"));
-const ImageFeature = lazy(() => import("./ImageFeature/ImageFeature"));
-const SimilarProducts = lazy(() => import("./SimilarDisplay/page"));
+const ImageDisplay = lazy(() => import("@/components/DetailsPage/ImageDisplay/ImageDisplay"));
+const ImageFeature = lazy(() => import("@/components/DetailsPage/ImageFeature/ImageFeature"));
+const SimilarProducts = lazy(() => import("@/components/DetailsPage/SimilarDisplay/page"));
 const Footer = lazy(()=>import("../../../components/HomePage/Footer/page"));
 
 import '@/app/styles/selectdpage/selectpage.scss';

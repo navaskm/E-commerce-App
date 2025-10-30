@@ -89,7 +89,7 @@ const SimilarProducts = () => {
               style={{ textDecoration: "none" }}
               className="each-similar-product card h-100 shadow-sm border-0"
               href={{
-                pathname: "/components/SelectedPage",
+                pathname: "/product-details",
                 query: {
                   name: encodeURIComponent(product.name),
                   priceCents: product.priceCents,
