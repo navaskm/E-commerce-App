@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/components/selectedpage/imagedisplay/addtocartbtn/cartslice.js", "src/app/lib/store/store.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/DetailsPage/ImageDisplay/addtocartbtn/cartslice.js", "src/app/lib/store/store.ts"],
   "exclude": ["node_modules"]
 }
