@@ -12,7 +12,7 @@ import { addItem } from "@/lib/store/feature/items/itemsslice";
 import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
 import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
 import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
-import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/page";
+import EmptyCart from "../../CheckoutPage/CartItems/EmptyCart/EmptyCart";
 
 type OrderItems = {
   image: string;
