@@ -21,7 +21,7 @@ const LargeProduct = lazy(() => import("../components/HomePage/LargeProducts/Lar
 const TwoProducts = lazy(() => import("../components/HomePage/TwoProducts/TwoProducts"));
 const SmallScrolling = lazy(() => import("../components/HomePage/SmallScrolling/SmallScrolling"));
 const LastOneProducts = lazy (() => import("../components/HomePage/LastOneProducts/LastOneProducts"));
-const Footer = lazy(()=>import("../components/HomePage/Footer/page"));
+const Footer = lazy(()=>import("../components/HomePage/Footer/Footer"));
 
 // type imports
 import { Products } from "@/types/type";
