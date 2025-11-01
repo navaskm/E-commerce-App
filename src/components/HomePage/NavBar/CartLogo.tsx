@@ -20,7 +20,7 @@ const CartLogo = () => {
 
   return (
     <Link 
-    href='/components/CheckoutPage'
+    href='/checkout'
     className="cart-logo">
       <h6>{numberOfItemsQuantity}</h6>
       <img

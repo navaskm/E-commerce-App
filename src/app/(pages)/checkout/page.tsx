@@ -2,9 +2,9 @@ import { lazy,Suspense } from "react";
 import { Rings } from 'react-loading-icons';
 
 const NavbarSkeleton = lazy(()=> import("../../../skeletons/NavbarSkeleton"));
-const CartItems = lazy(()=> import('./CartItems/page'));
-const PaymentPage = lazy(()=> import('./PaymentSection/Payment'));
-const TopBarOfCartPage = lazy(()=> import('./TopBar/TopBar'));
+const TopBar = lazy(()=> import('@/components/CheckoutPage/TopBar/TopBar'));
+const Payment = lazy(()=> import('@/components/CheckoutPage/PaymentSection/Payment'));
+const CartItems = lazy(()=> import('@/components/CheckoutPage/CartItems/page'));
 import "@/app/styles/checkoutpage/checkout.scss";
 
 const CartPage = () => {
@@ -14,12 +14,12 @@ const CartPage = () => {
       <title>Check Your Items</title>
 
       <Suspense fallback={<NavbarSkeleton/>}>
-        <TopBarOfCartPage/>
+        <TopBar/>
       </Suspense>
 
       <div className="cart-items-payment-section-container">
         <Suspense fallback={<Rings/>}>
-          <PaymentPage />
+          <Payment />
           <CartItems />
         </Suspense>
       </div>
