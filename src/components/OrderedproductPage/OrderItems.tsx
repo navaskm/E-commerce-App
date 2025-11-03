@@ -13,36 +13,12 @@ import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
 import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
 import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "../CheckoutPage/CartItems/EmptyCart";
-
-type OrderItems = {
-  image: string;
-  name: string;
-  price: string;
-  id: string; 
-  quantity: number;
-  conformDate: string;
-  size: string;
-}
-
-type Products = {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-  selectedSize: string;
-};
-
-type FinalOrderItems = {
-  received: { [date: string]: OrderItems[] };
-  pending: { [date: string]: OrderItems[] };
-};
+import { OrderedItemProducts, OrderProducts, FinalOrderItems } from "@/types/type";
 
 const OrderItems = () => {
 
   const checkoutItems = useAppSelector((state) => state.cartItems.items);
-  const conformDeliveryDate = useAppSelector((state) => state.deliveryDate.userOrder)as OrderItems[];
+  const conformDeliveryDate = useAppSelector((state) => state.deliveryDate.userOrder)as OrderProducts[];
   const dispatch = useAppDispatch();
   const {isSignedIn} = useAuth();
 
@@ -90,7 +66,7 @@ const OrderItems = () => {
 
     // Check if the product is already in the cart
     const existingItem = checkoutItems.find(
-      (item:Products) => item.id === id && item.selectedSize === selectedSize
+      (item:OrderedItemProducts) => item.id === id && item.selectedSize === selectedSize
     );
 
     // Prevent adding more than 10 of the same product

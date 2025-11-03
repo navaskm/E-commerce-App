@@ -157,3 +157,29 @@ export type ShippingType = {
     shippingCost: number;
   }
 }
+
+// ordered product types
+export type OrderedItemProducts = {
+  id: string;
+  name: string; 
+  image: string; 
+  price: number;
+  quantity: number;
+  size: string;
+  selectedSize: string;
+};
+
+export type OrderProducts = {
+  image: string;
+  name: string;
+  price: string;
+  id: string; 
+  quantity: number;
+  conformDate: string;
+  size: string;
+}
+
+export type FinalOrderItems = {
+  received: { [date: string]: OrderProducts[] };
+  pending: { [date: string]: OrderProducts[] };
+};
