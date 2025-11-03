@@ -54,13 +54,13 @@ const PaymentPage = () => {
   // order button clicked time work
   const handleOrder = () => {
 
-    // if user not login
+    //if user not login
     if(!isSignedIn){
 
       // save this in localStorage. and this check in /components/OrderPage
       localStorage.setItem("pendingOrder", "true");
 
-      const redirectUrl = `${window.location.origin}/components/OrderPage`;
+      const redirectUrl = `${window.location.origin}/ordered-products`;
       route.push(`https://fit-katydid-33.accounts.dev/sign-in?redirect_url=${encodeURIComponent(redirectUrl)}`);
       return;
     }
@@ -69,7 +69,7 @@ const PaymentPage = () => {
     dispatch(userOrder());
     dispatch(removeAllItem());
     dispatch(removeAllQuantity());
-    route.push("/components/OrderPage");
+    route.push("/ordered-products");
   }
 
   return conformItems.length !== 0 && (
