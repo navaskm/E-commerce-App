@@ -198,7 +198,7 @@ const OrderItems = () => {
 
                     <Link 
                       href={{
-                        pathname :'/components/TrackingPage',
+                        pathname :'/ordered-products/track-id',
                         query:{
                           name: item.name,
                           image: item.image,
