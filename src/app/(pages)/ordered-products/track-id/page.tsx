@@ -1,24 +1,17 @@
 import Link from "next/link"
 import '@/app/styles/trackingpage/tracking.scss';
 import TrackId from "../../../../components/TrackingPage/TrackId";
-
-type Products = {
-  name: string,
-  image: string,
-  date: string,
-  quantity: number,
-  size: string,
-}
+import { TrackIdProducts } from "@/types/type";
 
 // Generate metadata dynamically based on searchParams
-export async function generateMetadata({ searchParams }: { searchParams: Products }) {
+export async function generateMetadata({ searchParams }: { searchParams: TrackIdProducts }) {
   return {
     title: `Tracking ${decodeURIComponent(searchParams.name)}`,
     description: `Track ${decodeURIComponent(searchParams.name)} Product`,
   };
 }
 
-const TrackingPage= ({ searchParams }: { searchParams: Products }) => {
+const TrackingPage= ({ searchParams }: { searchParams: TrackIdProducts }) => {
 
 const dateString = searchParams.date;
 

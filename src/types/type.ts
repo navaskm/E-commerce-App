@@ -183,3 +183,12 @@ export type FinalOrderItems = {
   received: { [date: string]: OrderProducts[] };
   pending: { [date: string]: OrderProducts[] };
 };
+
+// track id page product type
+export type TrackIdProducts = {
+  name: string,
+  image: string,
+  date: string,
+  quantity: number,
+  size: string,
+}
