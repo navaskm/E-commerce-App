@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import "@/app/styles/homepage/mainoffers/mainoffers.scss";
+import '@/style/homepage/mainoffers/mainoffers.scss'
 
 const MainOffers = () => {
 

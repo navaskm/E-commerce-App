@@ -10,7 +10,7 @@ const Login = lazy(() => import("./Login"));
 const CartLogo = lazy(() => import("./CartLogo"));
 const MobilHamburger = lazy(() => import("./MobilHamburger"));
 
-import "@/app/styles/homepage/navbar/navbar.scss";
+import '@/style/homepage/navbar/navbar.scss';
 
 const NavBar =  () => {
 

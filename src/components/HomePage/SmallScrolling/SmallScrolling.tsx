@@ -1,6 +1,6 @@
 import { Items } from '@/types/type';
-import '@/app/styles/homepage/smallScrolling/smallScrolling.scss';
 import Link from 'next/link';
+import '@/style/homepage/smallScrolling/smallScrolling.scss';
 
 function SmallScrolling({products}: Items) {
   

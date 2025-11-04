@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Items } from "@/types/type";
 import { allowedSmallProductTypes } from "@/types/type";
-import '@/app/homepagesmall/smallproducts.scss';
+import '@/style/homepage/smallproducts/smallproducts.scss';
 
 function SmallProducts({products}:Items) {
 

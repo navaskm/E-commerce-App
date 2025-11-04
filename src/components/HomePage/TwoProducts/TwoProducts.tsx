@@ -1,8 +1,8 @@
 import React from 'react';
 import  Link  from 'next/link';
 import { Items } from '@/types/type';
+import '@/style/homepage/twoproduct/twoproduct.scss';
 import { allAllowedAllTwoProductsTypes } from '@/types/type';
-import '@/app/styles/homepage/twoproduct/twoproduct.scss';
 
 function TwoProducts({products}:Items) {
 

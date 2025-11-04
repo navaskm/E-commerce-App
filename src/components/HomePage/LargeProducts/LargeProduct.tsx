@@ -1,6 +1,6 @@
 import Link from 'next/link';
+import '@/style/homepage/largeproduct/largeproduct.scss'
 import { Items } from '@/types/type';
-import '@/app/styles/homepage/largeproduct/largeproduct.scss';
 
 function LargeProduct({products}:Items) {
 
