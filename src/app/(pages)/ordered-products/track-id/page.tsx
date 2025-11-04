@@ -1,6 +1,7 @@
+import { lazy,Suspense } from "react";
 import Link from "next/link"
+const TrackId = lazy(()=> import('../../../../components/TrackingPage/TrackId'));
 import '@/app/styles/trackingpage/tracking.scss';
-import TrackId from "../../../../components/TrackingPage/TrackId";
 import { TrackIdProducts } from "@/types/type";
 
 // Generate metadata dynamically based on searchParams
@@ -116,7 +117,9 @@ switch (diffInDays) {
 
       <div className="track-id-container">
         <h5>Shipped with UPS</h5>
-        <TrackId name={decodeURIComponent(searchParams.name)}/>
+        <Suspense fallback={<p>loading...</p>}>
+          <TrackId name={decodeURIComponent(searchParams.name)}/>
+        </Suspense>
       </div>
 
     </div>
