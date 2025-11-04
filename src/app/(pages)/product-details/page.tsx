@@ -12,7 +12,7 @@ const ImageFeature = lazy(() => import("@/components/DetailsPage/ImageFeature/Im
 const SimilarProducts = lazy(() => import("@/components/DetailsPage/SimilarDisplay/SimilarDisplay"));
 const Footer = lazy(()=>import("../../../components/HomePage/Footer/Footer"));
 
-import '@/app/styles/selectdpage/selectpage.scss';
+import '@/style/product-details-page/selectpage.scss';
 
 const SelectItemPage = () => {
 
