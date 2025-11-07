@@ -235,3 +235,33 @@ export interface RemoveDeliveryDatePayload {
   productId: number|string;
   selectedOption:string;
 }
+
+// Define interfaces for our types
+interface CartItem {
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  size: string;
+  selectedSize: string;
+  id:string;
+}
+
+export interface CartState {
+  items: CartItem[];
+}
+
+// Define types for our actions
+export interface HydratePayload {
+  items: CartItem[];
+}
+//name,image,price,id,selectedSize
+export interface AddRemovePayload {
+  id: number|null|string;
+  selectedSize: string;
+  name?: string|null;
+  image?: string;
+  price?: string|null;
+  conformDate?: string;
+  size?: string;
+}

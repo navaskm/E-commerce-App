@@ -1,34 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// Define interfaces for our types
-interface CartItem {
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-  selectedSize: string;
-  id:string;
-}
-
-interface CartState {
-  items: CartItem[];
-}
-
-// Define types for our actions
-interface HydratePayload {
-  items: CartItem[];
-}
-//name,image,price,id,selectedSize
-interface AddRemovePayload {
-  id: number|null|string;
-  selectedSize: string;
-  name?: string|null;
-  image?: string;
-  price?: string|null;
-  conformDate?: string;
-  size?: string;
-}
+import { CartState, HydratePayload, AddRemovePayload } from "@/types/type";
 
 const initialState: CartState = {
   items: [],
