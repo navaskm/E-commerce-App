@@ -4,7 +4,7 @@ import { Rings } from 'react-loading-icons';
 const NavbarSkeleton = lazy(()=> import("../../../skeletons/NavbarSkeleton"));
 const TopBar = lazy(()=> import('@/components/CheckoutPage/TopBar/TopBar'));
 const Payment = lazy(()=> import('@/components/CheckoutPage/PaymentSection/Payment'));
-const CartItems = lazy(()=> import('@/components/CheckoutPage/CartItems/page'));
+const CartItems = lazy(()=> import('@/components/CheckoutPage/CartItems/CartItems'));
 import "@/style/checkoutpage/checkout.scss";
 
 const CartPage = () => {
