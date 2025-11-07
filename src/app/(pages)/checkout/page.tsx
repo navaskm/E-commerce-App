@@ -5,7 +5,7 @@ const NavbarSkeleton = lazy(()=> import("../../../skeletons/NavbarSkeleton"));
 const TopBar = lazy(()=> import('@/components/CheckoutPage/TopBar/TopBar'));
 const Payment = lazy(()=> import('@/components/CheckoutPage/PaymentSection/Payment'));
 const CartItems = lazy(()=> import('@/components/CheckoutPage/CartItems/page'));
-import "@/app/styles/checkoutpage/checkout.scss";
+import "@/style/checkoutpage/checkout.scss";
 
 const CartPage = () => {
 
