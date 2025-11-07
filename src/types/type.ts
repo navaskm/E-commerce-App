@@ -192,3 +192,46 @@ export type TrackIdProducts = {
   quantity: number,
   size: string,
 }
+
+// redux types
+
+// Define interfaces for the state and items
+interface DeliveryItem {
+  id: number|string;
+  selectedOption: 'option1' | 'option2' | 'option3'|string;
+  conformDate: string;
+  name: string;
+  image: string;
+  price: number|string;
+  quantity: number;
+  size: string;
+  shipping: number;
+}
+
+export interface DeliveryDateState {
+  shippingCost: number;
+  deliveryDate: DeliveryItem[];
+  userOrder: DeliveryItem[];
+}
+
+// Define types for action payloads
+export interface HydrateOrderPayload {
+  deliveryDate: DeliveryItem[];
+  userOrder: DeliveryItem[];
+}
+
+export interface AddDeliveryDatePayload {
+  id: number|string;
+  selectedOption: 'option1' | 'option2' | 'option3'|string;
+  conformDate: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  size: string;
+}
+
+export interface RemoveDeliveryDatePayload {
+  productId: number|string;
+  selectedOption:string;
+}

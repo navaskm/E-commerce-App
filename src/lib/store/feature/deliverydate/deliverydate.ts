@@ -1,45 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// Define interfaces for the state and items
-interface DeliveryItem {
-  id: number|string;
-  selectedOption: 'option1' | 'option2' | 'option3'|string;
-  conformDate: string;
-  name: string;
-  image: string;
-  price: number|string;
-  quantity: number;
-  size: string;
-  shipping: number;
-}
-
-interface DeliveryDateState {
-  shippingCost: number;
-  deliveryDate: DeliveryItem[];
-  userOrder: DeliveryItem[];
-}
-
-// Define types for action payloads
-interface HydrateOrderPayload {
-  deliveryDate: DeliveryItem[];
-  userOrder: DeliveryItem[];
-}
-
-interface AddDeliveryDatePayload {
-  id: number|string;
-  selectedOption: 'option1' | 'option2' | 'option3'|string;
-  conformDate: string;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  size: string;
-}
-
-interface RemoveDeliveryDatePayload {
-  productId: number|string;
-  selectedOption:string;
-}
+import { DeliveryDateState, HydrateOrderPayload, AddDeliveryDatePayload, RemoveDeliveryDatePayload } from "@/types/type";
 
 const initialState: DeliveryDateState = {
   shippingCost: 0,
@@ -158,6 +118,3 @@ export const {
   removeDeliveryDate,
   userOrder 
 } = deliveryDateSlice.actions;
-
-// Export types for use in components
-export type { DeliveryItem, DeliveryDateState };
