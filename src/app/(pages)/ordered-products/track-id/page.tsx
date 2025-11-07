@@ -1,7 +1,7 @@
 import { lazy,Suspense } from "react";
 import Link from "next/link"
 const TrackId = lazy(()=> import('../../../../components/TrackingPage/TrackId'));
-import '@/app/styles/trackingpage/tracking.scss';
+import '@/style/trackingpage/tracking.scss';
 import { TrackIdProducts } from "@/types/type";
 
 // Generate metadata dynamically based on searchParams
