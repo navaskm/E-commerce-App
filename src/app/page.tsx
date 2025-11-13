@@ -24,13 +24,7 @@ const LastOneProducts = lazy (() => import("../components/HomePage/LastOneProduc
 const Footer = lazy(()=>import("../components/HomePage/Footer/Footer"));
 
 // type imports
-import { Products } from "@/types/type";
-import { allowedSmallProductTypes } from "@/types/type";
-import { scrollingProduct } from "@/types/type";
-import { allowedFirstLargeProductTypes } from "@/types/type";
-import { allowedLastOneProductTypes } from "@/types/type";
-import { allowedFirstTwoTypes } from "@/types/type";
-import { smallScrollingProduct } from "@/types/type";
+import { Products, allowedSmallProductTypes, scrollingProduct, allowedFirstLargeProductTypes, allowedLastOneProductTypes, allowedFirstTwoTypes, smallScrollingProduct } from "@/types/type";
 
 const fourItems : Products[] = [];
 const firstLargeProducts : Products[] = [];
