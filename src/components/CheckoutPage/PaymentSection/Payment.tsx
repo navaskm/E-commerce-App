@@ -2,19 +2,18 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
 import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
 import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
-import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
-import { hydrate } from "@/lib/store/feature/itemquantity/itemquantityslice";
-import { PaymentPageProducts, QuantityType, CartItemType, ShippingType } from "@/types/type";
+import { PaymentPageProducts, CartItemType, ShippingType } from "@/types/type";
 
 const PaymentPage = () => {
 
-  const checkoutItems = useAppSelector((state:QuantityType)=> state.cart.cartBase || 0);
+  const [quantity, setQuantity] = useState(0);
+  const items = useAppSelector((state) => state.cartItems.items)
   const conformItems = useAppSelector((state:CartItemType)=> state.cartItems.items || {});
   const dispatch = useAppDispatch();
   const {isSignedIn} = useAuth();
@@ -31,11 +30,9 @@ const PaymentPage = () => {
   }, [conformItems]);
 
   useEffect(() => {
-      if (typeof window !== "undefined") {
-        const cartBase = JSON.parse(localStorage.getItem("cartBase") || '0');
-        dispatch(hydrate({ cartBase }));
-      }
-    }, [dispatch]);
+    const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+    setQuantity(totalQuantity);
+  }, [items]);
 
   // get total price before tax
   const totalBeforeTax = shippingCost + productPriceCents;
@@ -68,7 +65,6 @@ const PaymentPage = () => {
     // user is already login this code is work
     dispatch(userOrder());
     dispatch(removeAllItem());
-    dispatch(removeAllQuantity());
     route.push("/ordered-products");
   }
 
@@ -80,7 +76,7 @@ const PaymentPage = () => {
 
         <div className="product-shipping-price-container">
           <div className='order-names'>
-            <p>Items({checkoutItems}):</p>
+            <p>Items({quantity}):</p>
             <p>Shipping & handling:</p>
           </div>
           <div className='order-prices'>

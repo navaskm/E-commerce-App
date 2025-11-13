@@ -1,20 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useAppDispatch,useAppSelector } from "@/lib/store/hooks/hooks";
-import { hydrate } from "@/lib/store/feature/itemquantity/itemquantityslice";
+import { cartItemHydrate } from "@/lib/store/feature/items/itemsslice";
 
 const CartLogo = () => {
 
+  const [quantity, setQuantity] = useState(0);
   const dispatch = useAppDispatch();
-  const numberOfItemsQuantity = useAppSelector((state) => state.cart.cartBase)
+  const items = useAppSelector((state) => state.cartItems.items);
 
-  // add local storage in to the store
+  useEffect(() => {
+    const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+    setQuantity(totalQuantity);
+  }, [items]);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const cartBase = JSON.parse(localStorage.getItem("cartBase") || '0');
-      dispatch(hydrate({ cartBase }));
+      const items = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      dispatch(cartItemHydrate({ items }));
     }
   }, [dispatch]);
 
@@ -22,7 +27,7 @@ const CartLogo = () => {
     <Link 
     href='/checkout'
     className="cart-logo">
-      <h6>{numberOfItemsQuantity}</h6>
+      <h6>{quantity}</h6>
       <img
         src='/Logo/cart-logo.png'
         alt="Logo"

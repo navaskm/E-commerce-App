@@ -7,7 +7,6 @@ import { FaRupeeSign } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
 import { cartItemHydrate, addItem, removeItemQuantity, removeItem } from "@/lib/store/feature/items/itemsslice";
 import { addDeliveryDate, removeDeliveryDate } from "@/lib/store/feature/deliverydate/deliverydate";
-import { addToCart, removeFromCart, removeFromCartOfQuantityBase } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import EmptyCart from "./EmptyCart";
 import { CartItemsPageProducts } from "@/types/type";
 
@@ -53,8 +52,6 @@ const CartItems = () => {
 
     Object.entries(selectedOptions).forEach(([key, selectedOption]) => {
 
-      //const existingItem = checkoutItems.find((item) => `${item.id}-${item.selectedSize.replace(".size-", "")}` === key
-      //);
       const existingItem = checkoutItems.find(item => {
         const itemKey:string = `${item.id}-${item.selectedSize.replace(".size-", "")}`;
         return itemKey === key
@@ -108,38 +105,20 @@ const CartItems = () => {
 
     if (value === "+") {
       dispatch(addItem({ id, selectedSize }));
-
-      const item = checkoutItems.find(
-        (item:CartItemsPageProducts) => item.id === id && item.selectedSize === selectedSize
-      );
-      if (item && item.quantity < 10) {
-        dispatch(addToCart());
-      }else{
-        return;
-      }
-
+      return;
     } else if (value === "-") {
       dispatch(removeItemQuantity({ id, selectedSize }));
-      const item = checkoutItems.find(
-        (item:CartItemsPageProducts) => item.id === id && item.selectedSize === selectedSize
-      );
-      if (item && item.quantity > 1) {
-        dispatch(removeFromCart());
-      }else{
-        return;
-      }
+      return;
     }
 
   };
 
   // remove from cart
-  const handleRemoveItem = (id: string, selectedSize: string, itemQuantity: number,selectedOption:string,dateId:string) => {
+  const handleRemoveItem = (id: string, selectedSize: string, selectedOption:string,dateId:string) => {
     dispatch(removeItem({ id, selectedSize }));
 
     const productId = dateId.replace('.size-', '');
     dispatch(removeDeliveryDate({ productId, selectedOption }));
-
-    dispatch(removeFromCartOfQuantityBase({ quantity: itemQuantity }));
   };
 
   return checkoutItems.length != 0 ? (
@@ -238,7 +217,7 @@ const CartItems = () => {
             <h5 
               className="remove-cart" 
               title="Remove this item"
-              onClick={()=>handleRemoveItem(item.id, item.selectedSize,item.quantity,selectedOption,
+              onClick={()=>handleRemoveItem(item.id, item.selectedSize,selectedOption,
                 `${item.id}-${item.selectedSize}`)}
             >
               <MdRemoveShoppingCart />

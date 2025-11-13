@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import cartReducer from './feature/itemquantity/itemquantityslice';
 import cartItemsReducer from './feature/items/itemsslice'
 import deliveryDateReducer from './feature/deliverydate/deliverydate'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      cart: cartReducer,
       cartItems: cartItemsReducer,
       deliveryDate: deliveryDateReducer,
     },

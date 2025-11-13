@@ -5,13 +5,8 @@ import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
-import { hydrateOrder } from "@/lib/store/feature/deliverydate/deliverydate";
-
-import { addToCart } from "@/lib/store/feature/itemquantity/itemquantityslice";
-import { addItem } from "@/lib/store/feature/items/itemsslice";
-import { userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
-import { removeAllItem } from "@/lib/store/feature/items/itemsslice";
-import { removeAllQuantity } from "@/lib/store/feature/itemquantity/itemquantityslice";
+import { hydrateOrder, userOrder } from "@/lib/store/feature/deliverydate/deliverydate";
+import { removeAllItem, addItem } from "@/lib/store/feature/items/itemsslice";
 import EmptyCart from "../CheckoutPage/CartItems/EmptyCart";
 import { OrderedItemProducts, OrderProducts, FinalOrderItems } from "@/types/type";
 
@@ -44,7 +39,6 @@ const OrderItems = () => {
     if(hasPendingOrder === "true" && isSignedIn){
       dispatch(userOrder());
       dispatch(removeAllItem());
-      dispatch(removeAllQuantity());
     };
 
     // Clear the localStorage
@@ -88,7 +82,7 @@ const OrderItems = () => {
       }));
     }, 2000);
 
-    dispatch(addToCart());
+    //dispatch(addToCart());
     dispatch(addItem({name,image,price,id,selectedSize,conformDate}))
   };
 

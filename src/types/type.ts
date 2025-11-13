@@ -144,13 +144,6 @@ export type CartItemType = {
   }
 }
 
-// payment section and top bar page quantity types
-export type QuantityType = {
-  cart: {
-    cartBase: number;
-  }
-}
-
 // payment section page shipping type types
 export type ShippingType = {
   deliveryDate: {

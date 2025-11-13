@@ -4,7 +4,6 @@ import { TiShoppingCart } from "react-icons/ti";
 import { useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks/hooks";
-import { addToCart } from "@/lib/store/feature/itemquantity/itemquantityslice";
 import { addItem } from "@/lib/store/feature/items/itemsslice";
 import { AddToCartBtnFileProps, AddToCartBtnFileProducts } from "@/types/type";
 
@@ -37,8 +36,6 @@ const AddToCartBtn = ({name,image,price,id,size,selectedSize}:AddToCartBtnFilePr
     }
 
     setIsAdded(true);
-
-    dispatch(addToCart());
     dispatch(addItem({name,image,price,id,selectedSize}))
 
     setTimeout(()=>{
