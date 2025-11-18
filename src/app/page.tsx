@@ -1,10 +1,6 @@
 import { Suspense, lazy } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
-
 import { fetchProduct,fetchScrollingProduct } from "@/data/productdata";
-
-const response = await fetchProduct();
-const responseOfScrollingProducts = await fetchScrollingProduct();
 
 //Loading imports
 import NavbarSkeleton from "../skeletons/NavbarSkeleton";
@@ -26,26 +22,37 @@ const Footer = lazy(()=>import("../components/HomePage/Footer/Footer"));
 // type imports
 import { Products, allowedSmallProductTypes, scrollingProduct, allowedFirstLargeProductTypes, allowedLastOneProductTypes, allowedFirstTwoTypes, smallScrollingProduct } from "@/types/type";
 
-const fourItems : Products[] = [];
-const firstLargeProducts : Products[] = [];
-const lastOneProducts : Products[] = [];
-const firstTwoProducts : Products[] = [];
+export default async function Home() {
 
-response.forEach((item: Products) => {
+  let response:Products[] = [];
+  let responseOfScrollingProducts:Products[] = [];
 
-  if(allowedSmallProductTypes.includes(item.type)){
-    fourItems.push(item);
-  }else if(allowedFirstLargeProductTypes.includes(item.type)){
-    firstLargeProducts.push(item);
-  }else if(allowedLastOneProductTypes.includes(item.type)){
-    lastOneProducts.push(item);
-  }else if(allowedFirstTwoTypes.includes(item.type)){
-    firstTwoProducts.push(item);
-  };
+  try {
+    response = await fetchProduct();
+    responseOfScrollingProducts = await fetchScrollingProduct();
+  } catch (error) {
+    throw new Error("failed to fetch")
+  }
 
-});
+  const fourItems : Products[] = [];
+  const firstLargeProducts : Products[] = [];
+  const lastOneProducts : Products[] = [];
+  const firstTwoProducts : Products[] = [];
 
-export default function Home() {
+  response.forEach((item: Products) => {
+
+    if(allowedSmallProductTypes.includes(item.type)){
+      fourItems.push(item);
+    }else if(allowedFirstLargeProductTypes.includes(item.type)){
+      firstLargeProducts.push(item);
+    }else if(allowedLastOneProductTypes.includes(item.type)){
+      lastOneProducts.push(item);
+    }else if(allowedFirstTwoTypes.includes(item.type)){
+      firstTwoProducts.push(item);
+    };
+
+  });
+
   return (
     <SkeletonTheme baseColor="#aed4fa" highlightColor="#525252">
       <Suspense fallback={<NavbarSkeleton/>}>
