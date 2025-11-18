@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import { Suspense, lazy } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { fetchProduct,fetchScrollingProduct } from "@/data/productdata";
